@@ -4,8 +4,15 @@
       <section class="relative w-screen h-screen min-h-screen py-40">
         <!-- start of background -->
         <div
-          class="absolute top-0 bottom-0 w-screen h-screen bg-no-repeat  bg-blueGray-800 bg-full"
-          style="background-image: url(../src/assets/img/register_bg_2.png)"
+          class="
+            absolute
+            top-0
+            bottom-0
+            w-screen
+            h-screen
+            bg-no-repeat bg-blueGray-800 bg-full
+          "
+          style="background-image: url(/../src/assets/img/register_bg_2.png)"
         ></div>
         <!-- end of background -->
 
@@ -14,12 +21,30 @@
           <div class="flex items-center content-center justify-center h-full">
             <div class="w-full px-4 lg:w-3/4">
               <div
-                class="relative flex flex-col w-full min-w-0 mb-6 break-words border-0 rounded-lg shadow-lg  bg-blueGray-200"
+                class="
+                  relative
+                  flex flex-col
+                  w-full
+                  min-w-0
+                  mb-6
+                  break-words
+                  border-0
+                  rounded-lg
+                  shadow-lg
+                  bg-blueGray-200
+                "
               >
                 <div class="px-6 py-6 mb-0 rounded-t">
                   <div class="mb-3 text-center">
                     <div
-                      class="flex items-center justify-center py-2 font-medium  text-blueGray-600"
+                      class="
+                        flex
+                        items-center
+                        justify-center
+                        py-2
+                        font-medium
+                        text-blueGray-600
+                      "
                     >
                       <div>
                         <svg
@@ -42,7 +67,13 @@
                         </svg>
                       </div>
                       <div
-                        class="flex-initial max-w-full text-lg font-bold  text-blueGray-600"
+                        class="
+                          flex-initial
+                          max-w-full
+                          text-lg
+                          font-bold
+                          text-blueGray-600
+                        "
                       >
                         Daftar akun berhasil dan Email verifikasi sudah kami
                         kirim ke email anda.
