@@ -119,7 +119,7 @@
                   >
                     <img
                       v-if="isLoading"
-                      src="../../../src/assets/img/spinner2.svg"
+                      src="/src/assets/img/spinner2.svg"
                       class="w-5"
                       alt=""
                     />

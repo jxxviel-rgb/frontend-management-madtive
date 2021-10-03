@@ -58,11 +58,11 @@
               </div>
               <div class="flex px-4 space-x-0">
                 <div
-                  class="flex-none min-w-0 mb-6 ml-0 break-words rounded shadow-lg lg:-ml-6 md:-ml-6"
+                  class="flex-none min-w-0 mb-6 ml-0 break-words rounded shadow-lg  lg:-ml-6 md:-ml-6"
                 >
                   <button
                     @click="toggleModalInsert"
-                    class="flex justify-center px-4 py-1 -mt-5 transition-colors duration-100 rounded hover:bg-blueGray-300 text-blueGray-800 bg-blueGray-200 active:bg-blueGray-400"
+                    class="flex justify-center px-4 py-1 -mt-5 transition-colors duration-100 rounded  hover:bg-blueGray-300 text-blueGray-800 bg-blueGray-200 active:bg-blueGray-400"
                   >
                     <PlusCircleIcon class="flex-none w-6 mr-1"></PlusCircleIcon>
                     <p class="flex-none">PIC</p>
@@ -87,33 +87,33 @@
                   <thead class="bg-blueGray-300">
                     <tr class="shadow-lg">
                       <th
-                        class="px-4 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
+                        class="px-4 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                       >
                         #
                       </th>
 
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                       >
                         PIC
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                       >
                         Client
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                       >
                         No. Telp
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                       >
                         Email
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                       >
                         Aksi
                       </th>
@@ -134,44 +134,44 @@
                   <tbody v-else>
                     <tr v-for="(pic, index) in pics.data" :key="index">
                       <td
-                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                       >
                         {{ index + 1 }}
                       </td>
                       <th
-                        class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                        class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                       >
                         {{ pic.name }}
                       </th>
                       <td
                         v-if="pic.client"
-                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                       >
                         {{ pic.client.company_name }}
                       </td>
                       <td
                         v-else
-                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                       >
                         Belum ada client
                       </td>
                       <td
-                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                       >
                         {{ pic.phone_number }}
                       </td>
                       <td
-                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                       >
                         {{ pic.email }}
                       </td>
                       <td
-                        class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                        class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                       >
                         <div class="space-x-1">
                           <button
                             @click="sendIdForUpdate(pic.id)"
-                            class="px-1 py-1 text-white transition-colors duration-200 bg-sky-500 hover:bg-sky-600 active:bg-sky-800"
+                            class="px-1 py-1 text-white transition-colors duration-200  bg-sky-500 hover:bg-sky-600 active:bg-sky-800"
                           >
                             <PencilIcon class="w-5"></PencilIcon>
                           </button>
@@ -183,7 +183,7 @@
                                 pic.client.company_name
                               )
                             "
-                            class="px-1 py-1 text-white transition-colors duration-200 bg-rose-500 hover:bg-rose-600 active:bg-rose-800"
+                            class="px-1 py-1 text-white transition-colors duration-200  bg-rose-500 hover:bg-rose-600 active:bg-rose-800"
                           >
                             <TrashIcon class="w-5"></TrashIcon>
                           </button>

@@ -7,26 +7,12 @@
       :content="content"
       @close="toggleModalInsert"
     ></FormModalInsert>
-    <Suspense timeout="0">
-      <template #default>
-        <div>
-          <FormModalUpdate
-            :isModalUpdateOpen="isModalUpdateOpen"
-            :contentModalUpdate="contentModalUpdate"
-            :project="project"
-            @close="toggleModalUpdate"
-          />
-        </div>
-      </template>
-      <template #fallback>
-        <div>
-          <!-- Skeleton loading -->
-          <!-- <img src="../../../assets/img/spinner2.svg" class="w-5" alt="" /> -->
-          <FormModalSkeleton :isModalSkeletonOpen="isModalUpdateOpen" />
-          <!-- End of skeleton loading -->
-        </div>
-      </template>
-    </Suspense>
+    <FormModalUpdate
+      :isModalUpdateOpen="isModalUpdateOpen"
+      :contentModalUpdate="contentModalUpdate"
+      :project="project"
+      @close="toggleModalUpdate"
+    />
     <FormModalInsertTeam
       :isModalInsertTeamOpen="isModalInsertTeamOpen"
       @close="toggleModalInsertTeam"
