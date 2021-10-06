@@ -36,7 +36,7 @@
     <!-- Sidebar -->
     <Sidebar></Sidebar>
     <!-- End of sidebar -->
-    <div class="relative md:ml-64 bg-blueGray-50">
+    <div class="relative md:ml-64">
       <!-- Navbar -->
       <Navbar></Navbar>
       <!-- end of navbar -->
@@ -46,30 +46,30 @@
           <div>
             <!-- Card stats -->
             <div class="flex flex-wrap">
-              <div class="w-full px-4 lg:w-6/12 xl:w-3/12">
+              <div class="w-full px-4">
                 <div
-                  class="relative flex flex-col min-w-0 mb-6 break-words bg-white shadow-lg  xl:mb-0"
+                  class="relative flex flex-col min-w-0 mb-6 break-words bg-white shadow-lg "
                 ></div>
               </div>
-              <div class="w-full px-4 lg:w-6/12 xl:w-3/12">
+              <div class="w-full px-4">
                 <div
-                  class="relative flex flex-col min-w-0 mb-6 break-words bg-white rounded shadow-lg  xl:mb-0"
+                  class="relative flex flex-col min-w-0 mb-6 break-words bg-white rounded shadow-lg "
                 ></div>
               </div>
-              <div class="w-full px-4 lg:w-6/12 xl:w-3/12">
+              <div class="w-full px-4">
                 <div
-                  class="relative flex flex-col min-w-0 mb-6 break-words bg-white rounded shadow-lg  xl:mb-0"
+                  class="relative flex flex-col min-w-0 mb-6 break-words bg-white rounded shadow-lg "
                 ></div>
               </div>
-              <div class="w-full px-4 lg:w-6/12 xl:w-3/12">
+              <div class="flex px-4 space-x-0">
                 <div
-                  class="relative flex flex-col min-w-0 mb-6 break-words rounded shadow-lg  xl:mb-0"
+                  class="flex-none min-w-0 mb-6 ml-0 break-words rounded shadow-lg  lg:-ml-6 md:-ml-6"
                 >
                   <button
                     class="flex justify-center px-4 py-1 -mt-5 space-x-1 transition-colors duration-100  hover:bg-blueGray-300 text-blueGray-800 bg-blueGray-200 active:bg-blueGray-400"
                   >
                     <PlusSmIcon class="flex-none w-6"></PlusSmIcon>
-                    <p class="flex-none">Tambah Tim</p>
+                    <p class="flex-none">Tim</p>
                   </button>
                 </div>
               </div>
@@ -77,7 +77,7 @@
           </div>
         </div>
       </div>
-      <div class="w-full px-4 mx-auto -m-24 md:px-10">
+      <div class="w-full px-4 mx-auto -mt-40">
         <div class="flex flex-wrap mt-4">
           <div class="w-full px-4 mb-12">
             <div
@@ -128,15 +128,32 @@
                       </th>
                     </tr>
                   </thead>
-                  <tbody class="bg-blueGray-200">
-                    <!-- <pre> {{ teams.data }} </pre> -->
+                  <tbody
+                    v-if="teams.data === undefined || teams.data.length === 0"
+                    class="bg-blueGray-200"
+                  >
+                    <tr>
+                      <td colspan="7" class="py-2 text-center bg-blueGray-200">
+                        Data tidak tersedia
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tbody v-else class="bg-blueGray-200">
                     <tr v-for="(team, index) in teams.data" :key="index">
                       <td
                         class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                       >
                         {{ index + 1 }}
                       </td>
+
                       <th
+                        v-if="team.project === null"
+                        class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                      >
+                        Belum ada project
+                      </th>
+                      <th
+                        v-else
                         class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                       >
                         {{ team.project.name }}

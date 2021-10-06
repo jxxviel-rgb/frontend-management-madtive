@@ -1,69 +1,76 @@
 <template>
   <nav
+    v-if="user"
     class="absolute top-0 left-0 z-10 flex items-center w-full p-4 bg-transparent  md:flex-row md:flex-nowrap md:justify-start"
   >
     <div
       class="flex flex-wrap items-center justify-between w-full px-4  mx-autp md:flex-nowrap md:px-10"
     >
-      <a
+      <router-link
         class="hidden text-sm font-semibold text-white uppercase  lg:inline-block"
-        href="./index.html"
-        >Dashboard</a
+        :to="{ name: 'admin' }"
+        >Dashboard</router-link
       >
-      <form
-        class="flex-row flex-wrap items-center hidden mr-3 md:flex lg:ml-auto"
-      >
-        <div class="relative flex flex-wrap items-stretch w-full">
-          <span
-            class="absolute z-10 items-center justify-center w-8 h-full py-3 pl-3 text-base font-normal leading-snug text-center bg-transparent rounded  text-blueGray-300"
-            ><i class="fas fa-search"></i
-          ></span>
-          <input
-            type="text"
-            placeholder="Search here..."
-            class="relative w-full px-3 py-3 pl-10 text-sm bg-white border-0 rounded shadow outline-none  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
-          />
-        </div>
-      </form>
+
       <ul class="flex-col items-center hidden list-none md:flex-row md:flex">
-        <a
-          class="block text-blueGray-500"
-          href="#dropdown"
-          @click="openDropdown($event, 'user-dropdown')"
-        >
-          <div class="flex items-center">
-            <span
-              class="inline-flex items-center justify-center w-12 h-12 text-sm text-white rounded-full  bg-blueGray-200"
-              ><img
-                alt="..."
-                class="w-full align-middle border-none rounded-full shadow-lg"
-                src="../../assets/img/team-1-800x800.jpg"
-            /></span>
-          </div>
-        </a>
-        <div
-          class="right-0 z-50 hidden float-left py-2 text-base text-left list-none bg-white rounded shadow-lg  min-w-48"
-          id="user-dropdown"
-        >
-          <a
-            href="#dropdown"
-            class="block w-full px-4 py-2 text-sm font-normal bg-transparent  whitespace-nowrap text-blueGray-700"
-            >Action</a
-          ><a
-            href="#dropdown"
-            class="block w-full px-4 py-2 text-sm font-normal bg-transparent  whitespace-nowrap text-blueGray-700"
-            >Another action</a
-          ><a
-            href="#dropdown"
-            class="block w-full px-4 py-2 text-sm font-normal bg-transparent  whitespace-nowrap text-blueGray-700"
-            >Something else here</a
-          >
-          <div class="h-0 my-2 border border-solid border-blueGray-100"></div>
-          <a
-            href="#dropdown"
-            class="block w-full px-4 py-2 text-sm font-normal bg-transparent  whitespace-nowrap text-blueGray-700"
-            >Seprated link</a
-          >
+        <div>
+          <Menu as="div" class="relative inline-block text-left">
+            <div v-if="user.employee">
+              <MenuButton
+                class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-black rounded-md  bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+              >
+                Halo, {{ firstName[0] }}!
+                <ChevronDownIcon
+                  class="w-5 h-5 ml-2 -mr-1  text-violet-200 hover:text-violet-100"
+                  aria-hidden="true"
+                />
+              </MenuButton>
+            </div>
+            <div v-else class="animate-pulse">
+              <MenuButton
+                class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white rounded-md  w-36 bg-blueGray-300 focus-visible:ring-white focus-visible:ring-opacity-75"
+              >
+                <ChevronDownIcon
+                  class="w-5 h-5 ml-2 -mr-1  text-violet-200 hover:text-violet-100"
+                  aria-hidden="true"
+                />
+              </MenuButton>
+            </div>
+
+            <transition
+              enter-active-class="transition duration-100 ease-out"
+              enter-from-class="transform scale-95 opacity-0"
+              enter-to-class="transform scale-100 opacity-100"
+              leave-active-class="transition duration-75 ease-in"
+              leave-from-class="transform scale-100 opacity-100"
+              leave-to-class="transform scale-95 opacity-0"
+            >
+              <MenuItems
+                class="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg  ring-1 ring-black ring-opacity-5 focus:outline-none"
+              >
+                <div class="px-1 py-1">
+                  <MenuItem v-slot="{ active }">
+                    <button
+                      @click="logout"
+                      :class="[
+                        active
+                          ? 'bg-blueGray-500 text-white'
+                          : 'text-blueGray-900',
+                        'group flex rounded-md items-center w-full px-2 py-2 text-sm',
+                      ]"
+                    >
+                      <LogoutIcon
+                        :active="active"
+                        class="w-5 h-5 mr-2 text-blueGray"
+                        aria-hidden="true"
+                      />
+                      Logout
+                    </button>
+                  </MenuItem>
+                </div>
+              </MenuItems>
+            </transition>
+          </Menu>
         </div>
       </ul>
     </div>
@@ -71,26 +78,51 @@
 </template>
 
 <script>
-import Popper from "popper.js";
-Popper.Defaults.modifiers.computeStyle.gpuAcceleration = false;
+import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
+import { ChevronDownIcon } from "@heroicons/vue/solid";
+import { LogoutIcon } from "@heroicons/vue/outline";
+import { useStore } from "vuex";
+import { ref, computed, onMounted } from "vue";
+// import ArchiveIcon from "./archive-icon.vue";
+// import DuplicateIcon from "./duplicate-icon.vue";
+// import MoveIcon from "./move-icon.vue";
+// import EditIcon from "./edit-icon.vue";
+// import DeleteIcon from "./delete-icon.vue";
 
-import { onMounted } from "vue";
 export default {
-  name: "Navbar",
+  components: {
+    Menu,
+    MenuButton,
+    MenuItems,
+    MenuItem,
+    ChevronDownIcon,
+    LogoutIcon,
+    // ArchiveIcon,
+    // DuplicateIcon,
+    // MoveIcon,
+    // EditIcon,
+    // DeleteIcon,
+  },
   setup() {
-    const openDropdown = (event, dropdownId) => {
-      let element = event.target;
-      while (element.nodeName !== "A") {
-        element = element.parentNode;
-      }
-      new Popper(element, document.getElementById(dropdownId), {
-        placement: "bottom-start",
+    const store = useStore();
+    const token = localStorage.getItem("token");
+    store.dispatch("user/retrieveUserInfo", token);
+    const user = computed(() => {
+      return store.state.user.user;
+    });
+    const logout = () => {
+      store.dispatch("auth/loggedOut", token).then((res) => {
+        router.push({
+          name: "login",
+        });
       });
-      document.getElementById(dropdownId).classList.toggle("hidden");
-      document.getElementById(dropdownId).classList.toggle("block");
     };
+    const firstName = computed(() => {
+      return store.state.user.firstName;
+    });
 
-    return { openDropdown };
+    console.log(firstName);
+    return { user, logout, firstName };
   },
 };
 </script>

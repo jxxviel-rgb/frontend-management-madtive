@@ -242,6 +242,11 @@ export default {
   setup() {
     const store = useStore();
     const route = useRouter();
+    if (store.state.auth.token) {
+      route.push({
+        name: "admin",
+      });
+    }
     const email = ref("");
     const password = ref("");
     const validation = reactive({
@@ -260,11 +265,6 @@ export default {
       title: "Warning",
       body: "Login gagal! Email atau password salah!",
     });
-    if (store.state.auth.token) {
-      route.push({
-        name: "admin",
-      });
-    }
 
     const login = () => {
       store.dispatch("employees/getEmployees");

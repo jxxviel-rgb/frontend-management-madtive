@@ -5,11 +5,15 @@ export default {
   state() {
     return {
       user: {},
+      firstName: [],
     };
   },
   mutations: {
     setUser(state, payload) {
       state.user = payload;
+    },
+    setFirstName(state, value) {
+      state.firstName = value;
     },
   },
   getters: {
@@ -17,6 +21,7 @@ export default {
       return state.user;
     },
   },
+
   actions: {
     retrieveUserInfo({ commit }, token) {
       axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -26,9 +31,11 @@ export default {
           .then((res) => {
             if (res) {
               commit("setUser", res.data);
+              let firstName = res.data.employee.name.split(" ");
+              commit("setFirstName", firstName);
               resolve(res.data);
-              return res.data;
             }
+            resolve(res);
           })
           .catch((error) => {
             reject(error);

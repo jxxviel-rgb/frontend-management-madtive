@@ -270,5 +270,6 @@ export default {
   color: #1e293b;
   background-color: #cbd5e1;
   padding: 5px 5px;
+  border-radius: 5px;
 }
 </style>

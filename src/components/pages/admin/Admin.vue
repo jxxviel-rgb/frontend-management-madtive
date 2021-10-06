@@ -79,6 +79,7 @@
     <!-- Sidebar -->
     <div class="relative md:ml-64 bg-blueGray-50">
       <!-- Navbar -->
+
       <Navbar></Navbar>
       <!-- Navbar -->
       <!-- Header -->

@@ -2,7 +2,7 @@
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root">
     <Sidebar></Sidebar>
-    <div class="relative md:ml-64 bg-blueGray-50">
+    <div class="relative md:ml-64">
       <Navbar></Navbar>
       <!-- Header -->
       <div class="relative pt-12 pb-32 bg-blueGray-800 md:pt-32">
@@ -10,28 +10,28 @@
           <div>
             <!-- Card stats -->
             <div class="flex flex-wrap">
-              <div class="w-full px-4 lg:w-6/12 xl:w-3/12">
+              <div class="w-full px-4">
                 <div
-                  class="relative flex flex-col min-w-0 mb-6 break-words bg-white rounded shadow-lg  xl:mb-0"
+                  class="relative flex flex-col min-w-0 mb-6 break-words bg-white rounded shadow-lg "
                 ></div>
               </div>
-              <div class="w-full px-4 lg:w-6/12 xl:w-3/12">
+              <div class="w-full px-4">
                 <div
-                  class="relative flex flex-col min-w-0 mb-6 break-words bg-white rounded shadow-lg  xl:mb-0"
+                  class="relative flex flex-col min-w-0 mb-6 break-words bg-white rounded shadow-lg "
                 ></div>
               </div>
-              <div class="w-full px-4 lg:w-6/12 xl:w-3/12">
+              <div class="w-full px-4">
                 <div
-                  class="relative flex flex-col min-w-0 mb-6 break-words bg-white rounded shadow-lg  xl:mb-0"
+                  class="relative flex flex-col min-w-0 mb-6 break-words bg-white rounded shadow-lg "
                 ></div>
               </div>
-              <div class="px-4 lg:w-full xl:w-3/12">
+              <div class="flex px-4 space-x-0">
                 <div
-                  class="relative flex flex-col min-w-0 mb-6 break-words rounded shadow-lg  xl:mb-0"
+                  class="relative flex flex-col min-w-0 mb-6 break-words rounded shadow-lg  lg:-ml-6 md:-ml-6"
                 >
                   <button
                     @click="modalToggle"
-                    class="flex justify-center px-4 py-2 -mt-5 space-x-1 transition-colors duration-100 rounded-md  hover:bg-blueGray-300 text-blueGray-800 bg-blueGray-200 active:bg-blueGray-400"
+                    class="flex justify-center px-4 py-1 -mt-5 transition-colors duration-100 rounded-tl-lg rounded-bl-lg  hover:bg-blueGray-300 text-blueGray-800 bg-blueGray-200 active:bg-blueGray-400"
                   >
                     <UserAddIcon class="flex-none w-6"></UserAddIcon>
                     <p class="flex-none">Add Client</p>
@@ -51,7 +51,7 @@
           </div>
         </div>
       </div>
-      <div class="w-full px-4 mx-auto -m-28 md:px-10">
+      <div class="w-full px-4 mx-auto -mt-40">
         <div class="flex flex-wrap mt-4">
           <div class="w-full px-4 mb-12">
             <div
@@ -65,7 +65,7 @@
                   <thead>
                     <tr>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap bg-blueGray-300 text-blueGray-500"
+                        class="px-4 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap bg-blueGray-300 text-blueGray-500"
                       >
                         #
                       </th>

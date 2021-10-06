@@ -326,6 +326,7 @@
                     >
                     <Money3Component
                       v-model="project.project_value"
+                      min="0"
                       class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded-tr rounded-br shadow placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                     ></Money3Component>
                   </div>
@@ -712,7 +713,7 @@ import { UserAddIcon } from "@heroicons/vue/outline";
 import { CheckIcon, SelectorIcon } from "@heroicons/vue/solid";
 import { ref, reactive, computed, watchEffect } from "vue";
 import { useStore } from "vuex";
-// import { Money3Component } from "v-money3";
+import { Money3Component } from "v-money3";
 export default {
   components: {
     Dialog,
@@ -728,7 +729,7 @@ export default {
     ListboxOption,
     CheckIcon,
     SelectorIcon,
-    // Money3Component,
+    Money3Component,
   },
   emits: ["close"],
   props: {
@@ -747,17 +748,17 @@ export default {
     const config = computed(() => {
       return {
         masked: false,
-        decimal: ".",
-        thousands: ",",
+        decimal: ",",
+        thousands: ".",
         prefix: "",
         suffix: "",
-        max: 9007199254740991,
-        min: null,
+        max: null,
+        min: 0,
         minimumNumberOfCharacters: 0,
         precision: 0,
         allowBlank: true,
         disable: false,
-        disableNegative: false,
+        disableNegative: true,
         modelModifiers: {
           number: false,
         },

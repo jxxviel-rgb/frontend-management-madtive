@@ -31,7 +31,7 @@
     <!-- Sidebar -->
     <Sidebar></Sidebar>
     <!-- End of sidebar -->
-    <div class="relative md:ml-64 bg-blueGray-50">
+    <div class="relative md:ml-64">
       <!-- Navbar -->
       <Navbar></Navbar>
       <!-- end of navbar -->

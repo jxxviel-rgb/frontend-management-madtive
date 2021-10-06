@@ -40,7 +40,7 @@
     <!-- Sidebar -->
     <Sidebar></Sidebar>
     <!-- End of sidebar -->
-    <div class="relative md:ml-64 bg-blueGray-50">
+    <div class="relative md:ml-64">
       <!-- Navbar -->
       <Navbar></Navbar>
       <!-- end of navbar -->
@@ -183,25 +183,7 @@
                       >
                         {{ project.estimation }}
                       </td>
-                      <!-- <td
-                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
-                      >
-                        {{ project.progres }}
-                      </td>
-                      <td
-                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
-                      >
-                        <span
-                          v-if="project.status === 'Penawaran'"
-                          class="px-2 py-2 font-bold uppercase bg-sky-300 text-blueGray-700"
-                          >{{ project.status }}</span
-                        >
-                        <span
-                          v-else
-                          class="px-2 py-2 uppercase bg-rose-300 text-blueGray-800"
-                          >{{ project.status }}</span
-                        >
-                      </td> -->
+
                       <td
                         class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                       >
