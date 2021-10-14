@@ -326,6 +326,7 @@
                     >
                     <Money3Component
                       v-model="project.project_value"
+                      v-bind="config"
                       min="0"
                       class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded-tr rounded-br shadow placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                     ></Money3Component>
@@ -427,6 +428,7 @@
                     >
                     <Money3Component
                       v-model="project.profit_team"
+                      v-bind="config"
                       min="0"
                       class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded-tr rounded-br shadow placeholder-blueGray-300 text-blueGray-600"
                       readonly
@@ -477,7 +479,8 @@
                       >Rp.</span
                     >
                     <Money3Component
-                      v-model.number="project.profit_company"
+                      v-model="project.profit_company"
+                      v-bind="config"
                       min="0"
                       class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded-tr rounded-br shadow placeholder-blueGray-300 text-blueGray-600"
                       readonly
@@ -526,7 +529,6 @@
                     v-model="project.progres"
                     type="text"
                     class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
-                    placeholder="+62"
                   />
                   <!-- Start of validation progres -->
                   <span v-if="validation.progres">
@@ -567,12 +569,19 @@
                   >
                     Pajak
                   </label>
-                  <input
-                    v-model="project.tax"
-                    type="text"
-                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
-                    placeholder="+62"
-                  />
+                  <div class="flex">
+                    <span
+                      class="px-4 py-2 text-sm whitespace-no-wrap border rounded-l text-blueGray-700 bg-blueGray-300"
+                      >Rp.</span
+                    >
+                    <Money3Component
+                      v-model="project.tax"
+                      v-bind="config"
+                      type="text"
+                      class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded-tr rounded-br shadow placeholder-blueGray-300 text-blueGray-600"
+                      readonly
+                    />
+                  </div>
                   <!-- Start of validation tax -->
                   <span v-if="validation.tax">
                     <div
@@ -612,12 +621,75 @@
                   >
                     Status
                   </label>
-                  <input
-                    v-model="project.status"
-                    type="text"
-                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
-                    placeholder="+62"
-                  />
+                  <Listbox v-model="project.status">
+                    <div class="relative mt-1">
+                      <ListboxButton
+                        class="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded shadow cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
+                      >
+                        <span
+                          v-if="project.status === ''"
+                          class="block text-sm truncate text-blueGray-600"
+                        >
+                          Pilih Status Project
+                        </span>
+                        <span
+                          v-else
+                          class="block text-sm truncate text-blueGray-600"
+                        >
+                          {{ project.status }}
+                        </span>
+                        <span
+                          class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none "
+                        >
+                          <SelectorIcon
+                            class="w-5 h-5 text-blueGray-400"
+                            aria-hidden="true"
+                          />
+                        </span>
+                      </ListboxButton>
+
+                      <transition
+                        leave-active-class="transition duration-100 ease-in"
+                        leave-from-class="opacity-100"
+                        leave-to-class="opacity-0"
+                      >
+                        <ListboxOptions
+                          class="absolute z-50 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                        >
+                          <ListboxOption
+                            v-slot="{ active, selected }"
+                            v-for="status in statuses"
+                            :key="status.value"
+                            :value="status.value"
+                            as="template"
+                          >
+                            <li
+                              :class="[
+                                active
+                                  ? 'text-blueGray-800 bg-blueGray-200'
+                                  : 'text-blueGray-800',
+                                'cursor-default select-none relative py-2 pl-10 pr-4',
+                              ]"
+                            >
+                              <span
+                                :class="[
+                                  selected ? 'font-medium' : 'font-normal',
+                                  'block truncate',
+                                ]"
+                                >{{ status.value }}</span
+                              >
+                              <span
+                                v-if="selected"
+                                class="absolute inset-y-0 left-0 flex items-center pl-3 text-blueGray-600"
+                              >
+                                <CheckIcon class="w-5 h-5" aria-hidden="true" />
+                              </span>
+                            </li>
+                          </ListboxOption>
+                        </ListboxOptions>
+                      </transition>
+                    </div>
+                  </Listbox>
                   <!-- Start of validation status -->
                   <span v-if="validation.status">
                     <div
@@ -745,6 +817,17 @@ export default {
   setup(props, { emit }) {
     const showing = props.isOpen;
     const modalContent = props.content;
+    const statuses = [
+      {
+        value: "Penawaran",
+      },
+      {
+        value: "On Progres",
+      },
+      {
+        value: "Finish",
+      },
+    ];
     const config = computed(() => {
       return {
         masked: false,
@@ -807,6 +890,9 @@ export default {
     project.profit_company = computed(() => {
       return (project.project_value * 30) / 100;
     });
+    project.tax = computed(() => {
+      return (project.project_value * 10) / 100;
+    });
 
     const validation = reactive({
       client: "",
@@ -857,6 +943,17 @@ export default {
           project.tax = "";
           project.progres = "";
           project.status = "";
+          validation.name = "";
+      validation.client = "";
+      validation.deadline = "";
+      validation.estimation = "";
+      validation.project_value = "";
+      validation.accomodation = "";
+      validation.profit_team = "";
+      validation.profit_company = "";
+      validation.tax = "";
+      validation.progres = "";
+      validation.status = "";
           // * close modal after insert
           emit("close");
         })
@@ -891,6 +988,7 @@ export default {
       project,
       clients,
       config,
+      statuses,
     };
   },
 };

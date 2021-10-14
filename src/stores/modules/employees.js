@@ -47,7 +47,7 @@ export default {
             email: data.email,
             password: data.password,
             role: data.role,
-            position_id: data.position_id.value.id,
+            position_id: data.position_id,
             phone_number: data.phone_number,
             name: data.name,
             address: data.address,

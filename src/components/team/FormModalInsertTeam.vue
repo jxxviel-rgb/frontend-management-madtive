@@ -58,7 +58,7 @@
                     class="mt-2 text-lg leading-6 font-semi text-blueGray-700"
                   >
                     <!-- {{ modalContent.title }} -->
-                    Tambah Project
+                    Tambah Tim
                   </DialogTitle>
                 </div>
               </div>
@@ -403,12 +403,18 @@
                   >
                     Profit
                   </label>
-                  <input
-                    v-model.number="team.profit"
-                    type="number"
-                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
-                    placeholder="meet@madtive.com"
-                  />
+                  <div class="flex">
+                    <span
+                      class="px-4 py-2 text-sm whitespace-no-wrap border rounded-l  text-blueGray-700 bg-blueGray-300"
+                      >Rp.</span
+                    >
+                    <Money3Component
+                      v-model="team.profit"
+                      v-bind="config"
+                      min="0"
+                      class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    />
+                  </div>
                   <!-- Start of validation profit -->
                   <span v-if="validation.profit">
                     <div
@@ -502,7 +508,8 @@ import {
 } from "@headlessui/vue";
 import { UserAddIcon } from "@heroicons/vue/outline";
 import { CheckIcon, SelectorIcon } from "@heroicons/vue/solid";
-import { ref, reactive, computed, watchEffect } from "vue";
+import { ref, reactive, computed } from "vue";
+import { Money3Component } from "v-money3";
 import { useStore } from "vuex";
 export default {
   components: {
@@ -519,6 +526,7 @@ export default {
     ListboxOption,
     CheckIcon,
     SelectorIcon,
+    Money3Component,
   },
   emits: ["close"],
   props: {
@@ -534,14 +542,25 @@ export default {
   setup(props, { emit }) {
     const showing = props.isModalInsertTeamOpen;
     const modalContent = props.content;
-    const config = {
-      decimal: ".",
-      thousands: ".",
-      prefix: "Rp ",
-      suffix: " #",
-      precision: 0,
-      masked: false /* doesn't work with directive */,
-    };
+    const config = computed(() => {
+      return {
+        masked: false,
+        decimal: ",",
+        thousands: ".",
+        prefix: "",
+        suffix: "",
+        max: null,
+        min: 0,
+        minimumNumberOfCharacters: 0,
+        precision: 0,
+        allowBlank: true,
+        disable: false,
+        disableNegative: true,
+        modelModifiers: {
+          number: true,
+        },
+      };
+    });
     const closeAndClearValidation = () => {
       /*
        * close modal and set validation value to null or empty string
@@ -587,7 +606,7 @@ export default {
           payment_status: team.payment_status,
         })
         .then((res) => {
-          store.dispatch("project/getAllProjects");
+          store.dispatch("team/getAllTeams");
           isLoading.value = false;
           isDisabled.value = false;
           /*

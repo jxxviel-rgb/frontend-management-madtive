@@ -222,6 +222,7 @@ export default {
           isLoading.value = false;
           isDisabled.value = false;
           // * close modal after insert
+          positionName.value = "";
           emit("close");
         })
         .catch((err) => {

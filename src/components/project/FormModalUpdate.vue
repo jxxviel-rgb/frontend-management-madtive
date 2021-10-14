@@ -38,12 +38,12 @@
           leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
         >
           <div
-            class="inline-block w-full max-w-xl overflow-hidden text-left align-bottom transition-all transform bg-white shadow-xl sm:my-0 sm:align-middle sm:max-w-xl sm:w-full"
+            class="inline-block w-full max-w-xl overflow-hidden text-left align-bottom transition-all transform bg-white shadow-xl  sm:my-0 sm:align-middle sm:max-w-xl sm:w-full"
           >
             <div class="p-6 px-4 pt-5 pb-4 bg-blueGray-200 sm:p-6 sm:pb-4">
               <div class="sm:flex sm:items-start">
                 <div
-                  class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto rounded-full bg-blueGray-400 sm:mx-0 sm:h-10 sm:w-10"
+                  class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto rounded-full  bg-blueGray-400 sm:mx-0 sm:h-10 sm:w-10"
                 >
                   <UserAddIcon
                     class="w-6 h-6 text-blueGray-800"
@@ -67,7 +67,7 @@
               <form @submit.prevent="update" v-if="project.data.data">
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                     htmlFor="grid-password"
                   >
                     Nama Project
@@ -75,7 +75,7 @@
                   <input
                     v-model="project.data.data.name"
                     type="text"
-                    class="w-full text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    class="w-full text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                     placeholder="PT. Madtive Studio Indonesia"
                   />
                   <!-- Start of validation employee name -->
@@ -112,7 +112,7 @@
                 </div>
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                     htmlFor="grid-password"
                   >
                     Client
@@ -120,7 +120,7 @@
                   <Listbox v-model="project.data.data.client">
                     <div class="relative mt-1">
                       <ListboxButton
-                        class="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded shadow cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
+                        class="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded shadow cursor-default  focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
                       >
                         <span
                           v-if="project.data.data.client === null"
@@ -151,7 +151,7 @@
                         leave-to-class="opacity-0"
                       >
                         <ListboxOptions
-                          class="absolute z-50 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                          class="absolute z-50 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg  max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                         >
                           <ListboxOption
                             v-slot="{ active, selected }"
@@ -178,7 +178,7 @@
                               </span>
                               <span
                                 v-if="selected"
-                                class="absolute inset-y-0 left-0 flex items-center pl-3 text-blueGray-600"
+                                class="absolute inset-y-0 left-0 flex items-center pl-3  text-blueGray-600"
                               >
                                 <CheckIcon class="w-5 h-5" aria-hidden="true" />
                               </span>
@@ -222,7 +222,7 @@
                 </div>
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                     htmlFor="grid-password"
                   >
                     Deadline
@@ -230,7 +230,7 @@
                   <input
                     v-model="project.data.data.deadline"
                     type="date"
-                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                   />
                   <!-- Start of validation deadline -->
                   <span v-if="validation.deadline">
@@ -266,7 +266,7 @@
                 </div>
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                     htmlFor="grid-password"
                   >
                     Estimasi
@@ -274,7 +274,7 @@
                   <input
                     v-model="project.data.data.estimation"
                     type="date"
-                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                   />
                   <!-- Start of validation estimation -->
                   <span v-if="validation.estimation">
@@ -311,18 +311,25 @@
 
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                     htmlFor="grid-password"
                   >
                     Nilai Project
                   </label>
-                  <input
-                    v-model="project.data.data.project_value"
-                    type="number"
-                    min="0"
-                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
-                    placeholder="+62"
-                  />
+                  <div class="flex">
+                    <span
+                      class="px-4 py-2 text-sm whitespace-no-wrap border rounded-l  text-blueGray-700 bg-blueGray-300"
+                      >Rp.</span
+                    >
+                    <Money3Component
+                      v-model="project.data.data.project_value"
+                      v-bind="config"
+                      type="number"
+                      min="0"
+                      class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                      placeholder="+62"
+                    />
+                  </div>
                   <!-- Start of validation project_value -->
                   <span v-if="validation.project_value">
                     <div
@@ -357,18 +364,24 @@
                 </div>
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                     htmlFor="grid-password"
                   >
                     Akomodasi
                   </label>
-                  <input
-                    v-model="project.data.data.accomodation"
-                    type="number"
-                    min="0"
-                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
-                    placeholder="+62"
-                  />
+                  <div class="flex">
+                    <span
+                      class="px-4 py-2 text-sm whitespace-no-wrap border rounded-l  text-blueGray-700 bg-blueGray-300"
+                      >Rp.</span
+                    >
+                    <Money3Component
+                      v-model="project.data.data.accomodation"
+                      v-bind="config"
+                      type="number"
+                      min="0"
+                      class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    />
+                  </div>
                   <!-- Start of validation accomodation -->
                   <span v-if="validation.accomodation">
                     <div
@@ -403,18 +416,24 @@
                 </div>
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                     htmlFor="grid-password"
                   >
                     Profit Team
                   </label>
-                  <input
-                    v-model="project.data.data.profit_team"
-                    type="number"
-                    min="0"
-                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
-                    placeholder="+62"
-                  />
+                  <div class="flex">
+                    <span
+                      class="px-4 py-2 text-sm whitespace-no-wrap border rounded-l  text-blueGray-700 bg-blueGray-300"
+                      >Rp.</span
+                    >
+                    <Money3Component
+                      v-model="project.data.data.profit_team"
+                      v-bind="config"
+                      type="number"
+                      min="0"
+                      class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    />
+                  </div>
                   <!-- Start of validation profit_team -->
                   <span v-if="validation.profit_team">
                     <div
@@ -449,18 +468,24 @@
                 </div>
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                     htmlFor="grid-password"
                   >
                     Profit Perusahaan
                   </label>
-                  <input
-                    v-model="project.data.data.profit_company"
-                    type="number"
-                    min="0"
-                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
-                    placeholder="+62"
-                  />
+                  <div class="flex">
+                    <span
+                      class="px-4 py-2 text-sm whitespace-no-wrap border rounded-l  text-blueGray-700 bg-blueGray-300"
+                      >Rp.</span
+                    >
+                    <Money3Component
+                      v-model="project.data.data.profit_company"
+                      v-bind="config"
+                      type="number"
+                      min="0"
+                      class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    />
+                  </div>
                   <!-- Start of validation profit_company -->
                   <span v-if="validation.profit_company">
                     <div
@@ -495,7 +520,7 @@
                 </div>
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                     htmlFor="grid-password"
                   >
                     Progres
@@ -503,7 +528,7 @@
                   <input
                     v-model="project.data.data.progres"
                     type="text"
-                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                     placeholder="+62"
                   />
                   <!-- Start of validation progres -->
@@ -540,17 +565,22 @@
                 </div>
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                     htmlFor="grid-password"
                   >
                     Pajak
                   </label>
-                  <input
-                    v-model="project.data.data.tax"
-                    type="text"
-                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
-                    placeholder="+62"
-                  />
+                  <div class="flex">
+                    <span
+                      class="px-4 py-2 text-sm whitespace-no-wrap border rounded-l  text-blueGray-700 bg-blueGray-300"
+                      >Rp.</span
+                    >
+                    <Money3Component
+                      v-model="project.data.data.tax"
+                      type="text"
+                      class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    />
+                  </div>
                   <!-- Start of validation tax -->
                   <span v-if="validation.tax">
                     <div
@@ -585,17 +615,80 @@
                 </div>
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                     htmlFor="grid-password"
                   >
                     Status
                   </label>
-                  <input
-                    v-model="project.data.data.status"
-                    type="text"
-                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
-                    placeholder="+62"
-                  />
+                  <Listbox v-model="project.data.data.status">
+                    <div class="relative mt-1">
+                      <ListboxButton
+                        class="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded shadow cursor-default  focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
+                      >
+                        <span
+                          v-if="project.data.data.status === ''"
+                          class="block text-sm truncate text-blueGray-600"
+                        >
+                          Pilih Status Project
+                        </span>
+                        <span
+                          v-else
+                          class="block text-sm truncate text-blueGray-600"
+                        >
+                          {{ project.data.data.status }}
+                        </span>
+                        <span
+                          class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none "
+                        >
+                          <SelectorIcon
+                            class="w-5 h-5 text-blueGray-400"
+                            aria-hidden="true"
+                          />
+                        </span>
+                      </ListboxButton>
+
+                      <transition
+                        leave-active-class="transition duration-100 ease-in"
+                        leave-from-class="opacity-100"
+                        leave-to-class="opacity-0"
+                      >
+                        <ListboxOptions
+                          class="absolute z-50 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg  max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                        >
+                          <ListboxOption
+                            v-slot="{ active, selected }"
+                            v-for="status in statuses"
+                            :key="status.value"
+                            :value="status.value"
+                            as="template"
+                          >
+                            <li
+                              :class="[
+                                active
+                                  ? 'text-blueGray-800 bg-blueGray-200'
+                                  : 'text-blueGray-800',
+                                'cursor-default select-none relative py-2 pl-10 pr-4',
+                              ]"
+                            >
+                              <span
+                                :class="[
+                                  selected ? 'font-medium' : 'font-normal',
+                                  'block truncate',
+                                ]"
+                                >{{ status.value }}</span
+                              >
+                              <span
+                                v-if="selected"
+                                class="absolute inset-y-0 left-0 flex items-center pl-3  text-blueGray-600"
+                              >
+                                <CheckIcon class="w-5 h-5" aria-hidden="true" />
+                              </span>
+                            </li>
+                          </ListboxOption>
+                        </ListboxOptions>
+                      </transition>
+                    </div>
+                  </Listbox>
                   <!-- Start of validation status -->
                   <span v-if="validation.status">
                     <div
@@ -633,7 +726,7 @@
                   <button
                     :disabled="isDisabled"
                     :class="[isDisabled ? '' : 'active:bg-blueGray-600']"
-                    class="flex w-full px-6 py-3 mb-1 mr-1 text-sm font-semibold text-white uppercase transition-all duration-150 ease-linear rounded shadow outline-none disabled:opacity-50 place-content-center bg-blueGray-800 hover:shadow-lg focus:outline-none"
+                    class="flex w-full px-6 py-3 mb-1 mr-1 text-sm font-semibold text-white uppercase transition-all duration-150 ease-linear rounded shadow outline-none  disabled:opacity-50 place-content-center bg-blueGray-800 hover:shadow-lg focus:outline-none"
                     type="submit"
                   >
                     <img
@@ -647,138 +740,140 @@
                   </button>
                 </div>
               </form>
+              <!-- Skeleton loading -->
               <form v-else class="animate-pulse">
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                     htmlFor="grid-password"
                   >
                     Nama Project
                   </label>
                   <input
-                    class="w-full text-sm border-0 rounded shadow bg-blueGray-300 placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    class="w-full text-sm border-0 rounded shadow  bg-blueGray-300 placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                   />
                 </div>
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                     htmlFor="grid-password"
                   >
                     Client
                   </label>
                   <input
-                    class="w-full px-3 py-3 text-sm border-0 rounded shadow bg-blueGray-300 placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    class="w-full px-3 py-3 text-sm border-0 rounded shadow  bg-blueGray-300 placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                   />
                 </div>
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                   >
                     Deadline
                   </label>
                   <input
-                    class="w-full px-3 py-3 text-sm border-0 rounded shadow bg-blueGray-300 placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    class="w-full px-3 py-3 text-sm border-0 rounded shadow  bg-blueGray-300 placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                   />
                 </div>
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                   >
                     Estimasi
                   </label>
                   <input
-                    class="w-full px-3 py-3 text-sm border-0 rounded shadow bg-blueGray-300 placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    class="w-full px-3 py-3 text-sm border-0 rounded shadow  bg-blueGray-300 placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                   />
                 </div>
 
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                   >
                     Nilai Project
                   </label>
                   <input
-                    class="w-full px-3 py-3 text-sm border-0 rounded shadow bg-blueGray-300 placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    class="w-full px-3 py-3 text-sm border-0 rounded shadow  bg-blueGray-300 placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                   />
                 </div>
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                   >
                     Akomodasi
                   </label>
                   <input
-                    class="w-full px-3 py-3 text-sm border-0 rounded shadow bg-blueGray-300 placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    class="w-full px-3 py-3 text-sm border-0 rounded shadow  bg-blueGray-300 placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                   />
                 </div>
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                   >
                     Profit Team
                   </label>
                   <input
-                    class="w-full px-3 py-3 text-sm border-0 rounded shadow bg-blueGray-300 placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    class="w-full px-3 py-3 text-sm border-0 rounded shadow  bg-blueGray-300 placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                   />
                 </div>
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                   >
                     Profit Perusahaan
                   </label>
                   <input
-                    class="w-full px-3 py-3 text-sm border-0 rounded shadow bg-blueGray-300 placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    class="w-full px-3 py-3 text-sm border-0 rounded shadow  bg-blueGray-300 placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                   />
                 </div>
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                   >
                     Progres
                   </label>
                   <input
-                    class="w-full px-3 py-3 text-sm border-0 rounded shadow bg-blueGray-300 placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    class="w-full px-3 py-3 text-sm border-0 rounded shadow  bg-blueGray-300 placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                   />
                 </div>
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                   >
                     Pajak
                   </label>
                   <input
-                    class="w-full px-3 py-3 text-sm border-0 rounded shadow bg-blueGray-300 placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    class="w-full px-3 py-3 text-sm border-0 rounded shadow  bg-blueGray-300 placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                   />
                 </div>
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                   >
                     Status
                   </label>
                   <input
-                    class="w-full px-3 py-3 text-sm border-0 rounded shadow bg-blueGray-300 placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    class="w-full px-3 py-3 text-sm border-0 rounded shadow  bg-blueGray-300 placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                   />
                 </div>
 
                 <div class="mt-6 text-center">
                   <button
-                    class="flex w-full px-6 py-3 mb-1 mr-1 text-sm font-semibold text-white uppercase shadow outline-none roublueGray-300 disabled:opacity-50 place-content-center bg-blueGray-800 hover:shadow-lg focus:outline-none"
+                    class="flex w-full px-6 py-3 mb-1 mr-1 text-sm font-semibold text-white uppercase shadow outline-none  roublueGray-300 disabled:opacity-50 place-content-center bg-blueGray-800 hover:shadow-lg focus:outline-none"
                     type="submit"
                   >
                     <span class=""> Simpan </span>
                   </button>
                 </div>
               </form>
+              <!-- End of Skeleton loading -->
             </div>
             <!-- End of form content -->
             <div
-              class="px-4 py-3 bg-blueGray-200 sm:px-6 sm:flex sm:flex-row-reverse"
+              class="px-4 py-3  bg-blueGray-200 sm:px-6 sm:flex sm:flex-row-reverse"
             >
               <button
                 type="submit"
-                class="flex justify-center w-full px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-blueGray-800 hover:bg-blueGray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blueGray-500 sm:ml-3 sm:w-auto sm:text-sm"
+                class="flex justify-center w-full px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm  bg-blueGray-800 hover:bg-blueGray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blueGray-500 sm:ml-3 sm:w-auto sm:text-sm"
                 @click="closeAndClearValidation"
               >
                 Close
@@ -815,8 +910,10 @@ import { UserAddIcon } from "@heroicons/vue/outline";
 import { CheckIcon, SelectorIcon } from "@heroicons/vue/solid";
 import { ref, reactive, computed } from "vue";
 import { useStore } from "vuex";
+import { Money3Component } from "v-money3";
 export default {
   components: {
+    Money3Component,
     Dialog,
     DialogOverlay,
     DialogTitle,
@@ -850,7 +947,36 @@ export default {
     const showing = props.isModalUpdateOpen;
     const modalContent = props.contentModalUpdate;
     const project = props.project;
-
+    const config = computed(() => {
+      return {
+        masked: false,
+        decimal: ",",
+        thousands: ".",
+        prefix: "",
+        suffix: "",
+        max: null,
+        min: 0,
+        minimumNumberOfCharacters: 0,
+        precision: 0,
+        allowBlank: true,
+        disable: false,
+        disableNegative: true,
+        modelModifiers: {
+          number: false,
+        },
+      };
+    });
+    const statuses = [
+      {
+        value: "Penawaran",
+      },
+      {
+        value: "On Progres",
+      },
+      {
+        value: "Finish",
+      },
+    ];
     const closeAndClearValidation = () => {
       /*
        * close modal and set validation value to null or empty string
@@ -957,6 +1083,8 @@ export default {
       closeAndClearValidation,
       project,
       clients,
+      config,
+      statuses,
     };
   },
 };

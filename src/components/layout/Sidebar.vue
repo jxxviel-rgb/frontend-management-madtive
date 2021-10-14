@@ -14,7 +14,7 @@
       </button>
       <a
         class="inline-block p-4 px-0 mr-0 text-sm font-bold text-left uppercase  md:block md:pb-2 text-blueGray-600 whitespace-nowrap"
-        href="../../index.html"
+        href="/admin/dashboard"
       >
         Madtive Studio
       </a>
@@ -26,45 +26,67 @@
             @click="openDropdown($event, 'notification-dropdown')"
             ><i class="fas fa-bell"></i
           ></a>
-          <div
-            class="z-50 hidden float-left py-2 text-base text-left list-none bg-white rounded shadow-lg  min-w-48"
-            id="notification-dropdown"
-          >
-            <a
-              href="#pablo"
-              class="block w-full px-4 py-2 text-sm font-normal bg-transparent  whitespace-nowrap text-blueGray-700"
-              >Action</a
-            ><a
-              href="#pablo"
-              class="block w-full px-4 py-2 text-sm font-normal bg-transparent  whitespace-nowrap text-blueGray-700"
-              >Another action</a
-            ><a
-              href="#pablo"
-              class="block w-full px-4 py-2 text-sm font-normal bg-transparent  whitespace-nowrap text-blueGray-700"
-              >Something else here</a
-            >
-            <div class="h-0 my-2 border border-solid border-blueGray-100"></div>
-            <a
-              href="#pablo"
-              class="block w-full px-4 py-2 text-sm font-normal bg-transparent  whitespace-nowrap text-blueGray-700"
-              >Seprated link</a
-            >
-          </div>
         </li>
         <li class="relative inline-block">
-          <a
-            class="block text-blueGray-500"
-            href="#pablo"
-            @click="openDropdown($event, 'user-responsive-dropdown')"
-            ><div class="flex items-center">
-              <span
-                class="inline-flex items-center justify-center w-12 h-12 text-sm text-white rounded-full  bg-blueGray-200"
-                ><img
-                  alt="..."
-                  class="w-full align-middle border-none rounded-full shadow-lg"
-                  src="../../assets/img/team-1-800x800.jpg"
-              /></span></div
-          ></a>
+          <div>
+            <Menu as="div" class="relative inline-block text-left">
+              <div v-if="user.employee">
+                <MenuButton
+                  class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-black rounded-md  bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+                >
+                  Halo, {{ firstName[0] }}!
+                  <ChevronDownIcon
+                    class="w-5 h-5 ml-2 -mr-1  text-violet-200 hover:text-violet-100"
+                    aria-hidden="true"
+                  />
+                </MenuButton>
+              </div>
+              <div v-else class="animate-pulse">
+                <MenuButton
+                  class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white rounded-md  w-36 bg-blueGray-300 focus-visible:ring-white focus-visible:ring-opacity-75"
+                >
+                  <ChevronDownIcon
+                    class="w-5 h-5 ml-2 -mr-1  text-violet-200 hover:text-violet-100"
+                    aria-hidden="true"
+                  />
+                </MenuButton>
+              </div>
+
+              <transition
+                enter-active-class="transition duration-100 ease-out"
+                enter-from-class="transform scale-95 opacity-0"
+                enter-to-class="transform scale-100 opacity-100"
+                leave-active-class="transition duration-75 ease-in"
+                leave-from-class="transform scale-100 opacity-100"
+                leave-to-class="transform scale-95 opacity-0"
+              >
+                <MenuItems
+                  class="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg  ring-1 ring-black ring-opacity-5 focus:outline-none"
+                >
+                  <div class="px-1 py-1">
+                    <MenuItem v-slot="{ active }">
+                      <button
+                        @click="logout"
+                        :class="[
+                          active
+                            ? 'bg-blueGray-500 text-white'
+                            : 'text-blueGray-900',
+                          'group flex rounded-md items-center w-full px-2 py-2 text-sm',
+                        ]"
+                      >
+                        <LogoutIcon
+                          :active="active"
+                          class="w-5 h-5 mr-2 text-blueGray"
+                          aria-hidden="true"
+                        />
+                        Logout
+                      </button>
+                    </MenuItem>
+                  </div>
+                </MenuItems>
+              </transition>
+            </Menu>
+          </div>
           <div
             class="z-50 hidden float-left py-2 text-base text-left list-none bg-white rounded shadow-lg  min-w-48"
             id="user-responsive-dropdown"
@@ -102,9 +124,9 @@
             <div class="w-6/12">
               <a
                 class="inline-block p-4 px-0 mr-0 text-sm font-bold text-left uppercase  md:block md:pb-2 text-blueGray-600 whitespace-nowrap"
-                href="../../index.html"
+                href="/admin/dashboard"
               >
-                Notus JS
+                Madtive Studio
               </a>
             </div>
             <div class="flex justify-end w-6/12">
@@ -118,17 +140,8 @@
             </div>
           </div>
         </div>
-        <form class="mt-6 mb-4 md:hidden">
-          <div class="pt-0 mb-3">
-            <input
-              type="text"
-              placeholder="Search"
-              class="w-full h-12 px-3 py-2 text-base font-normal leading-snug bg-white border-0 border-solid rounded shadow-none outline-none  border-blueGray-500 placeholder-blueGray-300 text-blueGray-600 focus:outline-none"
-            />
-          </div>
-        </form>
+
         <!-- Divider -->
-        <hr class="my-4 md:min-w-full" />
         <!-- Heading -->
         <!-- <h6
               class="block pt-1 pb-4 text-xs font-bold no-underline uppercase md:min-w-full text-blueGray-500"
@@ -154,7 +167,7 @@
               class="flex py-3 text-xs font-bold uppercase  text-blueGray-600 hover:text-blueGray-500"
             >
               <UsersIcon class="w-5"></UsersIcon>
-              <span class="mt-1 ml-1">Clients</span>
+              <span class="mt-1 ml-1">Client</span>
             </router-link>
           </li>
 
@@ -164,7 +177,7 @@
               class="flex py-3 text-xs font-bold uppercase  text-blueGray-600 hover:text-blueGray-500"
             >
               <UserGroupIcon class="w-5"></UserGroupIcon>
-              <span class="mt-1 ml-1">Employees</span>
+              <span class="mt-1 ml-1">Pegawai</span>
             </router-link>
           </li>
           <li class="items-center">
@@ -173,7 +186,7 @@
               class="flex py-3 text-xs font-bold uppercase  text-blueGray-600 hover:text-blueGray-500"
             >
               <FolderIcon class="w-5"></FolderIcon>
-              <span class="mt-1 ml-1">Position</span>
+              <span class="mt-1 ml-1">Posisi</span>
             </router-link>
           </li>
 
@@ -183,7 +196,7 @@
               class="flex py-3 text-xs font-bold uppercase  text-blueGray-600 hover:text-blueGray-500"
             >
               <CodeIcon class="w-5"></CodeIcon>
-              <span class="mt-1 ml-1">Project</span>
+              <span class="mt-1 ml-1">Projek</span>
             </router-link>
           </li>
 
@@ -193,7 +206,7 @@
               class="flex py-3 text-xs font-bold uppercase  text-blueGray-600 hover:text-blueGray-500"
             >
               <UserGroupIcon class="w-5"></UserGroupIcon>
-              <span class="mt-1 ml-1">Team</span>
+              <span class="mt-1 ml-1">Tim</span>
             </router-link>
           </li>
           <li class="items-center">
@@ -223,7 +236,12 @@ import {
   UsersIcon,
   FolderIcon,
   HomeIcon,
+  LogoutIcon,
 } from "@heroicons/vue/outline";
+import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
+import { ChevronDownIcon } from "@heroicons/vue/solid";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 Popper.Defaults.modifiers.computeStyle.gpuAcceleration = false;
 export default {
   components: {
@@ -234,6 +252,12 @@ export default {
     XIcon,
     UserGroupIcon,
     CodeIcon,
+    Menu,
+    MenuButton,
+    MenuItems,
+    MenuItem,
+    ChevronDownIcon,
+    LogoutIcon,
   },
   name: "Sidebar",
   setup() {
@@ -256,10 +280,31 @@ export default {
       document.getElementById(dropdownId).classList.toggle("hidden");
       document.getElementById(dropdownId).classList.toggle("block");
     };
-
+    const store = useStore();
+    const token = localStorage.getItem("token");
+    const router = useRouter();
+    store.dispatch("user/retrieveUserInfo", token);
+    const user = computed(() => {
+      return store.state.user.user;
+    });
+    const logout = () => {
+      store.dispatch("auth/loggedOut", token).then((res) => {
+        if (res) {
+          router.push({
+            name: "login",
+          });
+        }
+      });
+    };
+    const firstName = computed(() => {
+      return store.state.user.firstName;
+    });
     return {
       toggleNavbar,
       openDropdown,
+      user,
+      logout,
+      firstName,
     };
   },
 };

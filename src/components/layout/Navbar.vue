@@ -82,7 +82,8 @@ import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
 import { ChevronDownIcon } from "@heroicons/vue/solid";
 import { LogoutIcon } from "@heroicons/vue/outline";
 import { useStore } from "vuex";
-import { ref, computed, onMounted } from "vue";
+import { computed } from "vue";
+import { useRouter } from "vue-router";
 // import ArchiveIcon from "./archive-icon.vue";
 // import DuplicateIcon from "./duplicate-icon.vue";
 // import MoveIcon from "./move-icon.vue";
@@ -106,22 +107,24 @@ export default {
   setup() {
     const store = useStore();
     const token = localStorage.getItem("token");
+    const router = useRouter();
     store.dispatch("user/retrieveUserInfo", token);
     const user = computed(() => {
       return store.state.user.user;
     });
     const logout = () => {
       store.dispatch("auth/loggedOut", token).then((res) => {
-        router.push({
-          name: "login",
-        });
+        if (res) {
+          router.push({
+            name: "login",
+          });
+        }
       });
     };
     const firstName = computed(() => {
       return store.state.user.firstName;
     });
 
-    console.log(firstName);
     return { user, logout, firstName };
   },
 };

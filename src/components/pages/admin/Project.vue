@@ -13,10 +13,7 @@
       :project="project"
       @close="toggleModalUpdate"
     />
-    <FormModalInsertTeam
-      :isModalInsertTeamOpen="isModalInsertTeamOpen"
-      @close="toggleModalInsertTeam"
-    ></FormModalInsertTeam>
+
     <ModalDelete
       :projectName="projectName"
       :isModalDeleteOpen="isModalDeleteOpen"
@@ -71,21 +68,10 @@
                 >
                   <button
                     @click="toggleModalInsert"
-                    class="flex justify-center px-4 py-1 -mt-5 transition-colors duration-100 rounded-tl-lg rounded-bl-lg  hover:bg-blueGray-300 text-blueGray-800 bg-blueGray-200 active:bg-blueGray-400"
+                    class="flex justify-center px-4 py-2 -mt-5 space-x-1 transition-colors duration-100 rounded-md  hover:bg-blueGray-300 text-blueGray-800 bg-blueGray-200 active:bg-blueGray-400"
                   >
                     <PlusCircleIcon class="flex-none w-6"></PlusCircleIcon>
                     <p class="flex-none">Project</p>
-                  </button>
-                </div>
-                <div
-                  class="flex-none min-w-0 mb-6 ml-0 break-words rounded shadow-lg  lg:-ml-6 md:-ml-6"
-                >
-                  <button
-                    @click="toggleModalInsertTeam"
-                    class="flex justify-center px-4 py-1 -mt-5 transition-colors duration-100 rounded-tr-lg rounded-br-lg  hover:bg-blueGray-300 text-blueGray-800 bg-blueGray-200 active:bg-blueGray-400"
-                  >
-                    <PlusCircleIcon class="flex-none w-6"></PlusCircleIcon>
-                    <p class="flex-none">Tim</p>
                   </button>
                 </div>
               </div>
@@ -132,16 +118,7 @@
                       >
                         Estimasi
                       </th>
-                      <!-- <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
-                      >
-                        Progres
-                      </th>
-                      <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
-                      >
-                        Status
-                      </th> -->
+
                       <th
                         class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                       >
@@ -149,78 +126,106 @@
                       </th>
                     </tr>
                   </thead>
-                  <tbody class="bg-blueGray-200">
-                    <tr v-for="(project, index) in projects.data" :key="index">
-                      <td
-                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        {{ index + 1 }}
-                      </td>
-                      <th
-                        class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        {{ project.name }}
-                      </th>
-                      <td
-                        v-if="project.client === null"
-                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        Belum ada client
-                      </td>
-                      <td
-                        v-else
-                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        {{ project.client.company_name }}
-                      </td>
-                      <td
-                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        {{ project.deadline }}
-                      </td>
-                      <td
-                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        {{ project.estimation }}
-                      </td>
+                  <template v-if="projects.data">
+                    <template v-if="projects.data.length === 0">
+                      <tr>
+                        <td colspan="6" class="text-center">Tidak ada data</td>
+                      </tr>
+                    </template>
+                    <template v-else>
+                      <tbody class="bg-blueGray-200">
+                        <tr
+                          v-for="(project, index) in projects.data"
+                          :key="index"
+                        >
+                          <td
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            {{ index + 1 }}
+                          </td>
+                          <th
+                            class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            {{ project.name }}
+                          </th>
+                          <td
+                            v-if="project.client === null"
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            Belum ada client
+                          </td>
+                          <td
+                            v-else
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            {{ project.client.company_name }}
+                          </td>
+                          <td
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            {{ project.deadline }}
+                          </td>
+                          <td
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            {{ project.estimation }}
+                          </td>
 
-                      <td
-                        class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        <div class="space-x-1">
-                          <button
-                            @click="sendIdAndOpenModalTabs(project.id)"
-                            class="px-2 py-2 text-white transition-colors duration-200  bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-800"
+                          <td
+                            class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                           >
-                            <InformationCircleIcon
-                              class="w-5"
-                            ></InformationCircleIcon>
-                          </button>
-                          <button
-                            @click="sendIdAndOpenModalUpdate(project.id)"
-                            class="px-2 py-2 text-white transition-colors duration-200  bg-sky-500 hover:bg-sky-600 active:bg-sky-800"
-                          >
-                            <PencilIcon class="w-5"></PencilIcon>
-                          </button>
+                            <div class="">
+                              <button
+                                @click="sendIdAndOpenModalTabs(project.id)"
+                                class="px-1 py-1 text-white transition-colors duration-200  bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-800"
+                              >
+                                <InformationCircleIcon
+                                  class="w-5"
+                                ></InformationCircleIcon>
+                              </button>
+                              <button
+                                @click="sendIdAndOpenModalUpdate(project.id)"
+                                class="px-1 py-1 text-white transition-colors duration-200  bg-sky-500 hover:bg-sky-600 active:bg-sky-800"
+                              >
+                                <PencilIcon class="w-5"></PencilIcon>
+                              </button>
 
-                          <button
-                            @click="sendIdForDelete(project.id, project.name)"
-                            class="px-2 py-2 text-white transition-colors duration-200  bg-rose-500 hover:bg-rose-600 active:bg-rose-800"
+                              <button
+                                @click="
+                                  sendIdForDelete(project.id, project.name)
+                                "
+                                class="px-1 py-1 text-white transition-colors duration-200  bg-rose-500 hover:bg-rose-600 active:bg-rose-800"
+                              >
+                                <TrashIcon class="w-5"></TrashIcon>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr v-if="projects === null">
+                          <td
+                            colspan="7"
+                            class="py-3 leading-6 text-center font-semi"
                           >
-                            <TrashIcon class="w-5"></TrashIcon>
-                          </button>
+                            Data tidak tersedia
+                          </td>
+                        </tr>
+                      </tbody>
+                    </template>
+                  </template>
+                  <template v-else>
+                    <tr>
+                      <td colspan="6" class="text-center">
+                        <div class="flex justify-center">
+                          <img
+                            class="w-6 my-2"
+                            src="/src/assets/img/spinner2.svg"
+                            alt=""
+                          />
+                          <span class="my-2"> Loading data</span>
                         </div>
                       </td>
                     </tr>
-                    <tr v-if="projects === null">
-                      <td
-                        colspan="7"
-                        class="py-3 leading-6 text-center font-semi"
-                      >
-                        Data tidak tersedia
-                      </td>
-                    </tr>
-                  </tbody>
+                  </template>
                 </table>
               </div>
             </div>
@@ -241,7 +246,6 @@ import Sidebar from "../../layout/Sidebar.vue";
 import Navbar from "../../layout/Navbar.vue";
 import FormModalInsert from "../../project/FormModalInsert.vue";
 import FormModalUpdate from "../../project/FormModalUpdate.vue";
-import FormModalInsertTeam from "../../project/FormModalInsertTeam.vue";
 import ModalDelete from "../../project/ModalDelete.vue";
 import ModalAlert from "../../global/ModalAlert.vue";
 import ModalTabs from "../../project/ModalTabs.vue";
@@ -251,7 +255,7 @@ import {
   PencilIcon,
   PlusCircleIcon,
   InformationCircleIcon,
-} from "@heroicons/vue/outline";
+} from "@heroicons/vue/solid";
 import { useStore } from "vuex";
 import { computed, ref, reactive } from "vue";
 export default {
@@ -265,7 +269,6 @@ export default {
     PencilIcon,
     InformationCircleIcon,
     FormModalUpdate,
-    FormModalInsertTeam,
     ModalDelete,
     ModalAlert,
     ModalTabs,
@@ -369,11 +372,7 @@ export default {
         return store.getters["team/getStateProjectTeam"];
       });
     };
-    // !MODAL INSERT TEAM
-    const isModalInsertTeamOpen = ref("");
-    const toggleModalInsertTeam = () => {
-      isModalInsertTeamOpen.value = !isModalInsertTeamOpen.value;
-    };
+
     return {
       projects,
       isOpen,
@@ -396,8 +395,6 @@ export default {
       isModalTabsOpen,
       toggleModalTabs,
       sendIdAndOpenModalTabs,
-      isModalInsertTeamOpen,
-      toggleModalInsertTeam,
       team,
     };
   },

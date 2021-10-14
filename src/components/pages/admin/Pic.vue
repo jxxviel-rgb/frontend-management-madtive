@@ -58,11 +58,11 @@
               </div>
               <div class="flex px-4 space-x-0">
                 <div
-                  class="flex-none min-w-0 mb-6 ml-0 break-words rounded shadow-lg  lg:-ml-6 md:-ml-6"
+                  class="flex-none min-w-0 mb-6 ml-0 break-words rounded shadow-lg lg:-ml-6 md:-ml-6"
                 >
                   <button
                     @click="toggleModalInsert"
-                    class="flex justify-center px-4 py-1 -mt-5 transition-colors duration-100 rounded  hover:bg-blueGray-300 text-blueGray-800 bg-blueGray-200 active:bg-blueGray-400"
+                    class="flex justify-center px-4 py-1 -mt-5 transition-colors duration-100 rounded hover:bg-blueGray-300 text-blueGray-800 bg-blueGray-200 active:bg-blueGray-400"
                   >
                     <PlusCircleIcon class="flex-none w-6 mr-1"></PlusCircleIcon>
                     <p class="flex-none">PIC</p>
@@ -87,109 +87,134 @@
                   <thead class="bg-blueGray-300">
                     <tr class="shadow-lg">
                       <th
-                        class="px-4 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
+                        class="px-4 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
                       >
                         #
                       </th>
 
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
                       >
                         PIC
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
                       >
                         Client
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
                       >
                         No. Telp
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
                       >
                         Email
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
                       >
                         Aksi
                       </th>
                     </tr>
                   </thead>
                   <!-- <pre> {{ pics }} </pre> -->
-
-                  <tbody
-                    v-if="pics.data === undefined || pics.data.length === 0"
-                    class="bg-blueGray-200"
-                  >
-                    <tr>
-                      <td colspan="6" class="py-2 text-center bg-blueGray-200">
-                        Data tidak tersedia
-                      </td>
-                    </tr>
-                  </tbody>
-                  <tbody v-else>
-                    <tr v-for="(pic, index) in pics.data" :key="index">
-                      <td
-                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        {{ index + 1 }}
-                      </td>
-                      <th
-                        class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        {{ pic.name }}
-                      </th>
-                      <td
-                        v-if="pic.client"
-                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        {{ pic.client.company_name }}
-                      </td>
-                      <td
-                        v-else
-                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        Belum ada client
-                      </td>
-                      <td
-                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        {{ pic.phone_number }}
-                      </td>
-                      <td
-                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        {{ pic.email }}
-                      </td>
-                      <td
-                        class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        <div class="space-x-1">
-                          <button
-                            @click="sendIdForUpdate(pic.id)"
-                            class="px-1 py-1 text-white transition-colors duration-200  bg-sky-500 hover:bg-sky-600 active:bg-sky-800"
+                  <!-- v-if="pics.data === undefined || pics.data.length === 0" -->
+                  <tbody class="bg-blueGray-200">
+                    <!-- <template v-if="pics.data">
+                      <tr>
+                        <td>
+                          <img
+                            src="/src/assets/img/spinner2.svg"
+                            class="w-6 mx-auto"
+                          />
+                        </td>
+                      </tr>
+                    </template> -->
+                    <template v-if="pics.data">
+                      <template v-if="pics.data.length === 0">
+                        <tr>
+                          <td colspan="6" class="text-center">
+                            Tidak ada data
+                          </td>
+                        </tr>
+                      </template>
+                      <template v-else>
+                        <tr v-for="(pic, index) in pics.data" :key="index">
+                          <td
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
                           >
-                            <PencilIcon class="w-5"></PencilIcon>
-                          </button>
-                          <button
-                            @click="
-                              sendIdForDelete(
-                                pic.id,
-                                pic.name,
-                                pic.client.company_name
-                              )
-                            "
-                            class="px-1 py-1 text-white transition-colors duration-200  bg-rose-500 hover:bg-rose-600 active:bg-rose-800"
+                            {{ index + 1 }}
+                          </td>
+                          <th
+                            class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
                           >
-                            <TrashIcon class="w-5"></TrashIcon>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
+                            {{ pic.name }}
+                          </th>
+                          <td
+                            v-if="pic.client"
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                          >
+                            {{ pic.client.company_name }}
+                          </td>
+                          <td
+                            v-else
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                          >
+                            Belum ada client
+                          </td>
+                          <td
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                          >
+                            {{ pic.phone_number }}
+                          </td>
+                          <td
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                          >
+                            {{ pic.email }}
+                          </td>
+                          <td
+                            class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                          >
+                            <div class="">
+                              <button
+                                @click="sendIdForUpdate(pic.id)"
+                                class="px-1 py-1 text-white transition-colors duration-200 bg-sky-500 hover:bg-sky-600 active:bg-sky-800"
+                              >
+                                <PencilIcon class="w-5"></PencilIcon>
+                              </button>
+                              <button
+                                @click="
+                                  sendIdForDelete(
+                                    pic.id,
+                                    pic.name,
+                                    pic.client.company_name
+                                  )
+                                "
+                                class="px-1 py-1 text-white transition-colors duration-200 bg-rose-500 hover:bg-rose-600 active:bg-rose-800"
+                              >
+                                <TrashIcon class="w-5"></TrashIcon>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      </template>
+                    </template>
+                    <template v-else>
+                      <tr>
+                        <td colspan="6" class="text-center">
+                          <div class="flex justify-center">
+                            <img
+                              class="w-6 my-2"
+                              src="/src/assets/img/spinner2.svg"
+                              alt=""
+                            />
+                            <span class="my-2"> Loading data</span>
+                          </div>
+                        </td>
+                      </tr>
+                    </template>
                   </tbody>
                 </table>
               </div>
@@ -236,8 +261,19 @@ export default {
   setup() {
     // * define vuex
     const store = useStore();
+    // toggle loading
+    const isLoading = ref(true);
     // ! retrieve all data pics
-    store.dispatch("pic/getAllData");
+    store
+      .dispatch("pic/getAllData")
+      .then((res) => {
+        if (res.data.length === 0) {
+          isLoading.value = false;
+        }
+      })
+      .catch((err) => {
+        isLoading.value = false;
+      });
     const pics = computed(() => {
       return store.getters["pic/getStatePics"];
     });
@@ -347,6 +383,7 @@ export default {
       toggleModalUpdate,
       sendIdForUpdate,
       pic,
+      isLoading,
     };
   },
 };

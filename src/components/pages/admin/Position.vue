@@ -61,9 +61,9 @@
                 >
                   <button
                     @click="toggleModalInsert"
-                    class="flex justify-center px-4 py-1 -mt-5 transition-colors duration-100 rounded-tl-lg rounded-bl-lg  hover:bg-blueGray-300 text-blueGray-800 bg-blueGray-200 active:bg-blueGray-400"
+                    class="flex justify-center px-4 py-2 -mt-5 space-x-1 transition-colors duration-100 rounded-md  hover:bg-blueGray-300 text-blueGray-800 bg-blueGray-200 active:bg-blueGray-400"
                   >
-                    <PlusSmIcon class="flex-none w-6"></PlusSmIcon>
+                    <PlusCircleIcon class="flex-none w-6"></PlusCircleIcon>
                     <p class="flex-none">Posisi</p>
                   </button>
                 </div>
@@ -103,48 +103,71 @@
                       </th>
                     </tr>
                   </thead>
-                  <tbody class="bg-blueGray-200">
-                    <tr
-                      v-for="(position, index) in positions.data"
-                      :key="index"
-                    >
-                      <td
-                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        {{ index + 1 }}
-                      </td>
-                      <th
-                        class="p-2 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        {{ position.position_name }}
-                      </th>
-
-                      <td
-                        class="p-2 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        <div class="space-x-1">
-                          <button
-                            @click="sendIdAndOpenModalUpdate(position.id)"
-                            class="px-3 py-2 text-white transition-colors duration-200 rounded-md  bg-sky-500 hover:bg-sky-600 active:bg-sky-800"
+                  <template v-if="positions.data">
+                    <template v-if="positions.data.length === 0">
+                      <tr>
+                        <td colspan="6" class="text-center">Tidak ada data</td>
+                      </tr>
+                    </template>
+                    <template v-else>
+                      <tbody class="bg-blueGray-200">
+                        <tr
+                          v-for="(position, index) in positions.data"
+                          :key="index"
+                        >
+                          <td
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                           >
-                            <PencilIcon class="w-5"></PencilIcon>
-                          </button>
-
-                          <button
-                            @click="
-                              sendIdForDelete(
-                                position.id,
-                                position.position_name
-                              )
-                            "
-                            class="px-3 py-2 text-white transition-colors duration-200 rounded-md  bg-rose-500 hover:bg-rose-600 active:bg-rose-800"
+                            {{ index + 1 }}
+                          </td>
+                          <th
+                            class="p-2 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                           >
-                            <TrashIcon class="w-5"></TrashIcon>
-                          </button>
+                            {{ position.position_name }}
+                          </th>
+
+                          <td
+                            class="p-2 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            <div class="">
+                              <button
+                                @click="sendIdAndOpenModalUpdate(position.id)"
+                                class="px-1 py-1 text-white transition-colors duration-200 rounded-tl-sm rounded-bl-sm  bg-sky-500 hover:bg-sky-600 active:bg-sky-800"
+                              >
+                                <PencilIcon class="w-5"></PencilIcon>
+                              </button>
+
+                              <button
+                                @click="
+                                  sendIdForDelete(
+                                    position.id,
+                                    position.position_name
+                                  )
+                                "
+                                class="px-1 py-1 text-white transition-colors duration-200 rounded-tr-sm rounded-br-sm  bg-rose-500 hover:bg-rose-600 active:bg-rose-800"
+                              >
+                                <TrashIcon class="w-5"></TrashIcon>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </template>
+                  </template>
+                  <template v-else>
+                    <tr>
+                      <td colspan="6" class="text-center">
+                        <div class="flex justify-center">
+                          <img
+                            class="w-6 my-2"
+                            src="/src/assets/img/spinner2.svg"
+                            alt=""
+                          />
+                          <span class="my-2"> Loading data</span>
                         </div>
                       </td>
                     </tr>
-                  </tbody>
+                  </template>
                 </table>
               </div>
             </div>
@@ -161,7 +184,7 @@
 </template>
 
 <script>
-import { PencilIcon, TrashIcon, PlusSmIcon } from "@heroicons/vue/outline";
+import { PencilIcon, TrashIcon, PlusCircleIcon } from "@heroicons/vue/solid";
 import Sidebar from "../../layout/Sidebar.vue";
 import Navbar from "../../layout/Navbar.vue";
 import FormModalInsert from "../../position/FormModalInsert.vue";
@@ -175,7 +198,7 @@ export default {
   components: {
     PencilIcon,
     TrashIcon,
-    PlusSmIcon,
+    PlusCircleIcon,
     Sidebar,
     Navbar,
     FormModalInsert,

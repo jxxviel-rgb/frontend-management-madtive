@@ -141,6 +141,7 @@
                                   Intl.NumberFormat("id-ID", {
                                     style: "currency",
                                     currency: "IDR",
+                                    minimumFractionDigits: 0,
                                   }).format(project.data.data.project_value)
                                 }}
                               </li>
@@ -163,6 +164,7 @@
                                   Intl.NumberFormat("id-ID", {
                                     style: "currency",
                                     currency: "IDR",
+                                    minimumFractionDigits: 0,
                                   }).format(project.data.data.accomodation)
                                 }}
                               </li>
@@ -183,6 +185,7 @@
                                   Intl.NumberFormat("id-ID", {
                                     style: "currency",
                                     currency: "IDR",
+                                    minimumFractionDigits: 0,
                                   }).format(project.data.data.profit_team)
                                 }}
                               </li>
@@ -205,6 +208,7 @@
                                   Intl.NumberFormat("id-ID", {
                                     style: "currency",
                                     currency: "IDR",
+                                    minimumFractionDigits: 0,
                                   }).format(project.data.data.profit_company)
                                 }}
                               </li>
@@ -223,6 +227,7 @@
                                   Intl.NumberFormat("id-ID", {
                                     style: "currency",
                                     currency: "IDR",
+                                    minimumFractionDigits: 0,
                                   }).format(project.data.data.tax)
                                 }}
                               </li>

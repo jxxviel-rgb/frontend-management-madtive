@@ -63,7 +63,7 @@
                     class="flex justify-center px-4 py-2 -mt-5 space-x-1 transition-colors duration-100 rounded-md  hover:bg-blueGray-300 text-blueGray-800 bg-blueGray-200 active:bg-blueGray-400"
                   >
                     <PlusCircleIcon class="flex-none w-6"></PlusCircleIcon>
-                    <p class="flex-none">Add Employee</p>
+                    <p class="flex-none">Pegawai</p>
                   </button>
                 </div>
               </div>
@@ -80,7 +80,7 @@
               <div class="block w-full overflow-x-auto">
                 <!-- Projects table -->
                 <table
-                  class="items-center w-full bg-transparent border-collapse"
+                  class="items-center w-full break-all bg-transparent border-collapse table-auto "
                 >
                   <thead class="bg-blueGray-300">
                     <tr>
@@ -93,7 +93,7 @@
                       <th
                         class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                       >
-                        Name
+                        Nama
                       </th>
                       <th
                         class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
@@ -103,101 +103,142 @@
                       <th
                         class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                       >
-                        Phone Number
+                        No. Telp
                       </th>
                       <th
                         class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowra text-blueGray-500"
                       >
-                        Position
+                        Posisi
                       </th>
                       <th
                         class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowra text-blueGray-500"
                       >
-                        Salary
+                        Gaji
                       </th>
                       <th
                         class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowra text-blueGray-500"
                       >
-                        Address
+                        Alamat
                       </th>
                       <th
                         class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowra text-blueGray-500"
                       >
-                        Actions
+                        Role
+                      </th>
+                      <th
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
+                      >
+                        Aksi
                       </th>
                     </tr>
                   </thead>
-                  <tbody class="bg-blueGray-200">
-                    <tr v-for="(item, index) in employees.data" :key="index">
-                      <td
-                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        {{ index + 1 }}
-                      </td>
-                      <th
-                        class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        {{ item.employee.name }}
-                      </th>
-                      <td
-                        class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        {{ item.email }}
-                      </td>
-                      <td
-                        class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        {{ item.employee.phone_number }}
-                      </td>
-
-                      <td
-                        v-if="item.employee.position === null"
-                        class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        Belum ada posisi
-                      </td>
-                      <td
-                        v-else
-                        class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        {{ item.employee.position.position_name }}
-                      </td>
-                      <td
-                        class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        Rp.
-                        {{
-                          new Intl.NumberFormat().format(item.employee.salary)
-                        }}
-                      </td>
-                      <td
-                        class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        {{ item.employee.address }}
-                      </td>
-                      <td
-                        class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        <div class="space-x-1">
-                          <button
-                            @click="sendIdAndOpenModalUpdate(item.id)"
-                            class="px-3 py-2 text-white transition-colors duration-200 rounded-md  bg-sky-500 hover:bg-sky-600 active:bg-sky-800"
+                  <template v-if="employees.data">
+                    <template v-if="employees.data.length === 0">
+                      <tr>
+                        <td colspan="9" class="text-center">Tidak ada data</td>
+                      </tr>
+                    </template>
+                    <template v-else>
+                      <tbody class="bg-blueGray-200">
+                        <tr
+                          v-for="(item, index) in employees.data"
+                          :key="index"
+                        >
+                          <td
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                           >
-                            <PencilIcon class="w-5"></PencilIcon>
-                          </button>
-
-                          <button
-                            @click="
-                              sendIdToLocalState(item.id, item.employee.name)
-                            "
-                            class="px-3 py-2 text-white transition-colors duration-200 rounded-md  bg-rose-500 hover:bg-rose-600 active:bg-rose-800"
+                            {{ index + 1 }}
+                          </td>
+                          <th
+                            class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                           >
-                            <TrashIcon class="w-5"></TrashIcon>
-                          </button>
+                            {{ item.employee.name }}
+                          </th>
+                          <td
+                            class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            {{ item.email }}
+                          </td>
+                          <td
+                            class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            {{ item.employee.phone_number }}
+                          </td>
+
+                          <td
+                            v-if="item.employee.position === null"
+                            class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            Belum ada posisi
+                          </td>
+                          <td
+                            v-else
+                            class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            {{ item.employee.position.position_name }}
+                          </td>
+                          <td
+                            class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            Rp.
+                            {{
+                              new Intl.NumberFormat().format(
+                                item.employee.salary
+                              )
+                            }}
+                          </td>
+                          <td
+                            class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            {{ item.employee.address }}
+                          </td>
+                          <td
+                            class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            {{ item.role }}
+                          </td>
+                          <td
+                            class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            <div class="">
+                              <button
+                                @click="sendIdAndOpenModalUpdate(item.id)"
+                                class="px-1 py-1 text-white transition-colors duration-200 rounded-tl-sm rounded-bl-sm  bg-sky-500 hover:bg-sky-600 active:bg-sky-800"
+                              >
+                                <PencilIcon class="w-5"></PencilIcon>
+                              </button>
+
+                              <button
+                                @click="
+                                  sendIdToLocalState(
+                                    item.id,
+                                    item.employee.name
+                                  )
+                                "
+                                class="px-1 py-1 text-white transition-colors duration-200 rounded-tr-sm rounded-br-sm  bg-rose-500 hover:bg-rose-600 active:bg-rose-800"
+                              >
+                                <TrashIcon class="w-5"></TrashIcon>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </template>
+                  </template>
+                  <template v-else>
+                    <tr>
+                      <td colspan="6" class="text-center">
+                        <div class="flex justify-center">
+                          <img
+                            class="w-6 my-2"
+                            src="/src/assets/img/spinner2.svg"
+                            alt=""
+                          />
+                          <span class="my-2"> Loading data</span>
                         </div>
                       </td>
                     </tr>
-                  </tbody>
+                  </template>
                 </table>
               </div>
             </div>
@@ -220,7 +261,7 @@ import FormModalInsert from "../../employee/FormModalInsert.vue";
 import FormModalUpdate from "../../employee/FormModalUpdate.vue";
 import ModalDelete from "../../employee/ModalDelete.vue";
 import ModalAlert from "../../employee/ModalAlert.vue";
-import { TrashIcon, PencilIcon, PlusCircleIcon } from "@heroicons/vue/outline";
+import { TrashIcon, PencilIcon, PlusCircleIcon } from "@heroicons/vue/solid";
 import { useStore } from "vuex";
 import { computed, ref, reactive } from "vue";
 export default {
@@ -262,7 +303,7 @@ export default {
       isModalUpdateOpen.value = !isModalUpdateOpen.value;
     };
     const modalUpdateContent = reactive({
-      title: "Update data karyawan",
+      title: "Edit data pegawai",
     });
 
     const specificEmployee = reactive({

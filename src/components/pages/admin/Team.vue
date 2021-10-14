@@ -26,6 +26,10 @@
       :alertContent="alertContent"
       @close="toggleModalAlert"
     ></ModalAlert>
+    <FormModalInsertTeam
+      :isModalInsertTeamOpen="isModalInsertTeamOpen"
+      @close="toggleModalInsertTeam"
+    ></FormModalInsertTeam>
     <!-- <modal-tabs
       :isModalTabsOpen="isModalTabsOpen"
       :project="project"
@@ -66,9 +70,10 @@
                   class="flex-none min-w-0 mb-6 ml-0 break-words rounded shadow-lg  lg:-ml-6 md:-ml-6"
                 >
                   <button
-                    class="flex justify-center px-4 py-1 -mt-5 space-x-1 transition-colors duration-100  hover:bg-blueGray-300 text-blueGray-800 bg-blueGray-200 active:bg-blueGray-400"
+                    @click="toggleModalInsertTeam"
+                    class="flex justify-center px-4 py-2 -mt-5 space-x-1 transition-colors duration-100 rounded-md  hover:bg-blueGray-300 text-blueGray-800 bg-blueGray-200 active:bg-blueGray-400"
                   >
-                    <PlusSmIcon class="flex-none w-6"></PlusSmIcon>
+                    <PlusCircleIcon class="flex-none w-6"></PlusCircleIcon>
                     <p class="flex-none">Tim</p>
                   </button>
                 </div>
@@ -128,112 +133,125 @@
                       </th>
                     </tr>
                   </thead>
-                  <tbody
-                    v-if="teams.data === undefined || teams.data.length === 0"
-                    class="bg-blueGray-200"
-                  >
+                  <template v-if="teams.data">
+                    <template v-if="teams.data.length === 0">
+                      <tr>
+                        <td colspan="6" class="text-center">Tidak ada data</td>
+                      </tr>
+                    </template>
+                    <template v-else>
+                      <tbody class="bg-blueGray-200">
+                        <tr v-for="(team, index) in teams.data" :key="index">
+                          <td
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            {{ index + 1 }}
+                          </td>
+
+                          <th
+                            v-if="team.project === null"
+                            class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            {{ (team.project = "Belum ada project") }}
+                          </th>
+                          <th
+                            v-else
+                            class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            {{ team.project.name }}
+                          </th>
+                          <td
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            {{ team.employee.name }}
+                          </td>
+                          <td
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            {{ team.position }}
+                          </td>
+                          <td
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            {{
+                              Intl.NumberFormat("id-ID", {
+                                style: "currency",
+                                currency: "IDR",
+                                minimumFractionDigits: 0,
+                              }).format(team.profit)
+                            }}
+                          </td>
+                          <td
+                            v-if="team.payment_status === 'PENDING'"
+                            class="px-4 text-xs font-medium text-center align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            <span class="px-2 py-1 bg-yellow-500 shadow">
+                              {{ team.payment_status }}
+                            </span>
+                          </td>
+                          <td
+                            v-else-if="team.payment_status === 'ON PROCESS'"
+                            class="px-4 text-xs text-center align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            <span
+                              class="px-2 py-1 font-medium shadow  text-blueGray-800 bg-sky-400"
+                            >
+                              {{ team.payment_status }}
+                            </span>
+                          </td>
+                          <td
+                            v-else
+                            class="px-4 text-xs text-center align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            <span
+                              class="px-2 py-1 font-medium shadow  text-blueGray-800 bg-emerald-400"
+                            >
+                              {{ team.payment_status }}
+                            </span>
+                          </td>
+                          <td
+                            class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            <div class="">
+                              <button
+                                @click="sendIdAndOpenModalUpdate(team.id)"
+                                class="px-1 py-1 text-white transition-colors duration-200  bg-sky-500 hover:bg-sky-600 active:bg-sky-800"
+                              >
+                                <PencilIcon class="w-5"></PencilIcon>
+                              </button>
+
+                              <button
+                                @click="
+                                  openModalDelete(
+                                    team.id,
+                                    team.project.name,
+                                    team.employee.name
+                                  )
+                                "
+                                class="px-1 py-1 text-white transition-colors duration-200  bg-rose-500 hover:bg-rose-600 active:bg-rose-800"
+                              >
+                                <TrashIcon class="w-5"></TrashIcon>
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </template>
+                  </template>
+                  <template v-else>
                     <tr>
-                      <td colspan="7" class="py-2 text-center bg-blueGray-200">
-                        Data tidak tersedia
-                      </td>
-                    </tr>
-                  </tbody>
-                  <tbody v-else class="bg-blueGray-200">
-                    <tr v-for="(team, index) in teams.data" :key="index">
-                      <td
-                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        {{ index + 1 }}
-                      </td>
-
-                      <th
-                        v-if="team.project === null"
-                        class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        Belum ada project
-                      </th>
-                      <th
-                        v-else
-                        class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        {{ team.project.name }}
-                      </th>
-                      <td
-                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        {{ team.employee.name }}
-                      </td>
-                      <td
-                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        {{ team.position }}
-                      </td>
-                      <td
-                        class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        {{
-                          Intl.NumberFormat("id-ID", {
-                            style: "currency",
-                            currency: "IDR",
-                            minimumFractionDigits: 0,
-                          }).format(team.profit)
-                        }}
-                      </td>
-                      <td
-                        v-if="team.payment_status === 'PENDING'"
-                        class="px-4 text-xs font-medium text-center align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        <span class="px-2 py-1 bg-yellow-500 shadow">
-                          {{ team.payment_status }}
-                        </span>
-                      </td>
-                      <td
-                        v-else-if="team.payment_status === 'ON PROCESS'"
-                        class="px-4 text-xs text-center align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        <span
-                          class="px-2 py-1 font-medium shadow  text-blueGray-800 bg-sky-400"
-                        >
-                          {{ team.payment_status }}
-                        </span>
-                      </td>
-                      <td
-                        v-else
-                        class="px-4 text-xs text-center align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        <span
-                          class="px-2 py-1 font-medium shadow  text-blueGray-800 bg-emerald-400"
-                        >
-                          {{ team.payment_status }}
-                        </span>
-                      </td>
-                      <td
-                        class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
-                      >
-                        <div class="space-x-1">
-                          <button
-                            @click="sendIdAndOpenModalUpdate(team.id)"
-                            class="px-2 py-2 text-white transition-colors duration-200  bg-sky-500 hover:bg-sky-600 active:bg-sky-800"
-                          >
-                            <PencilIcon class="w-5"></PencilIcon>
-                          </button>
-
-                          <button
-                            @click="
-                              openModalDelete(
-                                team.id,
-                                team.project.name,
-                                team.employee.name
-                              )
-                            "
-                            class="px-2 py-2 text-white transition-colors duration-200  bg-rose-500 hover:bg-rose-600 active:bg-rose-800"
-                          >
-                            <TrashIcon class="w-5"></TrashIcon>
-                          </button>
+                      <td colspan="6" class="text-center">
+                        <div class="flex justify-center">
+                          <img
+                            class="w-6 my-2"
+                            src="/src/assets/img/spinner2.svg"
+                            alt=""
+                          />
+                          <span class="my-2"> Loading data</span>
                         </div>
                       </td>
                     </tr>
-                  </tbody>
+                  </template>
                 </table>
               </div>
             </div>
@@ -255,13 +273,10 @@ import Navbar from "../../layout/Navbar.vue";
 import ModalDelete from "../../team/ModalDelete.vue";
 import ModalAlert from "../../global/ModalAlert.vue";
 import FormModalUpdate from "../../team/FormModalUpdate.vue";
+import FormModalInsertTeam from "../../team/FormModalInsertTeam.vue";
 import { computed, ref, reactive } from "@vue/reactivity";
 import { useStore } from "vuex";
-import {
-  TrashIcon,
-  InformationCircleIcon,
-  PencilIcon,
-} from "@heroicons/vue/outline";
+import { TrashIcon, PlusCircleIcon, PencilIcon } from "@heroicons/vue/solid";
 export default {
   components: {
     ModalAlert,
@@ -270,8 +285,9 @@ export default {
     Navbar,
     TrashIcon,
     PencilIcon,
-    InformationCircleIcon,
+    PlusCircleIcon,
     FormModalUpdate,
+    FormModalInsertTeam,
   },
   setup() {
     const store = useStore();
@@ -289,8 +305,8 @@ export default {
       title: "Hapus Team",
     });
     const paramId = ref(null);
-    const projectName = ref(null);
-    const employeeName = ref(null);
+    const projectName = ref("Belum ada project");
+    const employeeName = ref("Belum ada employee");
     const openModalDelete = (id, project, employee) => {
       isModalDeleteOpen.value = !isModalDeleteOpen;
       paramId.value = id;
@@ -345,6 +361,11 @@ export default {
         return store.getters["team/getStateTeam"];
       });
     };
+    // !MODAL INSERT TEAM
+    const isModalInsertTeamOpen = ref("");
+    const toggleModalInsertTeam = () => {
+      isModalInsertTeamOpen.value = !isModalInsertTeamOpen.value;
+    };
     return {
       teams,
       isModalDeleteOpen,
@@ -364,6 +385,8 @@ export default {
       modalUpdateContent,
       sendIdAndOpenModalUpdate,
       team,
+      isModalInsertTeamOpen,
+      toggleModalInsertTeam,
     };
   },
 };

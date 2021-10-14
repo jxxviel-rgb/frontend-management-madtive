@@ -58,7 +58,7 @@
                     class="mt-2 text-lg font-medium leading-6 text-blueGray-700"
                   >
                     <!-- {{ modalContent.title }} -->
-                    Update data client.
+                    Edit data client.
                   </DialogTitle>
                 </div>
               </div>
@@ -405,7 +405,7 @@ export default {
         });
     };
 
-    return {
+    return {  
       update,
       isDisabled,
       isLoading,
