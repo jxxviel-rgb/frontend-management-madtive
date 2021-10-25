@@ -1,5 +1,5 @@
 <template>
-  <TransitionRoot as="template" :show="(show = !show)">
+  <TransitionRoot as="template" :show="show">
     <Dialog
       :initialFocus="cancelButtonRef"
       as="div"
@@ -145,7 +145,9 @@ export default {
     },
   },
   setup(props, { emit }) {
-    const show = props.isModalDeleteOpen;
+    const show = computed(() => {
+      return props.isModalDeleteOpen;
+    });
     const modalContent = props.contentModalDelete;
     const projectName = computed(() => {
       return props.projectName;

@@ -1,5 +1,5 @@
 <template>
-  <TransitionRoot as="template" :show="(show = !show)">
+  <TransitionRoot as="template" :show="show">
     <Dialog
       as="div"
       class="fixed inset-0 z-10 overflow-y-auto"
@@ -139,7 +139,9 @@ export default {
     },
   },
   setup(props, { emit }) {
-    const show = props.isModalDeleteOpen;
+    const show = computed(() => {
+      return props.isModalDeleteOpen;
+    });
     const modalContent = props.contentModalDelete;
     const pic = computed(() => {
       return props.pic;

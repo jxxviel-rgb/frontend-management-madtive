@@ -227,7 +227,7 @@
                   </template>
                   <template v-else>
                     <tr>
-                      <td colspan="6" class="text-center">
+                      <td colspan="9" class="text-center">
                         <div class="flex justify-center">
                           <img
                             class="w-6 my-2"

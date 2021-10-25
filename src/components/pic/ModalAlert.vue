@@ -127,7 +127,9 @@ export default {
   },
   emits: ["close"],
   setup(props, { emit }) {
-    const show = props.isModalAlertOpen;
+    const show = computed(() => {
+      return props.isModalAlertOpen;
+    });
 
     const alertContent = props.alertContent;
     return {

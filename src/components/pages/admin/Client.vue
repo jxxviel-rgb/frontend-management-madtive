@@ -15,6 +15,7 @@
       @close="alertToggle"
       @delete-button="remove"
     ></action-modal-alert>
+    <ModalTablePic :isOpen="isModalTableOpen" @close="toggleModalTable" />
     <!-- end of modal alert -->
     <Sidebar></Sidebar>
     <div class="relative md:ml-64">
@@ -105,6 +106,11 @@
                       <th
                         class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  bg-blueGray-300 text-blueGray-500"
                       >
+                        PIC
+                      </th>
+                      <th
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  bg-blueGray-300 text-blueGray-500"
+                      >
                         Aksi
                       </th>
                     </tr>
@@ -142,6 +148,16 @@
                             class="p-2 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                           >
                             {{ items.address }}
+                          </td>
+                          <td
+                            class="p-2 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            <button
+                              @click="toggleModalTable(items.id)"
+                              class="flex px-1 py-1 text-white transition-colors duration-200 rounded-full  bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-800"
+                            >
+                              <EyeIcon class="w-6" />
+                            </button>
                           </td>
                           <td
                             class="p-2 px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
@@ -200,12 +216,19 @@ import Navbar from "../../layout/Navbar.vue";
 import FormModalClient from "../../client/FormModalClient.vue";
 import FormModalUpdateClient from "../../client/FormModalUpdateClient.vue";
 import ActionModalAlert from "../../client/ActionModalAlert.vue";
+import ModalTablePic from "../../../components/client/ModalTablePic.vue";
 import AlertInfo from "../../client/AlertInfo.vue";
-import { PlusCircleIcon, TrashIcon, PencilIcon } from "@heroicons/vue/solid";
+import {
+  PlusCircleIcon,
+  TrashIcon,
+  PencilIcon,
+  EyeIcon,
+} from "@heroicons/vue/solid";
 import { ref, computed, reactive } from "vue";
 import { useStore } from "vuex";
 export default {
   components: {
+    EyeIcon,
     Navbar,
     Sidebar,
     TrashIcon,
@@ -215,6 +238,7 @@ export default {
     PlusCircleIcon,
     ActionModalAlert,
     AlertInfo,
+    ModalTablePic,
   },
   setup() {
     // * using store from vuex
@@ -262,9 +286,7 @@ export default {
       specificClient.data = computed(() => {
         return store.getters["client/getSpecificClientState"];
       });
-      setTimeout(() => {
-        isModalUpdateOpen.value = !isModalUpdateOpen.value;
-      }, 300);
+      isModalUpdateOpen.value = !isModalUpdateOpen.value;
     };
 
     const alertInfoContent = reactive({
@@ -286,6 +308,12 @@ export default {
         })
         .catch((err) => {});
     };
+    const isModalTableOpen = ref(false);
+    const toggleModalTable = (id) => {
+      store.commit("client/setClientId", id);
+      store.dispatch("pic/getAllPicsClient", id);
+      isModalTableOpen.value = !isModalTableOpen.value;
+    };
 
     return {
       modalToggle,
@@ -304,6 +332,8 @@ export default {
       alertInfoContent,
       sendIdAndOpenEditModal,
       specificClient,
+      isModalTableOpen,
+      toggleModalTable,
     };
   },
 };

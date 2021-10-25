@@ -64,7 +64,7 @@
             </div>
             <!-- Start of form content -->
             <div class="w-full px-5 bg-blueGray-200">
-              <form @submit.prevent="update" v-if="project.data.data">
+              <form @submit.prevent="update" v-if="Project.data">
                 <div class="relative w-full mb-3">
                   <label
                     class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
@@ -73,7 +73,7 @@
                     Nama Project
                   </label>
                   <input
-                    v-model="project.data.data.name"
+                    v-model="Project.data.name"
                     type="text"
                     class="w-full text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                     placeholder="PT. Madtive Studio Indonesia"
@@ -117,13 +117,13 @@
                   >
                     Client
                   </label>
-                  <Listbox v-model="project.data.data.client">
+                  <Listbox v-model="Project.data.client">
                     <div class="relative mt-1">
                       <ListboxButton
                         class="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded shadow cursor-default  focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
                       >
                         <span
-                          v-if="project.data.data.client === null"
+                          v-if="Project.data.client === null"
                           class="block text-sm truncate text-blueGray-600"
                         >
                           Pilih Client
@@ -133,7 +133,7 @@
                           v-else
                           class="block text-sm truncate text-blueGray-600"
                         >
-                          {{ project.data.data.client.company_name }}
+                          {{ Project.data.client.company_name }}
                         </span>
                         <span
                           class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none "
@@ -228,7 +228,7 @@
                     Deadline
                   </label>
                   <input
-                    v-model="project.data.data.deadline"
+                    v-model="Project.data.deadline"
                     type="date"
                     class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                   />
@@ -272,7 +272,7 @@
                     Estimasi
                   </label>
                   <input
-                    v-model="project.data.data.estimation"
+                    v-model="Project.data.estimation"
                     type="date"
                     class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                   />
@@ -322,7 +322,7 @@
                       >Rp.</span
                     >
                     <Money3Component
-                      v-model="project.data.data.project_value"
+                      v-model="Project.data.project_value"
                       v-bind="config"
                       type="number"
                       min="0"
@@ -375,7 +375,7 @@
                       >Rp.</span
                     >
                     <Money3Component
-                      v-model="project.data.data.accomodation"
+                      v-model="Project.data.accomodation"
                       v-bind="config"
                       type="number"
                       min="0"
@@ -427,11 +427,12 @@
                       >Rp.</span
                     >
                     <Money3Component
-                      v-model="project.data.data.profit_team"
+                      readonly
+                      v-model="input.profit_team"
                       v-bind="config"
                       type="number"
                       min="0"
-                      class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                      class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear border-0 rounded shadow  bg-blueGray-100 placeholder-blueGray-300 text-blueGray-600"
                     />
                   </div>
                   <!-- Start of validation profit_team -->
@@ -479,11 +480,12 @@
                       >Rp.</span
                     >
                     <Money3Component
-                      v-model="project.data.data.profit_company"
+                      readonly
+                      v-model="input.profit_company"
                       v-bind="config"
                       type="number"
                       min="0"
-                      class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                      class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear border-0 rounded shadow  bg-blueGray-100 placeholder-blueGray-300 text-blueGray-600"
                     />
                   </div>
                   <!-- Start of validation profit_company -->
@@ -526,7 +528,7 @@
                     Progres
                   </label>
                   <input
-                    v-model="project.data.data.progres"
+                    v-model="Project.data.progres"
                     type="text"
                     class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                     placeholder="+62"
@@ -576,11 +578,14 @@
                       >Rp.</span
                     >
                     <Money3Component
-                      v-model="project.data.data.tax"
+                      readonly
+                      v-model="input.tax"
+                      v-bind="config"
                       type="text"
-                      class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                      class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear border-0 rounded shadow  bg-blueGray-100 placeholder-blueGray-300 text-blueGray-600"
                     />
                   </div>
+
                   <!-- Start of validation tax -->
                   <span v-if="validation.tax">
                     <div
@@ -620,13 +625,13 @@
                   >
                     Status
                   </label>
-                  <Listbox v-model="project.data.data.status">
+                  <Listbox v-model="Project.data.status">
                     <div class="relative mt-1">
                       <ListboxButton
                         class="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded shadow cursor-default  focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
                       >
                         <span
-                          v-if="project.data.data.status === ''"
+                          v-if="Project.data.status === ''"
                           class="block text-sm truncate text-blueGray-600"
                         >
                           Pilih Status Project
@@ -635,7 +640,7 @@
                           v-else
                           class="block text-sm truncate text-blueGray-600"
                         >
-                          {{ project.data.data.status }}
+                          {{ Project.data.status }}
                         </span>
                         <span
                           class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none "
@@ -908,7 +913,7 @@ import {
 } from "@headlessui/vue";
 import { UserAddIcon } from "@heroicons/vue/outline";
 import { CheckIcon, SelectorIcon } from "@heroicons/vue/solid";
-import { ref, reactive, computed } from "vue";
+import { ref, reactive, computed, watchEffect, onMounted } from "vue";
 import { useStore } from "vuex";
 import { Money3Component } from "v-money3";
 export default {
@@ -938,15 +943,10 @@ export default {
       type: Object,
       default: {},
     },
-    project: {
-      type: Object,
-      default: {},
-    },
   },
   setup(props, { emit }) {
     const showing = props.isModalUpdateOpen;
     const modalContent = props.contentModalUpdate;
-    const project = props.project;
     const config = computed(() => {
       return {
         masked: false,
@@ -1013,24 +1013,54 @@ export default {
       progres: "",
       status: "",
     });
+    const input = reactive({
+      profit_team: "",
+      profit_company: "",
+      tax: "",
+    });
+    const Project = computed(() => {
+      return store.getters["project/getProjectState"];
+    });
+    watchEffect(() => {
+      if (Project.value.data) {
+        input.profit_team = computed(() => {
+          return (Project.value.data.project_value * 5) / 100;
+        });
+        input.profit_company = computed(() => {
+          return (Project.value.data.project_value * 30) / 100;
+        });
+        input.tax = computed(() => {
+          return (Project.value.data.project_value * 10) / 100;
+        });
+      }
+    });
+    const tax = computed(() => {
+      return store.getters["project/getTax"];
+    });
+    const profit_team = computed(() => {
+      return store.getters["project/getProfitTeam"];
+    });
+    const profit_company = computed(() => {
+      return store.getters["project/getProfitCompany"];
+    });
 
     const update = () => {
       isLoading.value = true;
       isDisabled.value = true;
       store
         .dispatch("project/updateData", {
-          id: project.data.data.id,
-          client_id: project.data.data.client.id,
-          name: project.data.data.name,
-          deadline: project.data.data.deadline,
-          estimation: project.data.data.estimation,
-          project_value: project.data.data.project_value,
-          accomodation: project.data.data.accomodation,
-          profit_team: project.data.data.profit_team,
-          profit_company: project.data.data.profit_company,
-          tax: project.data.data.tax,
-          progres: project.data.data.progres,
-          status: project.data.data.status,
+          id: Project.value.data.id,
+          client_id: Project.value.data.client.id,
+          name: Project.value.data.name,
+          deadline: Project.value.data.deadline,
+          estimation: Project.value.data.estimation,
+          project_value: Project.value.data.project_value,
+          accomodation: Project.value.data.accomodation,
+          profit_team: input.profit_team,
+          profit_company: input.profit_company,
+          tax: input.tax,
+          progres: Project.value.data.progres,
+          status: Project.value.data.status,
         })
         .then((res) => {
           store.dispatch("project/getAllProjects");
@@ -1039,17 +1069,17 @@ export default {
           /*
            *reset input form
            */
-          project.data.data.client = "";
-          project.data.data.name = "";
-          project.data.data.deadline = "";
-          project.data.data.estimation = "";
-          project.data.data.project_value = "";
-          project.data.data.accomodation = "";
-          project.data.data.profit_team = "";
-          project.data.data.profit_company = "";
-          project.data.data.tax = "";
-          project.data.data.progres = "";
-          project.data.data.status = "";
+          Project.value.data.client = "";
+          Project.value.data.name = "";
+          Project.value.data.deadline = "";
+          Project.value.data.estimation = "";
+          Project.value.data.project_value = "";
+          Project.value.data.accomodation = "";
+          Project.value.data.profit_team = "";
+          Project.value.data.profit_company = "";
+          Project.value.data.tax = "";
+          Project.value.data.progres = "";
+          Project.value.data.status = "";
           // * close modal after insert
           emit("close");
         })
@@ -1081,10 +1111,14 @@ export default {
       modalContent,
       validation,
       closeAndClearValidation,
-      project,
       clients,
       config,
       statuses,
+      input,
+      Project,
+      tax,
+      profit_team,
+      profit_company,
     };
   },
 };

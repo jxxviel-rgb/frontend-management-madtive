@@ -26,10 +26,10 @@
       :alertContent="alertContent"
       @close="toggleModalAlert"
     ></ModalAlert>
-    <FormModalInsertTeam
+    <!-- <FormModalInsertTeam
       :isModalInsertTeamOpen="isModalInsertTeamOpen"
       @close="toggleModalInsertTeam"
-    ></FormModalInsertTeam>
+    ></FormModalInsertTeam> -->
     <!-- <modal-tabs
       :isModalTabsOpen="isModalTabsOpen"
       :project="project"
@@ -67,11 +67,11 @@
               </div>
               <div class="flex px-4 space-x-0">
                 <div
-                  class="flex-none min-w-0 mb-6 ml-0 break-words rounded shadow-lg  lg:-ml-6 md:-ml-6"
+                  class="flex-none min-w-0 mb-6 ml-0 break-words rounded shadow-lg lg:-ml-6 md:-ml-6"
                 >
                   <button
                     @click="toggleModalInsertTeam"
-                    class="flex justify-center px-4 py-2 -mt-5 space-x-1 transition-colors duration-100 rounded-md  hover:bg-blueGray-300 text-blueGray-800 bg-blueGray-200 active:bg-blueGray-400"
+                    class="flex justify-center px-4 py-2 -mt-5 space-x-1 transition-colors duration-100 rounded-md hover:bg-blueGray-300 text-blueGray-800 bg-blueGray-200 active:bg-blueGray-400"
                   >
                     <PlusCircleIcon class="flex-none w-6"></PlusCircleIcon>
                     <p class="flex-none">Tim</p>
@@ -96,38 +96,38 @@
                   <thead class="bg-blueGray-300">
                     <tr class="shadow-lg">
                       <th
-                        class="px-4 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
+                        class="px-4 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
                       >
                         #
                       </th>
 
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
                       >
                         Project
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
                       >
                         Nama Member
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
                       >
                         Posisi
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
                       >
                         Profit
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
                       >
                         Status Pembayaran
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
                       >
                         Aksi
                       </th>
@@ -143,35 +143,35 @@
                       <tbody class="bg-blueGray-200">
                         <tr v-for="(team, index) in teams.data" :key="index">
                           <td
-                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
                           >
                             {{ index + 1 }}
                           </td>
 
                           <th
                             v-if="team.project === null"
-                            class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                            class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
                           >
                             {{ (team.project = "Belum ada project") }}
                           </th>
                           <th
                             v-else
-                            class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                            class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
                           >
                             {{ team.project.name }}
                           </th>
                           <td
-                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
                           >
                             {{ team.employee.name }}
                           </td>
                           <td
-                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
                           >
                             {{ team.position }}
                           </td>
                           <td
-                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
                           >
                             {{
                               Intl.NumberFormat("id-ID", {
@@ -183,7 +183,7 @@
                           </td>
                           <td
                             v-if="team.payment_status === 'PENDING'"
-                            class="px-4 text-xs font-medium text-center align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                            class="px-4 text-xs font-medium text-center align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
                           >
                             <span class="px-2 py-1 bg-yellow-500 shadow">
                               {{ team.payment_status }}
@@ -191,31 +191,31 @@
                           </td>
                           <td
                             v-else-if="team.payment_status === 'ON PROCESS'"
-                            class="px-4 text-xs text-center align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                            class="px-4 text-xs text-center align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
                           >
                             <span
-                              class="px-2 py-1 font-medium shadow  text-blueGray-800 bg-sky-400"
+                              class="px-2 py-1 font-medium shadow text-blueGray-800 bg-sky-400"
                             >
                               {{ team.payment_status }}
                             </span>
                           </td>
                           <td
                             v-else
-                            class="px-4 text-xs text-center align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                            class="px-4 text-xs text-center align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
                           >
                             <span
-                              class="px-2 py-1 font-medium shadow  text-blueGray-800 bg-emerald-400"
+                              class="px-2 py-1 font-medium shadow text-blueGray-800 bg-emerald-400"
                             >
                               {{ team.payment_status }}
                             </span>
                           </td>
                           <td
-                            class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                            class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
                           >
                             <div class="">
                               <button
                                 @click="sendIdAndOpenModalUpdate(team.id)"
-                                class="px-1 py-1 text-white transition-colors duration-200  bg-sky-500 hover:bg-sky-600 active:bg-sky-800"
+                                class="px-1 py-1 text-white transition-colors duration-200 bg-sky-500 hover:bg-sky-600 active:bg-sky-800"
                               >
                                 <PencilIcon class="w-5"></PencilIcon>
                               </button>
@@ -228,7 +228,7 @@
                                     team.employee.name
                                   )
                                 "
-                                class="px-1 py-1 text-white transition-colors duration-200  bg-rose-500 hover:bg-rose-600 active:bg-rose-800"
+                                class="px-1 py-1 text-white transition-colors duration-200 bg-rose-500 hover:bg-rose-600 active:bg-rose-800"
                               >
                                 <TrashIcon class="w-5"></TrashIcon>
                               </button>

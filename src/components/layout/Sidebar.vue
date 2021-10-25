@@ -199,25 +199,25 @@
               <span class="mt-1 ml-1">Projek</span>
             </router-link>
           </li>
-
+          <!-- 
           <li class="items-center">
             <router-link
               :to="{ name: 'team' }"
-              class="flex py-3 text-xs font-bold uppercase  text-blueGray-600 hover:text-blueGray-500"
+              class="flex py-3 text-xs font-bold uppercase text-blueGray-600 hover:text-blueGray-500"
             >
               <UserGroupIcon class="w-5"></UserGroupIcon>
               <span class="mt-1 ml-1">Tim</span>
             </router-link>
-          </li>
-          <li class="items-center">
+          </li> -->
+          <!-- <li class="items-center">
             <router-link
               :to="{ name: 'pic' }"
-              class="flex py-3 text-xs font-bold uppercase  text-blueGray-600 hover:text-blueGray-500"
+              class="flex py-3 text-xs font-bold uppercase text-blueGray-600 hover:text-blueGray-500"
             >
               <UsersIcon class="w-5"></UsersIcon>
               <span class="mt-1 ml-1">PIC</span>
             </router-link>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>

@@ -6,6 +6,8 @@ export default {
     return {
       clients: {},
       client: {},
+      clientId: null,
+      pics: {},
     };
   },
   mutations: {
@@ -14,6 +16,9 @@ export default {
     },
     setSpecificClient(state, value) {
       state.client = value;
+    },
+    setClientId(state, value) {
+      state.clientId = value;
     },
   },
   actions: {
@@ -96,6 +101,9 @@ export default {
     },
     getSpecificClientState(state) {
       return state.client;
+    },
+    getStateClientId(state) {
+      return state.clientId;
     },
   },
 };

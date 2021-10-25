@@ -1,5 +1,5 @@
 <template>
-  <TransitionRoot as="template" :show="(showing = !showing)">
+  <TransitionRoot as="template" :show="showing">
     <Dialog
       as="div"
       class="fixed inset-0 z-10 overflow-y-auto"
@@ -73,7 +73,7 @@
                   >
                     Project
                   </label>
-                  <Listbox v-model="team.project">
+                  <Listbox v-model="team.project" ref="listBoxRef">
                     <div class="relative mt-1">
                       <ListboxButton
                         class="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded shadow cursor-default  focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
@@ -532,7 +532,7 @@ export default {
   props: {
     isModalInsertTeamOpen: {
       type: Boolean,
-      default: "",
+      default: false,
     },
     content: {
       type: Object,
@@ -540,7 +540,10 @@ export default {
     },
   },
   setup(props, { emit }) {
-    const showing = props.isModalInsertTeamOpen;
+    const showing = computed(() => {
+      return props.isModalInsertTeamOpen;
+    });
+    const listBoxRef = ref(null);
     const modalContent = props.content;
     const config = computed(() => {
       return {
@@ -606,7 +609,7 @@ export default {
           payment_status: team.payment_status,
         })
         .then((res) => {
-          store.dispatch("team/getAllTeams");
+          store.dispatch("team/getSpecificProjectTeam", team.project.id);
           isLoading.value = false;
           isDisabled.value = false;
           /*
@@ -642,6 +645,7 @@ export default {
     const projects = computed(() => {
       return store.getters["project/getProjectsState"];
     });
+
     return {
       insert,
       isDisabled,
@@ -655,6 +659,7 @@ export default {
       projects,
       team,
       config,
+      listBoxRef,
     };
   },
 };

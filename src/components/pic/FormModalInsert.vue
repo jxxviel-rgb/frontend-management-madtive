@@ -1,5 +1,5 @@
 <template>
-  <TransitionRoot as="template" :show="(showing = !showing)">
+  <TransitionRoot as="template" :show="showing">
     <Dialog
       as="div"
       class="fixed inset-0 z-10 overflow-y-auto"
@@ -70,116 +70,6 @@
                     class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                     htmlFor="grid-password"
                   >
-                    Client
-                  </label>
-                  <Listbox v-model="pic.client">
-                    <div class="relative mt-1">
-                      <ListboxButton
-                        class="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded shadow cursor-default  focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
-                      >
-                        <span
-                          v-if="pic.client === ''"
-                          class="block text-sm truncate text-blueGray-600"
-                        >
-                          Pilih Client
-                        </span>
-                        <span
-                          v-else
-                          class="block text-sm truncate text-blueGray-600"
-                        >
-                          {{ pic.client.company_name }}
-                        </span>
-                        <span
-                          class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none "
-                        >
-                          <SelectorIcon
-                            class="w-5 h-5 text-blueGray-400"
-                            aria-hidden="true"
-                          />
-                        </span>
-                      </ListboxButton>
-
-                      <transition
-                        leave-active-class="transition duration-100 ease-in"
-                        leave-from-class="opacity-100"
-                        leave-to-class="opacity-0"
-                      >
-                        <ListboxOptions
-                          class="absolute z-50 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg  max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
-                        >
-                          <ListboxOption
-                            v-slot="{ active, selected }"
-                            v-for="client in clients.data"
-                            :key="client.id"
-                            :value="client"
-                            as="template"
-                          >
-                            <li
-                              :class="[
-                                active
-                                  ? 'text-blueGray-800 bg-blueGray-200'
-                                  : 'text-blueGray-800',
-                                'cursor-default select-none relative py-2 pl-10 pr-4',
-                              ]"
-                            >
-                              <span
-                                :class="[
-                                  selected ? 'font-medium' : 'font-normal',
-                                  'block truncate',
-                                ]"
-                              >
-                                {{ client.company_name }}
-                              </span>
-                              <span
-                                v-if="selected"
-                                class="absolute inset-y-0 left-0 flex items-center pl-3  text-blueGray-600"
-                              >
-                                <CheckIcon class="w-5 h-5" aria-hidden="true" />
-                              </span>
-                            </li>
-                          </ListboxOption>
-                        </ListboxOptions>
-                      </transition>
-                    </div>
-                  </Listbox>
-                  <!-- Start of validation client -->
-                  <span v-if="validation.client">
-                    <div
-                      class="flex items-center justify-start pt-2 font-medium text-red-600 "
-                    >
-                      <div>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="100%"
-                          height="100%"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          class="w-5 h-5 mr-1 feather feather-alert-octagon"
-                        >
-                          <polygon
-                            points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"
-                          ></polygon>
-                          <line x1="12" y1="8" x2="12" y2="12"></line>
-                          <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                        </svg>
-                      </div>
-                      <div class="flex-initial max-w-full text-xs font-normal">
-                        {{ validation.client[0] }}
-                      </div>
-                    </div>
-                  </span>
-                  <!-- End of validation client -->
-                </div>
-
-                <div class="relative w-full mb-3">
-                  <label
-                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
-                    htmlFor="grid-password"
-                  >
                     Name
                   </label>
                   <input
@@ -229,9 +119,9 @@
                   </label>
                   <input
                     v-model="pic.phone_number"
-                    type="text"
+                    @keypress="formatedNumber()"
                     class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
-                    placeholder="+62"
+                    placeholder="Contoh: 081234567890"
                   />
                   <!-- Start of validation phone_number -->
                   <span v-if="validation.phone_number">
@@ -355,7 +245,14 @@
 
 
 <script>
-import { reactive, ref, computed, onMounted, onBeforeMount } from "vue";
+import {
+  reactive,
+  ref,
+  computed,
+  onMounted,
+  onBeforeMount,
+  watchEffect,
+} from "vue";
 import {
   Dialog,
   DialogOverlay,
@@ -390,9 +287,9 @@ export default {
   },
   emits: ["close"],
   props: {
-    isOpen: {
+    isModalInsertOpen: {
       type: Boolean,
-      default: "",
+      default: false,
     },
     content: {
       type: Object,
@@ -400,7 +297,10 @@ export default {
     },
   },
   setup(props, { emit }) {
-    const showing = props.isOpen;
+    const showing = computed(() => {
+      return props.isModalInsertOpen;
+    });
+    const phoneNumber = ref(null);
     const modalContent = props.content;
     const isDisabled = ref(false);
     const isLoading = ref(false);
@@ -410,6 +310,34 @@ export default {
       name: "",
       phone_number: "",
       email: "",
+    });
+    function formating() {
+      pic.phone_number = pic.phone_number.replace(/[^0-9]/g, "");
+    }
+    watchEffect(() => {
+      formating();
+    });
+    const formatedNumber = computed(() => {
+      return pic.phone_number.replace(/^0/g, "+62");
+    });
+    const config = computed(() => {
+      return {
+        masked: false,
+        decimal: "",
+        thousands: "",
+        prefix: "",
+        suffix: "",
+        max: null,
+        min: null,
+        minimumNumberOfCharacters: 0,
+        precision: 0,
+        allowBlank: true,
+        disable: false,
+        disableNegative: true,
+        modelModifiers: {
+          number: false,
+        },
+      };
     });
     const closeAndClearValidation = () => {
       validation.name = "";
@@ -424,20 +352,22 @@ export default {
       phone_number: "",
       email: "",
     });
-
+    const clientId = computed(() => {
+      return store.getters["client/getStateClientId"];
+    });
     const insert = computed(() => {
       isLoading.value = true;
       isDisabled.value = true;
 
       store
         .dispatch("pic/storeData", {
-          client_id: pic.client.id,
+          client_id: clientId.value,
           name: pic.name,
-          phone_number: pic.phone_number,
+          phone_number: formatedNumber.value,
           email: pic.email,
         })
         .then((res) => {
-          store.dispatch("pic/getAllData");
+          store.dispatch("pic/getAllPicsClient", clientId.value);
           isLoading.value = false;
           isDisabled.value = false;
           /*
@@ -479,6 +409,10 @@ export default {
       validation,
       clients,
       closeAndClearValidation,
+      phoneNumber,
+      config,
+      formatedNumber,
+      // formatedPhoneNumber,
     };
   },
 };

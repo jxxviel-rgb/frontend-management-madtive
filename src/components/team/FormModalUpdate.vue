@@ -1,5 +1,5 @@
 <template>
-  <TransitionRoot as="template" :show="(showing = !showing)">
+  <TransitionRoot as="template" :show="showing">
     <Dialog
       as="div"
       class="fixed inset-0 z-10 overflow-y-auto"
@@ -639,7 +639,7 @@ export default {
   props: {
     isModalUpdateOpen: {
       type: Boolean,
-      default: "",
+      default: false,
     },
     content: {
       type: Object,
@@ -653,7 +653,9 @@ export default {
   setup(props, { emit }) {
     const payments = ["PENDING", "PAID", "ON PROCESS"];
 
-    const showing = props.isModalUpdateOpen;
+    const showing = computed(() => {
+      return props.isModalUpdateOpen;
+    });
     const modalContent = props.content;
     const team = props.team;
     const store = useStore();
@@ -713,7 +715,10 @@ export default {
           payment_status: team.data.data.payment_status,
         })
         .then((res) => {
-          store.dispatch("team/getAllTeams");
+          store.dispatch(
+            "team/getSpecificProjectTeam",
+            team.data.data.project.id
+          );
           isLoading.value = false;
           isDisabled.value = false;
 

@@ -1,5 +1,5 @@
 <template>
-  <TransitionRoot as="template" :show="(showing = !showing)">
+  <TransitionRoot as="template" :show="showing">
     <Dialog
       as="div"
       class="fixed inset-0 z-10 overflow-y-auto"
@@ -393,7 +393,7 @@ export default {
   props: {
     isOpen: {
       type: Boolean,
-      default: "",
+      default: false,
     },
     content: {
       type: Object,
@@ -405,7 +405,9 @@ export default {
     },
   },
   setup(props, { emit }) {
-    const showing = props.isOpen;
+    const showing = computed(() => {
+      return props.isOpen;
+    });
     const modalContent = props.content;
     const isDisabled = ref(false);
     const isLoading = ref(false);
@@ -437,7 +439,7 @@ export default {
           email: pic.data.data.email,
         })
         .then((res) => {
-          store.dispatch("pic/getAllData");
+          store.dispatch("pic/getAllPicsClient", pic.data.data.client.id);
           isLoading.value = false;
           isDisabled.value = false;
           /*

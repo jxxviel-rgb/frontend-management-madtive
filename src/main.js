@@ -1,7 +1,8 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import "./index.css";
-import "@popperjs/core";
-import router from "./routes";
-import { store } from "./stores";
-const app = createApp(App).use(router).use(store).mount("#app");
+import router from "./routes/index.js";
+import { store } from "./stores/index.js";
+import "nprogress/nprogress";
+
+createApp(App).use(router).use(store).mount("#app");

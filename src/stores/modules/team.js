@@ -79,7 +79,7 @@ export default {
             employee_id: data.employee_id,
             position: data.position,
             profit: data.profit,
-            payment_status: data.payment_status,
+            payment_status: "PENDING",
           })
           .then((res) => {
             resolve(res);

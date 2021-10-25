@@ -6,7 +6,7 @@
       @close="closeAndClearValidation"
     >
       <div
-        class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0"
+        class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center  sm:block sm:p-0"
       >
         <TransitionChild
           as="template"
@@ -38,12 +38,12 @@
           leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
         >
           <div
-            class="inline-block w-full overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-0 sm:align-middle sm:max-w-xl sm:w-full"
+            class="inline-block w-full overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl  sm:my-0 sm:align-middle sm:max-w-xl sm:w-full"
           >
             <div class="px-4 pt-5 pb-4 bg-blueGray-200 sm:p-6 sm:pb-4">
               <div class="sm:flex sm:items-start">
                 <div
-                  class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto rounded-full bg-blueGray-400 sm:mx-0 sm:h-10 sm:w-10"
+                  class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto rounded-full  bg-blueGray-400 sm:mx-0 sm:h-10 sm:w-10"
                 >
                   <PencilAltIcon
                     class="w-6 h-6 text-blueGray-800"
@@ -67,7 +67,7 @@
               <form @submit.prevent="update" v-if="specificEmployee.data.data">
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                     htmlFor="grid-password"
                   >
                     Nama Karyawan
@@ -75,7 +75,7 @@
                   <input
                     v-model="specificEmployee.data.data.employee.name"
                     type="text"
-                    class="w-full text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    class="w-full text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                     placeholder="cth : Fikri Ilhamsyah"
                   />
                   <!-- Start of validation employee name -->
@@ -113,7 +113,7 @@
 
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                     htmlFor="grid-password"
                   >
                     Email
@@ -121,7 +121,7 @@
                   <input
                     v-model="specificEmployee.data.data.email"
                     type="email"
-                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                     placeholder="meet@madtive.com"
                   />
                   <!-- Start of validation email -->
@@ -159,7 +159,7 @@
 
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                     htmlFor="grid-password"
                   >
                     No. Telp
@@ -167,7 +167,7 @@
                   <input
                     v-model="specificEmployee.data.data.employee.phone_number"
                     type="text"
-                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                     placeholder="+62"
                   />
                   <!-- Start of validation phone_number -->
@@ -204,14 +204,14 @@
                 </div>
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                   >
                     Gaji
                   </label>
                   <input
                     v-model="specificEmployee.data.data.employee.salary"
                     type="text"
-                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                     placeholder="+62"
                   />
                   <!-- Start of validation salary -->
@@ -248,7 +248,7 @@
                 </div>
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                     htmlFor="grid-password"
                   >
                     Posisi
@@ -258,7 +258,7 @@
                   >
                     <div class="relative mt-1">
                       <ListboxButton
-                        class="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded shadow cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
+                        class="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded shadow cursor-default  focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
                       >
                         <span
                           v-if="
@@ -294,7 +294,7 @@
                         leave-to-class="opacity-0"
                       >
                         <ListboxOptions
-                          class="absolute z-50 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                          class="absolute z-50 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg  max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                         >
                           <ListboxOption
                             v-slot="{ active, selected }"
@@ -320,7 +320,7 @@
                               >
                               <span
                                 v-if="selected"
-                                class="absolute inset-y-0 left-0 flex items-center pl-3 text-blueGray-600"
+                                class="absolute inset-y-0 left-0 flex items-center pl-3  text-blueGray-600"
                               >
                                 <CheckIcon class="w-5 h-5" aria-hidden="true" />
                               </span>
@@ -364,14 +364,14 @@
                 </div>
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                   >
                     Role
                   </label>
                   <Listbox v-model="specificEmployee.data.data.role">
                     <div class="relative mt-1">
                       <ListboxButton
-                        class="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded shadow cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
+                        class="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded shadow cursor-default  focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
                       >
                         <span
                           v-if="specificEmployee.data.data.role === ''"
@@ -401,7 +401,7 @@
                         leave-to-class="opacity-0"
                       >
                         <ListboxOptions
-                          class="absolute z-50 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                          class="absolute z-50 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg  max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                         >
                           <ListboxOption
                             v-slot="{ active, selected }"
@@ -427,7 +427,7 @@
                               >
                               <span
                                 v-if="selected"
-                                class="absolute inset-y-0 left-0 flex items-center pl-3 text-blueGray-600"
+                                class="absolute inset-y-0 left-0 flex items-center pl-3  text-blueGray-600"
                               >
                                 <CheckIcon class="w-5 h-5" aria-hidden="true" />
                               </span>
@@ -472,7 +472,7 @@
 
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
                     htmlFor="grid-password"
                   >
                     Alamat
@@ -484,7 +484,7 @@
                         /> -->
                   <textarea
                     v-model="specificEmployee.data.data.employee.address"
-                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                     name=""
                     id=""
                     cols="2"
@@ -528,7 +528,7 @@
                   <button
                     :disabled="isDisabled"
                     :class="[isDisabled ? '' : 'active:bg-blueGray-600']"
-                    class="flex w-full px-6 py-3 mb-1 mr-1 text-sm font-semibold text-white uppercase transition-all duration-150 ease-linear rounded shadow outline-none disabled:opacity-50 place-content-center bg-blueGray-800 hover:shadow-lg focus:outline-none"
+                    class="flex w-full px-6 py-3 mb-1 mr-1 text-sm font-semibold text-white uppercase transition-all duration-150 ease-linear rounded shadow outline-none  disabled:opacity-50 place-content-center bg-blueGray-800 hover:shadow-lg focus:outline-none"
                     type="submit"
                   >
                     <img
@@ -545,11 +545,11 @@
             </div>
             <!-- End of form content -->
             <div
-              class="px-4 py-3 bg-blueGray-200 sm:px-6 sm:flex sm:flex-row-reverse"
+              class="px-4 py-3  bg-blueGray-200 sm:px-6 sm:flex sm:flex-row-reverse"
             >
               <button
                 type="submit"
-                class="flex justify-center w-full px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-blueGray-800 hover:bg-blueGray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blueGray-500 sm:ml-3 sm:w-auto sm:text-sm"
+                class="flex justify-center w-full px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm  bg-blueGray-800 hover:bg-blueGray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blueGray-500 sm:ml-3 sm:w-auto sm:text-sm"
                 @click="closeAndClearValidation"
               >
                 Close

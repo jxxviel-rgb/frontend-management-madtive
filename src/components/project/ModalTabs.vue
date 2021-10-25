@@ -1,5 +1,5 @@
 <template>
-  <TransitionRoot :show="(isModalTabsOpen = !isModalTabsOpen)" as="template">
+  <TransitionRoot :show="isModalTabsOpen" as="template">
     <Dialog
       as="div"
       class="fixed inset-0 z-10 overflow-y-auto"
@@ -9,12 +9,12 @@
         <div class="min-h-screen px-4 text-center">
           <TransitionChild
             as="template"
-            enter="duration-300 ease-out"
-            enter-from="opacity-0"
-            enter-to="opacity-100"
-            leave="duration-200 ease-in"
-            leave-from="opacity-100"
-            leave-to="opacity-0"
+            enter="ease-out duration-300"
+            enter-from="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+            enter-to="opacity-100 translate-y-0 sm:scale-100"
+            leave="ease-in duration-200"
+            leave-from="opacity-100 translate-y-0 sm:scale-100"
+            leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
             <DialogOverlay
               class="fixed inset-0 bg-opacity-50 bg-blueGray-500"
@@ -43,6 +43,7 @@
               >
                 <XIcon class="w-5"></XIcon>
               </button>
+
               <!-- <div class="sm:flex sm:items-start">
                 <div
                   class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto rounded-full bg-emerald-200 sm:mx-0 sm:h-10 sm:w-10"
@@ -348,20 +349,36 @@
                     >
                       <ul>
                         <!-- <div class="flex"> -->
-                        <li
-                          v-for="(team, index) in team.data.data"
-                          :key="index"
-                          class="relative flex-1 p-3 rounded-md bg-coolGray-100"
-                        >
-                          {{ team.position }}
-                          <h3 class="text-sm font-medium leading-5"></h3>
-
-                          <ul
-                            class="mt-1 space-x-1 text-xs font-normal leading-4  text-coolGray-500"
+                        <template v-if="team.data.data.length === 0">
+                          <li
+                            class="relative flex-1 p-3 rounded-md  bg-coolGray-100"
                           >
-                            <li>{{ team.employee.name }}</li>
-                          </ul>
-                        </li>
+                            Belum ada tim
+                            <h3 class="text-sm font-medium leading-5"></h3>
+
+                            <ul
+                              class="mt-1 space-x-1 text-xs font-normal leading-4  text-coolGray-500"
+                            >
+                              <li></li>
+                            </ul>
+                          </li>
+                        </template>
+                        <template v-else>
+                          <li
+                            v-for="(team, index) in team.data.data"
+                            :key="index"
+                            class="relative flex-1 p-3 rounded-md  bg-coolGray-100"
+                          >
+                            {{ team.position }}
+                            <h3 class="text-sm font-medium leading-5"></h3>
+
+                            <ul
+                              class="mt-1 space-x-1 text-xs font-normal leading-4  text-coolGray-500"
+                            >
+                              <li>{{ team.employee.name }}</li>
+                            </ul>
+                          </li>
+                        </template>
                         <!-- </div> -->
                       </ul>
                     </TabPanel>
@@ -377,7 +394,7 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { reactive, ref, computed } from "vue";
 import {
   TabGroup,
   TabList,
@@ -393,6 +410,7 @@ import {
 import { XIcon } from "@heroicons/vue/outline";
 import { useStore } from "vuex";
 import TabsProjectSkeleton from "../../components/global/TabsProjectSkeleton.vue";
+import FormModalInsertTeam from "../../components/team/FormModalInsertTeam.vue";
 
 export default {
   components: {
@@ -408,11 +426,12 @@ export default {
     DialogOverlay,
     DialogTitle,
     XIcon,
+    FormModalInsertTeam,
   },
   props: {
     isModalTabsOpen: {
       type: Boolean,
-      default: "",
+      default: false,
     },
     project: {
       type: Object,
@@ -423,16 +442,34 @@ export default {
       default: {},
     },
   },
-  emits: ["close"],
+  emits: ["close", "openFormModalInsertTeam"],
   setup(props, { emit }) {
     // const store = useStore();
 
-    const isModalTabsOpen = props.isModalTabsOpen;
+    let isModalTabsOpen = computed(() => {
+      return props.isModalTabsOpen;
+    });
     const team = props.team;
     const project = props.project;
-    let categories = ref(["Detail Project", "Detail Client", "Detail Tim"]);
+    let categories = ref(["Detail Project", "Detail Client"]);
+    const isModalInsertTeamOpen = ref("");
+    const toggleModalInsertTeam = () => {
+      isModalInsertTeamOpen.value = !isModalInsertTeamOpen.value;
+      isModalTabsOpen = !isModalTabsOpen;
+    };
+    const content = reactive({
+      title: "Tambah Tim",
+    });
 
-    return { categories, isModalTabsOpen, project, team };
+    return {
+      categories,
+      isModalTabsOpen,
+      project,
+      team,
+      content,
+      isModalInsertTeamOpen,
+      toggleModalInsertTeam,
+    };
   },
 };
 </script>

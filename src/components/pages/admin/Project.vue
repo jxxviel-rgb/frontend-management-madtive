@@ -1,4 +1,5 @@
 <template>
+  <nprogress-container></nprogress-container>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root">
     <!-- Modal calls section -->
@@ -7,10 +8,27 @@
       :content="content"
       @close="toggleModalInsert"
     ></FormModalInsert>
+    <ModalTableTeam
+      :isOpen="isModalTableOpen"
+      @close="closeModalTable"
+      :team="team"
+      :projectId="projectId"
+      :projectNameLabel="projectNameLabel"
+    />
+    <ModalTabs
+      :isModalTabsOpen="isModalTabsOpen"
+      :project="project"
+      :team="team"
+      @close="toggleModalTabs"
+      @openFormModalInsertTeam="openFormModalInsertTeam"
+    ></ModalTabs>
+    <FormModalInsertTeam
+      :isModalInsertTeamOpen="isModalInsertTeamOpen"
+      @close="closeModalInsertTeam"
+    />
     <FormModalUpdate
       :isModalUpdateOpen="isModalUpdateOpen"
       :contentModalUpdate="contentModalUpdate"
-      :project="project"
       @close="toggleModalUpdate"
     />
 
@@ -26,12 +44,6 @@
       :alertContent="alertContent"
       @close="toggleModalAlert"
     ></ModalAlert>
-    <modal-tabs
-      :isModalTabsOpen="isModalTabsOpen"
-      :project="project"
-      :team="team"
-      @close="toggleModalTabs"
-    ></modal-tabs>
 
     <!-- End of Modal call -->
     <!-- Sidebar -->
@@ -62,13 +74,13 @@
                   class="relative flex flex-col min-w-0 mb-6 break-words bg-white rounded shadow-lg "
                 ></div>
               </div>
-              <div class="flex px-4 space-x-0">
+              <div class="flex px-4 space-x-1">
                 <div
-                  class="flex-none min-w-0 mb-6 ml-0 break-words rounded shadow-lg  lg:-ml-6 md:-ml-6"
+                  class="flex-none min-w-0 mb-6 ml-0 break-words rounded shadow-lg lg:-ml-6 md:-ml-6"
                 >
                   <button
                     @click="toggleModalInsert"
-                    class="flex justify-center px-4 py-2 -mt-5 space-x-1 transition-colors duration-100 rounded-md  hover:bg-blueGray-300 text-blueGray-800 bg-blueGray-200 active:bg-blueGray-400"
+                    class="flex justify-center px-4 py-2 -mt-5 space-x-1 transition-colors duration-100 rounded-md hover:bg-blueGray-300 text-blueGray-800 bg-blueGray-200 active:bg-blueGray-400"
                   >
                     <PlusCircleIcon class="flex-none w-6"></PlusCircleIcon>
                     <p class="flex-none">Project</p>
@@ -93,34 +105,44 @@
                   <thead class="bg-blueGray-300">
                     <tr class="shadow-lg">
                       <th
-                        class="px-4 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
+                        class="px-4 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
                       >
                         #
                       </th>
 
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
                       >
                         Project
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
                       >
                         Client
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
                       >
                         Deadline
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
                       >
                         Estimasi
                       </th>
+                      <th
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
+                      >
+                        Status
+                      </th>
 
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
+                      >
+                        Tim
+                      </th>
+                      <th
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
                       >
                         Aksi
                       </th>
@@ -139,45 +161,75 @@
                           :key="index"
                         >
                           <td
-                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
                           >
                             {{ index + 1 }}
                           </td>
                           <th
-                            class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                            class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap text-blueGray-600"
                           >
                             {{ project.name }}
                           </th>
                           <td
                             v-if="project.client === null"
-                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
                           >
                             Belum ada client
                           </td>
                           <td
                             v-else
-                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
                           >
                             {{ project.client.company_name }}
                           </td>
                           <td
-                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
                           >
                             {{ project.deadline }}
                           </td>
                           <td
-                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
                           >
                             {{ project.estimation }}
                           </td>
+                          <td
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                          >
+                            <span
+                              class="px-2 py-1 text-xs font-semibold text-blueGray-700 whitespace-nowrap"
+                              :class="[
+                                project.status === 'On Progres'
+                                  ? 'bg-yellow-500 shadow'
+                                  : '',
+                                project.status === 'Finish'
+                                  ? 'bg-emerald-300'
+                                  : '',
+                                project.status === 'Penawaran'
+                                  ? 'bg-blue-300'
+                                  : '',
+                              ]"
+                            >
+                              {{ project.status }}
+                            </span>
+                          </td>
+                          <td
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                          >
+                            <button
+                              @click="openModalTable(project.id, project.name)"
+                              class="flex px-1 py-1 text-white transition-colors duration-200 rounded-full bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-800"
+                            >
+                              <EyeIcon class="w-6" />
+                            </button>
+                          </td>
 
                           <td
-                            class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                            class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
                           >
                             <div class="">
                               <button
                                 @click="sendIdAndOpenModalTabs(project.id)"
-                                class="px-1 py-1 text-white transition-colors duration-200  bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-800"
+                                class="px-1 py-1 text-white transition-colors duration-200 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-800"
                               >
                                 <InformationCircleIcon
                                   class="w-5"
@@ -185,7 +237,7 @@
                               </button>
                               <button
                                 @click="sendIdAndOpenModalUpdate(project.id)"
-                                class="px-1 py-1 text-white transition-colors duration-200  bg-sky-500 hover:bg-sky-600 active:bg-sky-800"
+                                class="px-1 py-1 text-white transition-colors duration-200 bg-sky-500 hover:bg-sky-600 active:bg-sky-800"
                               >
                                 <PencilIcon class="w-5"></PencilIcon>
                               </button>
@@ -194,7 +246,7 @@
                                 @click="
                                   sendIdForDelete(project.id, project.name)
                                 "
-                                class="px-1 py-1 text-white transition-colors duration-200  bg-rose-500 hover:bg-rose-600 active:bg-rose-800"
+                                class="px-1 py-1 text-white transition-colors duration-200 bg-rose-500 hover:bg-rose-600 active:bg-rose-800"
                               >
                                 <TrashIcon class="w-5"></TrashIcon>
                               </button>
@@ -214,7 +266,7 @@
                   </template>
                   <template v-else>
                     <tr>
-                      <td colspan="6" class="text-center">
+                      <td colspan="8" class="text-center">
                         <div class="flex justify-center">
                           <img
                             class="w-6 my-2"
@@ -244,17 +296,20 @@
 <script>
 import Sidebar from "../../layout/Sidebar.vue";
 import Navbar from "../../layout/Navbar.vue";
+import ModalTabs from "../../project/ModalTabs.vue";
 import FormModalInsert from "../../project/FormModalInsert.vue";
+import FormModalInsertTeam from "../../team/FormModalInsertTeam.vue";
 import FormModalUpdate from "../../project/FormModalUpdate.vue";
 import ModalDelete from "../../project/ModalDelete.vue";
 import ModalAlert from "../../global/ModalAlert.vue";
-import ModalTabs from "../../project/ModalTabs.vue";
 import FormModalSkeleton from "../../global/FormModalSkeleton.vue";
+import ModalTableTeam from "../../team/ModalTableTeam.vue";
 import {
   TrashIcon,
   PencilIcon,
   PlusCircleIcon,
   InformationCircleIcon,
+  EyeIcon,
 } from "@heroicons/vue/solid";
 import { useStore } from "vuex";
 import { computed, ref, reactive } from "vue";
@@ -265,15 +320,20 @@ export default {
     Navbar,
     TrashIcon,
     FormModalInsert,
+    FormModalInsertTeam,
     PlusCircleIcon,
     PencilIcon,
     InformationCircleIcon,
+    EyeIcon,
     FormModalUpdate,
     ModalDelete,
     ModalAlert,
     ModalTabs,
+    ModalTableTeam,
   },
   setup() {
+    // title
+    document.title = "Madtive Management | Project";
     const store = useStore();
     // ! get all data projects
     store.dispatch("project/getAllProjects");
@@ -297,23 +357,18 @@ export default {
     const contentModalUpdate = reactive({
       title: "Edit Project",
     });
-    const project = reactive({
-      data: [],
-    });
+
     const sendIdAndOpenModalUpdate = (paramId) => {
       isModalUpdateOpen.value = !isModalUpdateOpen.value;
       store.dispatch("project/showForUpdate", paramId);
-      project.data = computed(() => {
-        return store.getters["project/getProjectState"];
-      });
     };
     // !MODAL ALERT
-    const isModalAlertOpen = ref("");
+    const isModalAlertOpen = ref(false);
     const toggleModalAlert = () => {
       isModalAlertOpen.value = !isModalAlertOpen.value;
     };
     // ! MODAL DELETE
-    const isModalDeleteOpen = ref("");
+    const isModalDeleteOpen = ref(false);
     const toggleModalDelete = () => {
       isModalDeleteOpen.value = !isModalDeleteOpen.value;
     };
@@ -354,15 +409,18 @@ export default {
         });
     };
     // ! MODAL TABS
-    const isModalTabsOpen = ref("");
+    const isModalTabsOpen = ref(false);
     const toggleModalTabs = () => {
-      isModalTabsOpen.value = !isModalTabsOpen.value;
+      isModalTabsOpen.value = false;
     };
     const team = reactive({
       data: [],
     });
+    const project = reactive({
+      data: []
+    })
     const sendIdAndOpenModalTabs = (id) => {
-      isModalTabsOpen.value = !isModalTabsOpen.value;
+      isModalTabsOpen.value = true;
       store.dispatch("project/show", id);
       store.dispatch("team/getSpecificProjectTeam", id);
       project.data = computed(() => {
@@ -372,7 +430,26 @@ export default {
         return store.getters["team/getStateProjectTeam"];
       });
     };
-
+    // ! MODAL INSERT TEAM SECTION
+    const isModalInsertTeamOpen = ref(false);
+    const closeModalInsertTeam = () => {
+      isModalInsertTeamOpen.value = false;
+    };
+    const openFormModalInsertTeam = () => {
+      isModalInsertTeamOpen.value = true;
+    };
+    const projectNameLabel = ref(null);
+    const isModalTableOpen = ref(false);
+    const openModalTable = (id, name) => {
+      projectId.value = id;
+      projectNameLabel.value = name;
+      store.dispatch("team/getSpecificProjectTeam", projectId.value);
+      store.dispatch("project/show", id);
+      isModalTableOpen.value = true;
+    };
+    const closeModalTable = () => {
+      isModalTableOpen.value = false;
+    };
     return {
       projects,
       isOpen,
@@ -381,7 +458,6 @@ export default {
       isModalUpdateOpen,
       toggleModalUpdate,
       contentModalUpdate,
-      project,
       sendIdAndOpenModalUpdate,
       isModalDeleteOpen,
       toggleModalDelete,
@@ -396,6 +472,16 @@ export default {
       toggleModalTabs,
       sendIdAndOpenModalTabs,
       team,
+      isModalInsertTeamOpen,
+      closeModalInsertTeam,
+      openFormModalInsertTeam,
+      isModalTableOpen,
+      closeModalTable,
+      openModalTable, 
+      projectId,
+      projectNameLabel,
+      project,
+      // openFormModalInsertTeam,
     };
   },
 };

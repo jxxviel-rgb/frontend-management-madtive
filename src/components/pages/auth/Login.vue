@@ -4,7 +4,7 @@
       <section class="relative w-screen h-screen min-h-screen py-40">
         <!-- start of background -->
         <div
-          class="absolute top-0 bottom-0 w-screen h-screen bg-no-repeat bg-blueGray-800 bg-full"
+          class="absolute top-0 bottom-0 w-screen h-screen bg-no-repeat  bg-blueGray-800 bg-full"
           style="background-image: url(src/assets/img/register_bg_2.png)"
         >
           <!-- end of background -->
@@ -12,7 +12,7 @@
           <!-- start of validation message -->
           <div
             v-if="isVisibleAlert"
-            class="flex items-center content-center justify-center text-center h-1/6"
+            class="flex items-center content-center justify-center text-center  h-1/6"
           >
             <ModalAlert
               :contentAlert="contentAlert"
@@ -28,7 +28,7 @@
           <div class="flex items-center content-center justify-center h-full">
             <div class="w-full px-4 lg:w-4/12">
               <div
-                class="relative flex flex-col w-full min-w-0 mb-6 break-words border-0 rounded-lg shadow-lg bg-blueGray-200"
+                class="relative flex flex-col w-full min-w-0 mb-6 break-words border-0 rounded-lg shadow-lg  bg-blueGray-200"
               >
                 <div class="px-6 py-6 mb-0 rounded-t">
                   <div class="mb-3 text-center">
@@ -39,7 +39,7 @@
                   <div class="text-center btn-wrapper">
                     <button
                       @click="showModal"
-                      class="inline-flex items-center px-4 py-2 mb-1 mr-2 text-xs font-bold uppercase transition-all duration-150 ease-linear bg-white rounded shadow outline-none active:bg-blueGray-50 text-blueGray-700 focus:outline-none hover:shadow-md"
+                      class="inline-flex items-center px-4 py-2 mb-1 mr-2 text-xs font-bold uppercase transition-all duration-150 ease-linear bg-white rounded shadow outline-none  active:bg-blueGray-50 text-blueGray-700 focus:outline-none hover:shadow-md"
                       type="button"
                     >
                       <img
@@ -49,7 +49,7 @@
                       />Github</button
                     ><button
                       @click="showModal"
-                      class="inline-flex items-center px-4 py-2 mb-1 mr-1 text-xs font-bold uppercase transition-all duration-150 ease-linear bg-white rounded shadow outline-none active:bg-blueGray-50 text-blueGray-700 focus:outline-none hover:shadow-md"
+                      class="inline-flex items-center px-4 py-2 mb-1 mr-1 text-xs font-bold uppercase transition-all duration-150 ease-linear bg-white rounded shadow outline-none  active:bg-blueGray-50 text-blueGray-700 focus:outline-none hover:shadow-md"
                       type="button"
                     >
                       <img
@@ -75,7 +75,7 @@
                   <form @submit.prevent="login" @keyup.enter="login">
                     <div class="relative w-full mb-3">
                       <label
-                        class="block mb-2 text-xs font-bold uppercase text-blueGray-600"
+                        class="block mb-2 text-xs font-bold uppercase  text-blueGray-600"
                         for="grid-password"
                         >Email</label
                       >
@@ -97,8 +97,7 @@
                           shadow
                           ${blueGray}
                           text-blueGray-600
-                          focus:outline-none
-                          focus:ring
+                          focus:outline-none focus:ring
                         "
                         :class="{
                           [`ring-1 ring-red-500 ${
@@ -145,13 +144,13 @@
                     </div>
                     <div class="relative w-full mb-3">
                       <label
-                        class="block mb-2 text-xs font-bold uppercase text-blueGray-600"
+                        class="block mb-2 text-xs font-bold uppercase  text-blueGray-600"
                         for="grid-password"
                         >Password</label
                       ><input
                         type="password"
                         v-model="password"
-                        class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow text-blueGray-600 focus:outline-none focus:ring"
+                        class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  text-blueGray-600 focus:outline-none focus:ring"
                         :class="{
                           [`ring-1 ring-red-500 ${
                             validation.password
@@ -200,7 +199,7 @@
                       <button
                         :disabled="isDisabled"
                         :class="[isDisabled ? '' : 'active:bg-blueGray-600']"
-                        class="flex justify-center w-full px-6 py-3 mb-1 mr-1 text-sm font-bold text-white uppercase transition-all duration-150 ease-linear rounded shadow outline-none bg-blueGray-800 active:bg-blueGray-600 hover:shadow-lg focus:outline-none"
+                        class="flex justify-center w-full px-6 py-3 mb-1 mr-1 text-sm font-bold text-white uppercase transition-all duration-150 ease-linear rounded shadow outline-none  bg-blueGray-800 active:bg-blueGray-600 hover:shadow-lg focus:outline-none"
                         type="submit"
                       >
                         <img
@@ -288,8 +287,6 @@ export default {
           password: password.value,
         })
         .then((response) => {
-          isLoading.value = false;
-          isDisabled.value = false;
           if (response.data.success) {
             route.push({
               name: "admin",

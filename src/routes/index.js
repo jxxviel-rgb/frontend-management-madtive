@@ -1,3 +1,6 @@
+import axios from "axios";
+import nprogress from "nprogress";
+import nProgress from "nprogress";
 import { createRouter, createWebHistory } from "vue-router";
 import Dashboard from "../components/Dashboard.vue";
 import Login from "../components/pages/auth/Login.vue";
@@ -57,18 +60,6 @@ const routes = [
     component: () => import("../components/pages/admin/Project.vue"),
     meta: { requiresAuth: true },
   },
-  {
-    path: "/admin/teams",
-    name: "team",
-    component: () => import("../components/pages/admin/Team.vue"),
-    meta: { requiresAuth: true },
-  },
-  {
-    path: "/admin/pics",
-    name: "pic",
-    component: () => import("../components/pages/admin/Pic.vue"),
-    meta: { requiresAuth: true },
-  },
 ];
 
 const router = createRouter({
@@ -94,6 +85,25 @@ router.beforeEach((to, from, next) => {
   } else {
     next(); // make sure to always call next()!
   }
+});
+
+router.beforeResolve((to, from, next) => {
+  if (to.path) {
+    nProgress.start();
+  }
+  next();
+});
+
+router.afterEach((to, from) => {
+  nProgress.done();
+});
+axios.interceptors.request.use((config) => {
+  nProgress.start();
+  return config;
+});
+axios.interceptors.response.use((response) => {
+  nProgress.done();
+  return response;
 });
 
 export default router;

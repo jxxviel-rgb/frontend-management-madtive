@@ -6,6 +6,10 @@ export default {
     return {
       projects: {},
       project: {},
+      tax: null,
+      profit_team: null,
+      profit_company: null,
+      balanceTeamBudget: null,
     };
   },
   mutations: {
@@ -15,13 +19,37 @@ export default {
     setProjectState(state, value) {
       state.project = value;
     },
+    setProfitTeam(state, value) {
+      state.profit_team = value;
+    },
+    setProfitCompany(state, value) {
+      state.profit_company = value;
+    },
+    setTax(state, value) {
+      state.tax = value;
+    },
+    setBalanceTeamBudget(state, value) {
+      state.balanceTeamBudget = value;
+    },
   },
   getters: {
+    getBalanceTeamBudget(state) {
+      return state.balanceTeamBudget;
+    },
     getProjectsState(state) {
       return state.projects;
     },
     getProjectState(state) {
       return state.project;
+    },
+    getProfitTeam(state) {
+      return state.profit_team;
+    },
+    getProfitCompany(state) {
+      return state.profit_company;
+    },
+    getTax(state) {
+      return state.tax;
     },
   },
   actions: {
@@ -44,6 +72,7 @@ export default {
           .get(`${baseUrlApi.defaults.baseURL}/projects/${id}`)
           .then((res) => {
             commit("setProjectState", res.data);
+
             resolve(res);
           })
           .catch((err) => {
