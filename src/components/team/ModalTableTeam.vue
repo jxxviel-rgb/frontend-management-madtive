@@ -41,7 +41,9 @@
             <div class="relative w-full mb-5 bg-white rounded">
               <div class="p-6 px-4 pt-5 pb-4 bg-blueGray-200 sm:p-6 sm:pb-4">
                 <div class="flex mb-5">
-                  <span class="p-2 rounded bg-blueGray-300 text-blueGray-800">
+                  <span
+                    class="p-2 rounded shadow-lg  bg-blueGray-300 text-blueGray-800"
+                  >
                     Detail Tim pada Project :
                     <span class="font-semibold text-blueGray-800">{{
                       projectNameLabel
@@ -61,10 +63,11 @@
                     </button>
                   </div>
                   <div
-                    class="flex-none min-w-0 mb-6 -ml-4 break-words rounded shadow-lg "
+                    class="flex-none min-w-0 mb-6 -ml-4 break-words rounded  shadow-xxl"
                   >
                     <div
-                      class="flex justify-center px-4 py-2 space-x-1 transition-colors duration-100 rounded-md  text-blueGray-800 bg-blueGray-300"
+                      class="flex justify-center px-4 py-2 space-x-1 transition-colors duration-100 rounded-md shadow-lg  text-blueGray-800"
+                      :class="[result < 0 ? 'bg-red-400' : 'bg-blueGray-300']"
                     >
                       <CashIcon class="flex-none w-6" />
                       <p v-if="projectDetail.data" class="flex-none">
