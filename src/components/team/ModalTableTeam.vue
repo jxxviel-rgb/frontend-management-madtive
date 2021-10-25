@@ -411,18 +411,7 @@ const profitTeam = computed(() => {
     return parseInt(balance.value);
   }
 });
-// const result = ref(null);
-// if (projectDetail.value.data) {
-//   result.value = parseInt(
-//     projectDetail.value.data.project_value -
-//       projectDetail.value.data.profit_team -
-//       projectDetail.value.data.profit_company -
-//       projectDetail.value.data.tax -
-//       profitTeam.value
-//   );
-//   store.commit("project/setBalanceTeamBudget", result.value);
-//   (result.value);
-// }
+
 const result = computed(() => {
   if (projectDetail.value.data) {
     return parseInt(
@@ -430,7 +419,7 @@ const result = computed(() => {
         projectDetail.value.data.profit_team -
         projectDetail.value.data.profit_company -
         projectDetail.value.data.tax -
-        balance.value
+        profitTeam.value
     );
     // store.commit("project/setBalanceTeamBudget", result.value);
     // (result.value);
