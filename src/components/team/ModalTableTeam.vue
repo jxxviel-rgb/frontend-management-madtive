@@ -76,7 +76,7 @@
                             style: "currency",
                             currency: "IDR",
                             minimumFractionDigits: 0,
-                          }).format(result)
+                          }).format(parseInt(result))
                         }}
                       </p>
                     </div>
