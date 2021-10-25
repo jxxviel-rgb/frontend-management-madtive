@@ -1,3 +1,3 @@
 import axios from "axios";
 
-export const baseUrlApi = axios.create({ baseURL: "http://127.0.0.1:8000/api" });
+export const baseUrlApi = axios.create({ baseURL: "https://management-madtive.himed.id/api" });
