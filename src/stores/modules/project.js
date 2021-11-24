@@ -1,18 +1,25 @@
 import axios from "axios";
 import { baseUrlApi } from "../../config/baseurl.js";
+import moment from "moment";
+import "moment/locale/id";
 export default {
   namespaced: true,
   state() {
     return {
       projects: {},
       project: {},
+      projectShow: {},
       tax: null,
       profit_team: null,
       profit_company: null,
       balanceTeamBudget: null,
+      monthlyProjects: {},
     };
   },
   mutations: {
+    setMonthlyProjectsState(state, value) {
+      state.monthlyProjects = value;
+    },
     setProjectsState(state, value) {
       state.projects = value;
     },
@@ -31,6 +38,9 @@ export default {
     setBalanceTeamBudget(state, value) {
       state.balanceTeamBudget = value;
     },
+    setProjectShowState(state, value) {
+      state.projectShow = value;
+    },
   },
   getters: {
     getBalanceTeamBudget(state) {
@@ -39,8 +49,14 @@ export default {
     getProjectsState(state) {
       return state.projects;
     },
+    getMonthlyProjectsState(state) {
+      return state.monthlyProjects;
+    },
     getProjectState(state) {
       return state.project;
+    },
+    getProjectShowState(state) {
+      return state.projectShow;
     },
     getProfitTeam(state) {
       return state.profit_team;
@@ -71,8 +87,7 @@ export default {
         axios
           .get(`${baseUrlApi.defaults.baseURL}/projects/${id}`)
           .then((res) => {
-            commit("setProjectState", res.data);
-
+            commit("setProjectShowState", res.data);
             resolve(res);
           })
           .catch((err) => {
@@ -85,6 +100,8 @@ export default {
         axios
           .get(`${baseUrlApi.defaults.baseURL}/projects/show/${id}`)
           .then((res) => {
+            // moment.locale("id");
+            // res.data.data.deadline = moment(new Date(res.data.data.deadline)).format("LL");
             commit("setProjectState", res.data);
             resolve(res);
           })
@@ -94,11 +111,14 @@ export default {
       });
     },
     storeData({ commit }, data) {
+      data;
       return new Promise((resolve, reject) => {
         axios
           .post(`${baseUrlApi.defaults.baseURL}/projects`, {
             client_id: data.client_id,
+            pic_id: data.pic_id,
             name: data.name,
+            start_project: data.start_project,
             deadline: data.deadline,
             estimation: data.estimation,
             project_value: data.project_value,
@@ -106,8 +126,10 @@ export default {
             profit_team: data.profit_team,
             profit_company: data.profit_company,
             tax: data.tax,
-            progres: data.progres,
+            monthly_fee: data.monthly_fee,
             status: data.status,
+            type: data.type,
+            addTax: data.addTax,
           })
           .then((res) => {
             resolve(res);
@@ -122,16 +144,20 @@ export default {
         axios
           .put(`${baseUrlApi.defaults.baseURL}/projects/${data.id}`, {
             client_id: data.client_id,
+            pic_id: data.pic_id,
             name: data.name,
+            start_project: data.start_project,
             deadline: data.deadline,
             estimation: data.estimation,
             project_value: data.project_value,
             accomodation: data.accomodation,
             profit_team: data.profit_team,
             profit_company: data.profit_company,
+            monthly_fee: data.monthly_fee,
             tax: data.tax,
-            progres: data.progres,
+            type: data.type,
             status: data.status,
+            addTax: data.addTax,
           })
           .then((res) => {
             resolve(res);
@@ -146,6 +172,32 @@ export default {
         axios
           .delete(`${baseUrlApi.defaults.baseURL}/projects/${id}`)
           .then((res) => {
+            resolve(res);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    },
+    paginate({ commit }, url) {
+      return new Promise((resolve, reject) => {
+        axios
+          .get(`${url}`)
+          .then((res) => {
+            commit("setProjectsState", res.data);
+            resolve(res);
+          })
+          .catch((err) => {
+            reject(err);
+          });
+      });
+    },
+    monthlyProjects({ commit }) {
+      return new Promise((resolve, reject) => {
+        axios
+          .get(`${baseUrlApi.defaults.baseURL}/reminders`)
+          .then((res) => {
+            commit("setMonthlyProjectsState", res.data);
             resolve(res);
           })
           .catch((err) => {

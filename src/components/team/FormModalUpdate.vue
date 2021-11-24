@@ -38,12 +38,12 @@
           leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
         >
           <div
-            class="inline-block w-full max-w-xl overflow-hidden text-left align-bottom transition-all transform bg-white rounded shadow-xl  sm:my-0 sm:align-middle sm:max-w-xl sm:w-full"
+            class="inline-block w-full max-w-xl overflow-hidden text-left align-bottom transition-all transform bg-white rounded shadow-xl sm:my-0 sm:align-middle sm:max-w-xl sm:w-full"
           >
             <div class="p-6 px-4 pt-5 pb-4 bg-blueGray-200 sm:p-6 sm:pb-4">
               <div class="sm:flex sm:items-start">
                 <div
-                  class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto rounded-full  bg-blueGray-400 sm:mx-0 sm:h-10 sm:w-10"
+                  class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto rounded-full bg-blueGray-400 sm:mx-0 sm:h-10 sm:w-10"
                 >
                   <UserAddIcon
                     class="w-6 h-6 text-blueGray-800"
@@ -68,28 +68,18 @@
               <form @submit.prevent="update" v-if="team.data.data">
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
                     htmlFor="grid-password"
                   >
                     Project
                   </label>
-                  <Listbox v-model="team.data.data.project">
+                  <Listbox v-model="project.data.name">
                     <div class="relative mt-1">
                       <ListboxButton
-                        class="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded shadow cursor-default  focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
+                        class="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded shadow cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
                       >
-                        <span
-                          v-if="team.data.data.project === null"
-                          class="block text-sm truncate text-blueGray-600"
-                        >
-                          Pilih Project
-                        </span>
-
-                        <span
-                          v-else
-                          class="block text-sm truncate text-blueGray-600"
-                        >
-                          {{ team.data.data.project.name }}
+                        <span class="block text-sm truncate text-blueGray-600">
+                          {{ project.data.name }}
                         </span>
                         <span
                           class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none "
@@ -100,48 +90,6 @@
                           />
                         </span>
                       </ListboxButton>
-
-                      <transition
-                        leave-active-class="transition duration-100 ease-in"
-                        leave-from-class="opacity-100"
-                        leave-to-class="opacity-0"
-                      >
-                        <ListboxOptions
-                          class="absolute z-50 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg  max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
-                        >
-                          <ListboxOption
-                            v-slot="{ active, selected }"
-                            v-for="project in projects.data"
-                            :key="project.id"
-                            :value="project"
-                            as="template"
-                          >
-                            <li
-                              :class="[
-                                active
-                                  ? 'text-blueGray-800 bg-blueGray-200'
-                                  : 'text-blueGray-800',
-                                'cursor-default select-none relative py-2 pl-10 pr-4',
-                              ]"
-                            >
-                              <span
-                                :class="[
-                                  selected ? 'font-medium' : 'font-normal',
-                                  'block truncate',
-                                ]"
-                              >
-                                {{ project.name }}
-                              </span>
-                              <span
-                                v-if="selected"
-                                class="absolute inset-y-0 left-0 flex items-center pl-3  text-blueGray-600"
-                              >
-                                <CheckIcon class="w-5 h-5" aria-hidden="true" />
-                              </span>
-                            </li>
-                          </ListboxOption>
-                        </ListboxOptions>
-                      </transition>
                     </div>
                   </Listbox>
                   <!-- Start of validation project -->
@@ -178,7 +126,7 @@
                 </div>
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
                     htmlFor="grid-password"
                   >
                     Pegawai
@@ -186,7 +134,7 @@
                   <Listbox v-model="team.data.data.employee">
                     <div class="relative mt-1">
                       <ListboxButton
-                        class="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded shadow cursor-default  focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
+                        class="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded shadow cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
                       >
                         <span
                           v-if="team.data.data.employee === ''"
@@ -215,7 +163,7 @@
                         leave-to-class="opacity-0"
                       >
                         <ListboxOptions
-                          class="absolute z-50 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg  max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                          class="absolute z-50 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                         >
                           <ListboxOption
                             v-for="employee in employees.data"
@@ -242,7 +190,7 @@
                               </span>
                               <span
                                 v-if="selected"
-                                class="absolute inset-y-0 left-0 flex items-center pl-3  text-blueGray-600"
+                                class="absolute inset-y-0 left-0 flex items-center pl-3 text-blueGray-600"
                               >
                                 <CheckIcon class="w-5 h-5" aria-hidden="true" />
                               </span>
@@ -286,7 +234,7 @@
                 </div>
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
                     htmlFor="grid-password"
                   >
                     Posisi
@@ -294,7 +242,7 @@
                   <Listbox v-model="team.data.data.position">
                     <div class="relative mt-1">
                       <ListboxButton
-                        class="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded shadow cursor-default  focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
+                        class="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded shadow cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
                       >
                         <span
                           v-if="team.data.data.position === ''"
@@ -325,7 +273,7 @@
                         leave-to-class="opacity-0"
                       >
                         <ListboxOptions
-                          class="absolute z-50 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg  max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                          class="absolute z-50 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                         >
                           <ListboxOption
                             v-for="position in positions.data"
@@ -352,7 +300,7 @@
                               </span>
                               <span
                                 v-if="selected"
-                                class="absolute inset-y-0 left-0 flex items-center pl-3  text-blueGray-600"
+                                class="absolute inset-y-0 left-0 flex items-center pl-3 text-blueGray-600"
                               >
                                 <CheckIcon class="w-5 h-5" aria-hidden="true" />
                               </span>
@@ -396,7 +344,7 @@
                 </div>
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
                     htmlFor="grid-password"
                   >
                     Status Pembayaran
@@ -404,7 +352,7 @@
                   <Listbox v-model="team.data.data.payment_status">
                     <div class="relative mt-1">
                       <ListboxButton
-                        class="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded shadow cursor-default  focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
+                        class="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded shadow cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
                       >
                         <span
                           v-if="team.data.data.payment_status === ''"
@@ -435,7 +383,7 @@
                         leave-to-class="opacity-0"
                       >
                         <ListboxOptions
-                          class="absolute z-50 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg  max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                          class="absolute z-50 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                         >
                           <ListboxOption
                             v-for="(payment, index) in payments"
@@ -462,7 +410,7 @@
                               </span>
                               <span
                                 v-if="selected"
-                                class="absolute inset-y-0 left-0 flex items-center pl-3  text-blueGray-600"
+                                class="absolute inset-y-0 left-0 flex items-center pl-3 text-blueGray-600"
                               >
                                 <CheckIcon class="w-5 h-5" aria-hidden="true" />
                               </span>
@@ -506,24 +454,24 @@
                 </div>
                 <div class="relative w-full mb-3">
                   <label
-                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
+                    class="block mb-2 text-xs font-semibold uppercase text-blueGray-600"
                     htmlFor="grid-password"
                   >
-                    Profit
+                    Fee
                   </label>
                   <div class="flex">
                     <span
-                      class="px-4 py-2 text-sm whitespace-no-wrap border rounded-l  text-blueGray-700 bg-blueGray-300"
+                      class="px-4 py-2 text-sm whitespace-no-wrap border rounded-l text-blueGray-700 bg-blueGray-300"
                       >Rp.</span
                     >
                     <Money3Component
-                      v-model="team.data.data.profit"
+                      v-model="team.data.data.fee"
                       v-bind="config"
-                      class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded-tr rounded-br shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                      class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded-tr rounded-br shadow placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
                     ></Money3Component>
                   </div>
-                  <!-- Start of validation profit -->
-                  <span v-if="validation.profit">
+                  <!-- Start of validation fee -->
+                  <span v-if="validation.fee">
                     <div
                       class="flex items-center justify-start pt-2 font-medium text-red-600 "
                     >
@@ -548,18 +496,18 @@
                         </svg>
                       </div>
                       <div class="flex-initial max-w-full text-xs font-normal">
-                        {{ validation.profit[0] }}
+                        {{ validation.fee[0] }}
                       </div>
                     </div>
                   </span>
-                  <!-- End of validation profit -->
+                  <!-- End of validation fee -->
                 </div>
 
                 <div class="mt-6 text-center">
                   <button
                     :disabled="isDisabled"
                     :class="[isDisabled ? '' : 'active:bg-blueGray-600']"
-                    class="flex w-full px-6 py-3 mb-1 mr-1 text-sm font-semibold text-white uppercase transition-all duration-150 ease-linear rounded shadow outline-none  disabled:opacity-50 place-content-center bg-blueGray-800 hover:shadow-lg focus:outline-none"
+                    class="flex w-full px-6 py-3 mb-1 mr-1 text-sm font-semibold text-white uppercase transition-all duration-150 ease-linear rounded shadow outline-none disabled:opacity-50 place-content-center bg-blueGray-800 hover:shadow-lg focus:outline-none"
                     type="submit"
                   >
                     <img
@@ -576,11 +524,11 @@
             </div>
             <!-- End of form content -->
             <div
-              class="px-4 py-3  bg-blueGray-200 sm:px-6 sm:flex sm:flex-row-reverse"
+              class="px-4 py-3 bg-blueGray-200 sm:px-6 sm:flex sm:flex-row-reverse"
             >
               <button
                 type="submit"
-                class="flex justify-center w-full px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm  bg-blueGray-800 hover:bg-blueGray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blueGray-500 sm:ml-3 sm:w-auto sm:text-sm"
+                class="flex justify-center w-full px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-blueGray-800 hover:bg-blueGray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blueGray-500 sm:ml-3 sm:w-auto sm:text-sm"
                 @click="closeAndClearValidation"
               >
                 Close
@@ -652,7 +600,6 @@ export default {
   },
   setup(props, { emit }) {
     const payments = ["PENDING", "PAID", "ON PROCESS"];
-
     const showing = computed(() => {
       return props.isModalUpdateOpen;
     });
@@ -685,7 +632,7 @@ export default {
       validation.project = "";
       validation.employee = "";
       validation.position = "";
-      validation.profit = "";
+      validation.fee = "";
       validation.payment_status = "";
       emit("close");
     };
@@ -698,7 +645,7 @@ export default {
       project: "",
       employee: "",
       position: "",
-      profit: "",
+      fee: "",
       payment_status: "",
     });
 
@@ -708,10 +655,10 @@ export default {
       store
         .dispatch("team/updateData", {
           id: team.data.data.id,
-          project_id: team.data.data.project.id,
+          project_id: project.value.data.id,
           employee_id: team.data.data.employee.id,
           position: team.data.data.position,
-          profit: team.data.data.profit,
+          fee: team.data.data.fee,
           payment_status: team.data.data.payment_status,
         })
         .then((res) => {
@@ -731,7 +678,7 @@ export default {
           validation.project = err.response.data.project_id;
           validation.employee = err.response.data.employee_id;
           validation.position = err.response.data.position;
-          validation.profit = err.response.data.profit;
+          validation.fee = err.response.data.fee;
           validation.payment_status = err.response.data.payment_status;
         });
     };
@@ -743,9 +690,9 @@ export default {
     const positions = computed(() => {
       return store.getters["position/getPositionsState"];
     });
-    store.dispatch("project/getAllProjects");
-    const projects = computed(() => {
-      return store.getters["project/getProjectsState"];
+    // store.dispatch("project/getAllProjects");
+    const project = computed(() => {
+      return store.getters["project/getProjectState"];
     });
     return {
       update,
@@ -757,7 +704,7 @@ export default {
       closeAndClearValidation,
       employees,
       positions,
-      projects,
+      project,
       team,
       config,
       payments,

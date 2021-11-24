@@ -65,411 +65,658 @@
             <!-- Start of form content -->
             <div class="w-full px-5 bg-blueGray-200">
               <form @submit.prevent="update" v-if="specificEmployee.data.data">
-                <div class="relative w-full mb-3">
-                  <label
-                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
-                    htmlFor="grid-password"
-                  >
-                    Nama Karyawan
-                  </label>
-                  <input
-                    v-model="specificEmployee.data.data.employee.name"
-                    type="text"
-                    class="w-full text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
-                    placeholder="cth : Fikri Ilhamsyah"
-                  />
-                  <!-- Start of validation employee name -->
-                  <span v-if="validation.name">
-                    <div
-                      class="flex items-center justify-start pt-2 font-medium text-red-600 "
+                <div class="flex space-x-2">
+                  <div class="relative w-full mb-3">
+                    <label
+                      class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
+                      htmlFor="grid-password"
                     >
-                      <div>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="100%"
-                          height="100%"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          class="w-5 h-5 mr-1 feather feather-alert-octagon"
-                        >
-                          <polygon
-                            points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"
-                          ></polygon>
-                          <line x1="12" y1="8" x2="12" y2="12"></line>
-                          <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                        </svg>
-                      </div>
-                      <div class="flex-initial max-w-full text-xs font-normal">
-                        {{ validation.name[0] }}
-                      </div>
-                    </div>
-                  </span>
-                  <!-- End of validation employee name -->
-                </div>
-
-                <div class="relative w-full mb-3">
-                  <label
-                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
-                    htmlFor="grid-password"
-                  >
-                    Email
-                  </label>
-                  <input
-                    v-model="specificEmployee.data.data.email"
-                    type="email"
-                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
-                    placeholder="meet@madtive.com"
-                  />
-                  <!-- Start of validation email -->
-                  <span v-if="validation.email">
-                    <div
-                      class="flex items-center justify-start pt-2 font-medium text-red-600 "
-                    >
-                      <div>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="100%"
-                          height="100%"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          class="w-5 h-5 mr-1 feather feather-alert-octagon"
-                        >
-                          <polygon
-                            points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"
-                          ></polygon>
-                          <line x1="12" y1="8" x2="12" y2="12"></line>
-                          <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                        </svg>
-                      </div>
-                      <div class="flex-initial max-w-full text-xs font-normal">
-                        {{ validation.email[0] }}
-                      </div>
-                    </div>
-                  </span>
-                  <!-- End of validation email -->
-                </div>
-
-                <div class="relative w-full mb-3">
-                  <label
-                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
-                    htmlFor="grid-password"
-                  >
-                    No. Telp
-                  </label>
-                  <input
-                    v-model="specificEmployee.data.data.employee.phone_number"
-                    type="text"
-                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
-                    placeholder="+62"
-                  />
-                  <!-- Start of validation phone_number -->
-                  <span v-if="validation.phone_number">
-                    <div
-                      class="flex items-center justify-start pt-2 font-medium text-red-600 "
-                    >
-                      <div>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="100%"
-                          height="100%"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          class="w-5 h-5 mr-1 feather feather-alert-octagon"
-                        >
-                          <polygon
-                            points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"
-                          ></polygon>
-                          <line x1="12" y1="8" x2="12" y2="12"></line>
-                          <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                        </svg>
-                      </div>
-                      <div class="flex-initial max-w-full text-xs font-normal">
-                        {{ validation.phone_number[0] }}
-                      </div>
-                    </div>
-                  </span>
-                  <!-- End of validation phone_number -->
-                </div>
-                <div class="relative w-full mb-3">
-                  <label
-                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
-                  >
-                    Gaji
-                  </label>
-                  <input
-                    v-model="specificEmployee.data.data.employee.salary"
-                    type="text"
-                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
-                    placeholder="+62"
-                  />
-                  <!-- Start of validation salary -->
-                  <span v-if="validation.salary">
-                    <div
-                      class="flex items-center justify-start pt-2 font-medium text-red-600 "
-                    >
-                      <div>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="100%"
-                          height="100%"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          class="w-5 h-5 mr-1 feather feather-alert-octagon"
-                        >
-                          <polygon
-                            points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"
-                          ></polygon>
-                          <line x1="12" y1="8" x2="12" y2="12"></line>
-                          <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                        </svg>
-                      </div>
-                      <div class="flex-initial max-w-full text-xs font-normal">
-                        {{ validation.salary[0] }}
-                      </div>
-                    </div>
-                  </span>
-                  <!-- End of validation salary -->
-                </div>
-                <div class="relative w-full mb-3">
-                  <label
-                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
-                    htmlFor="grid-password"
-                  >
-                    Posisi
-                  </label>
-                  <Listbox
-                    v-model="specificEmployee.data.data.employee.position"
-                  >
-                    <div class="relative mt-1">
-                      <ListboxButton
-                        class="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded shadow cursor-default  focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
+                      Nama Karyawan
+                    </label>
+                    <input
+                      v-model="specificEmployee.data.data.employee.name"
+                      type="text"
+                      class="w-full text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                      placeholder="cth : Fikri Ilhamsyah"
+                    />
+                    <!-- Start of validation employee name -->
+                    <span v-if="validation.name">
+                      <div
+                        class="flex items-center justify-start pt-2 font-medium text-red-600 "
                       >
-                        <span
-                          v-if="
-                            specificEmployee.data.data.employee.position ===
-                            null
-                          "
-                          class="block text-sm truncate text-blueGray-600"
-                        >
-                          Belum ada posisi
-                        </span>
-                        <span
-                          v-else
-                          class="block text-sm truncate text-blueGray-600"
-                        >
-                          {{
-                            specificEmployee.data.data.employee.position
-                              .position_name
-                          }}
-                        </span>
-                        <span
-                          class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none "
-                        >
-                          <SelectorIcon
-                            class="w-5 h-5 text-blueGray-400"
-                            aria-hidden="true"
-                          />
-                        </span>
-                      </ListboxButton>
-
-                      <transition
-                        leave-active-class="transition duration-100 ease-in"
-                        leave-from-class="opacity-100"
-                        leave-to-class="opacity-0"
-                      >
-                        <ListboxOptions
-                          class="absolute z-50 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg  max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
-                        >
-                          <ListboxOption
-                            v-slot="{ active, selected }"
-                            v-for="position in positions.data"
-                            :key="position.position_name"
-                            :value="position"
-                            as="template"
+                        <div>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="100%"
+                            height="100%"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="w-5 h-5 mr-1 feather feather-alert-octagon"
                           >
-                            <li
-                              :class="[
-                                active
-                                  ? 'text-blueGray-800 bg-blueGray-200'
-                                  : 'text-blueGray-800',
-                                'cursor-default select-none relative py-2 pl-10 pr-4',
-                              ]"
-                            >
-                              <span
-                                :class="[
-                                  selected ? 'font-medium' : 'font-normal',
-                                  'block truncate',
-                                ]"
-                                >{{ position.position_name }}</span
-                              >
-                              <span
-                                v-if="selected"
-                                class="absolute inset-y-0 left-0 flex items-center pl-3  text-blueGray-600"
-                              >
-                                <CheckIcon class="w-5 h-5" aria-hidden="true" />
-                              </span>
-                            </li>
-                          </ListboxOption>
-                        </ListboxOptions>
-                      </transition>
-                    </div>
-                  </Listbox>
-                  <!-- Start of validation position_id -->
-                  <span v-if="validation.position_id">
-                    <div
-                      class="flex items-center justify-start pt-2 font-medium text-red-600 "
+                            <polygon
+                              points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"
+                            ></polygon>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                          </svg>
+                        </div>
+                        <div
+                          class="flex-initial max-w-full text-xs font-normal"
+                        >
+                          {{ validation.name[0] }}
+                        </div>
+                      </div>
+                    </span>
+                    <!-- End of validation employee name -->
+                  </div>
+                  <div class="relative w-full mb-3">
+                    <label
+                      class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
+                      htmlFor="grid-password"
                     >
-                      <div>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="100%"
-                          height="100%"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          class="w-5 h-5 mr-1 feather feather-alert-octagon"
-                        >
-                          <polygon
-                            points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"
-                          ></polygon>
-                          <line x1="12" y1="8" x2="12" y2="12"></line>
-                          <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                        </svg>
-                      </div>
-                      <div class="flex-initial max-w-full text-xs font-normal">
-                        {{ validation.position_id[0] }}
-                      </div>
-                    </div>
-                  </span>
-                  <!-- End of validation position_id -->
-                </div>
-                <div class="relative w-full mb-3">
-                  <label
-                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
-                  >
-                    Role
-                  </label>
-                  <Listbox v-model="specificEmployee.data.data.role">
-                    <div class="relative mt-1">
-                      <ListboxButton
-                        class="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded shadow cursor-default  focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
+                      No. Telp
+                    </label>
+                    <input
+                      v-model="specificEmployee.data.data.employee.phone_number"
+                      type="text"
+                      class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                      placeholder="0812xxxxxx"
+                    />
+                    <!-- Start of validation phone_number -->
+                    <span v-if="validation.phone_number">
+                      <div
+                        class="flex items-center justify-start pt-2 font-medium text-red-600 "
                       >
-                        <span
-                          v-if="specificEmployee.data.data.role === ''"
-                          class="block text-sm truncate text-blueGray-600"
-                        >
-                          Pilih Role
-                        </span>
-                        <span
-                          v-else
-                          class="block text-sm truncate text-blueGray-600"
-                        >
-                          {{ specificEmployee.data.data.role }}
-                        </span>
-                        <span
-                          class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none "
-                        >
-                          <SelectorIcon
-                            class="w-5 h-5 text-blueGray-400"
-                            aria-hidden="true"
-                          />
-                        </span>
-                      </ListboxButton>
-
-                      <transition
-                        leave-active-class="transition duration-100 ease-in"
-                        leave-from-class="opacity-100"
-                        leave-to-class="opacity-0"
-                      >
-                        <ListboxOptions
-                          class="absolute z-50 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg  max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
-                        >
-                          <ListboxOption
-                            v-slot="{ active, selected }"
-                            v-for="role in roles"
-                            :key="role.display"
-                            :value="role.value"
-                            as="template"
+                        <div>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="100%"
+                            height="100%"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="w-5 h-5 mr-1 feather feather-alert-octagon"
                           >
-                            <li
-                              :class="[
-                                active
-                                  ? 'text-blueGray-800 bg-blueGray-200'
-                                  : 'text-blueGray-800',
-                                'cursor-default select-none relative py-2 pl-10 pr-4',
-                              ]"
-                            >
-                              <span
-                                :class="[
-                                  selected ? 'font-medium' : 'font-normal',
-                                  'block truncate',
-                                ]"
-                                >{{ role.display }}</span
-                              >
-                              <span
-                                v-if="selected"
-                                class="absolute inset-y-0 left-0 flex items-center pl-3  text-blueGray-600"
-                              >
-                                <CheckIcon class="w-5 h-5" aria-hidden="true" />
-                              </span>
-                            </li>
-                          </ListboxOption>
-                        </ListboxOptions>
-                      </transition>
-                    </div>
-                  </Listbox>
-                  <!-- Start of validation role -->
-                  <span v-if="validation.role">
-                    <div
-                      class="flex items-center justify-start pt-2 font-medium text-red-600 "
-                    >
-                      <div>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="100%"
-                          height="100%"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          class="w-5 h-5 mr-1 feather feather-alert-octagon"
+                            <polygon
+                              points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"
+                            ></polygon>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                          </svg>
+                        </div>
+                        <div
+                          class="flex-initial max-w-full text-xs font-normal"
                         >
-                          <polygon
-                            points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"
-                          ></polygon>
-                          <line x1="12" y1="8" x2="12" y2="12"></line>
-                          <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                        </svg>
+                          {{ validation.phone_number[0] }}
+                        </div>
                       </div>
-                      <div class="flex-initial max-w-full text-xs font-normal">
-                        {{ validation.role[0] }}
-                      </div>
-                    </div>
-                  </span>
-                  <!-- End of validation role -->
+                    </span>
+                    <!-- End of validation phone_number -->
+                  </div>
                 </div>
+                <div class="flex space-x-2">
+                  <div class="relative w-full mb-3">
+                    <label
+                      class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
+                      htmlFor="grid-password"
+                    >
+                      Email
+                    </label>
+                    <input
+                      v-model="specificEmployee.data.data.email"
+                      type="email"
+                      class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                      placeholder="meet@madtive.com"
+                    />
+                    <!-- Start of validation email -->
+                    <span v-if="validation.email">
+                      <div
+                        class="flex items-center justify-start pt-2 font-medium text-red-600 "
+                      >
+                        <div>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="100%"
+                            height="100%"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="w-5 h-5 mr-1 feather feather-alert-octagon"
+                          >
+                            <polygon
+                              points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"
+                            ></polygon>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                          </svg>
+                        </div>
+                        <div
+                          class="flex-initial max-w-full text-xs font-normal"
+                        >
+                          {{ validation.email[0] }}
+                        </div>
+                      </div>
+                    </span>
+                    <!-- End of validation email -->
+                  </div>
+                  <div class="relative w-full mb-3">
+                    <label
+                      class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
+                    >
+                      Gaji
+                    </label>
+                    <div class="flex">
+                      <span
+                        class="px-4 py-2 text-sm whitespace-no-wrap border rounded-l  text-blueGray-700 bg-blueGray-300"
+                        >Rp.</span
+                      >
+                      <input
+                        v-model="specificEmployee.data.data.employee.salary"
+                        type="text"
+                        class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                      />
+                    </div>
+                    <!-- Start of validation salary -->
+                    <span v-if="validation.salary">
+                      <div
+                        class="flex items-center justify-start pt-2 font-medium text-red-600 "
+                      >
+                        <div>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="100%"
+                            height="100%"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="w-5 h-5 mr-1 feather feather-alert-octagon"
+                          >
+                            <polygon
+                              points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"
+                            ></polygon>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                          </svg>
+                        </div>
+                        <div
+                          class="flex-initial max-w-full text-xs font-normal"
+                        >
+                          {{ validation.salary[0] }}
+                        </div>
+                      </div>
+                    </span>
+                    <!-- End of validation salary -->
+                  </div>
+                </div>
+                <div class="flex space-x-2">
+                  <div class="relative w-full mb-3">
+                    <label
+                      class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
+                      htmlFor="grid-password"
+                    >
+                      Posisi
+                    </label>
+                    <Listbox
+                      v-model="specificEmployee.data.data.employee.position"
+                    >
+                      <div class="relative mt-1">
+                        <ListboxButton
+                          class="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded shadow cursor-default  focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
+                        >
+                          <span
+                            v-if="
+                              specificEmployee.data.data.employee.position ===
+                              null
+                            "
+                            class="block text-sm truncate text-blueGray-600"
+                          >
+                            Belum ada posisi
+                          </span>
+                          <span
+                            v-else
+                            class="block text-sm truncate text-blueGray-600"
+                          >
+                            {{
+                              specificEmployee.data.data.employee.position
+                                .position_name
+                            }}
+                          </span>
+                          <span
+                            class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none "
+                          >
+                            <SelectorIcon
+                              class="w-5 h-5 text-blueGray-400"
+                              aria-hidden="true"
+                            />
+                          </span>
+                        </ListboxButton>
 
+                        <transition
+                          leave-active-class="transition duration-100 ease-in"
+                          leave-from-class="opacity-100"
+                          leave-to-class="opacity-0"
+                        >
+                          <ListboxOptions
+                            class="absolute z-50 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg  max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                          >
+                            <ListboxOption
+                              v-slot="{ active, selected }"
+                              v-for="position in positions.data"
+                              :key="position.position_name"
+                              :value="position"
+                              as="template"
+                            >
+                              <li
+                                :class="[
+                                  active
+                                    ? 'text-blueGray-800 bg-blueGray-200'
+                                    : 'text-blueGray-800',
+                                  'cursor-default select-none relative py-2 pl-10 pr-4',
+                                ]"
+                              >
+                                <span
+                                  :class="[
+                                    selected ? 'font-medium' : 'font-normal',
+                                    'block truncate',
+                                  ]"
+                                  >{{ position.position_name }}</span
+                                >
+                                <span
+                                  v-if="selected"
+                                  class="absolute inset-y-0 left-0 flex items-center pl-3  text-blueGray-600"
+                                >
+                                  <CheckIcon
+                                    class="w-5 h-5"
+                                    aria-hidden="true"
+                                  />
+                                </span>
+                              </li>
+                            </ListboxOption>
+                          </ListboxOptions>
+                        </transition>
+                      </div>
+                    </Listbox>
+                    <!-- Start of validation position_id -->
+                    <span v-if="validation.position_id">
+                      <div
+                        class="flex items-center justify-start pt-2 font-medium text-red-600 "
+                      >
+                        <div>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="100%"
+                            height="100%"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="w-5 h-5 mr-1 feather feather-alert-octagon"
+                          >
+                            <polygon
+                              points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"
+                            ></polygon>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                          </svg>
+                        </div>
+                        <div
+                          class="flex-initial max-w-full text-xs font-normal"
+                        >
+                          {{ validation.position_id[0] }}
+                        </div>
+                      </div>
+                    </span>
+                    <!-- End of validation position_id -->
+                  </div>
+                  <div class="relative w-full mb-3">
+                    <label
+                      class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
+                      htmlFor="grid-password"
+                    >
+                      Tanggal Bergabung
+                    </label>
+                    <input
+                      v-model="specificEmployee.data.data.employee.join_date"
+                      type="date"
+                      class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    />
+                    <!-- Start of validation join_date -->
+                    <span v-if="validation.join_date">
+                      <div
+                        class="flex items-center justify-start pt-2 font-medium text-red-600 "
+                      >
+                        <div>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="100%"
+                            height="100%"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="w-5 h-5 mr-1 feather feather-alert-octagon"
+                          >
+                            <polygon
+                              points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"
+                            ></polygon>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                          </svg>
+                        </div>
+                        <div
+                          class="flex-initial max-w-full text-xs font-normal"
+                        >
+                          {{ validation.join_date[0] }}
+                        </div>
+                      </div>
+                    </span>
+                    <!-- End of validation join_date -->
+                  </div>
+                </div>
+                <div class="flex space-x-2">
+                  <div class="relative w-full mb-3">
+                    <label
+                      class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
+                      htmlFor="grid-password"
+                    >
+                      Pendidikan Terakhir
+                    </label>
+                    <Listbox
+                      v-model="
+                        specificEmployee.data.data.employee.last_education
+                      "
+                    >
+                      <div class="relative mt-1">
+                        <ListboxButton
+                          class="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded shadow cursor-default  focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
+                        >
+                          <span
+                            v-if="
+                              specificEmployee.data.data.employee
+                                .last_education === ''
+                            "
+                            class="block text-sm truncate text-blueGray-600"
+                          >
+                            Pilih
+                          </span>
+                          <span
+                            v-else
+                            class="block text-sm truncate text-blueGray-600"
+                          >
+                            {{
+                              specificEmployee.data.data.employee.last_education
+                            }}
+                          </span>
+                          <span
+                            class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none "
+                          >
+                            <SelectorIcon
+                              class="w-5 h-5 text-blueGray-400"
+                              aria-hidden="true"
+                            />
+                          </span>
+                        </ListboxButton>
+
+                        <transition
+                          leave-active-class="transition duration-100 ease-in"
+                          leave-from-class="opacity-100"
+                          leave-to-class="opacity-0"
+                        >
+                          <ListboxOptions
+                            class="absolute z-50 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg  max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                          >
+                            <ListboxOption
+                              v-slot="{ active, selected }"
+                              v-for="lastEdu in last_educations.level"
+                              :key="lastEdu"
+                              :value="lastEdu"
+                              as="template"
+                            >
+                              <li
+                                :class="[
+                                  active
+                                    ? 'text-blueGray-800 bg-blueGray-200'
+                                    : 'text-blueGray-800',
+                                  'cursor-default select-none relative py-2 pl-10 pr-4',
+                                ]"
+                              >
+                                <span
+                                  :class="[
+                                    selected ? 'font-medium' : 'font-normal',
+                                    'block truncate',
+                                  ]"
+                                  >{{ lastEdu }}</span
+                                >
+                                <span
+                                  v-if="selected"
+                                  class="absolute inset-y-0 left-0 flex items-center pl-3  text-blueGray-600"
+                                >
+                                  <CheckIcon
+                                    class="w-5 h-5"
+                                    aria-hidden="true"
+                                  />
+                                </span>
+                              </li>
+                            </ListboxOption>
+                          </ListboxOptions>
+                        </transition>
+                      </div>
+                    </Listbox>
+                    <!-- Start of validation last_education -->
+                    <span v-if="validation.last_education">
+                      <div
+                        class="flex items-center justify-start pt-2 font-medium text-red-600 "
+                      >
+                        <div>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="100%"
+                            height="100%"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="w-5 h-5 mr-1 feather feather-alert-octagon"
+                          >
+                            <polygon
+                              points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"
+                            ></polygon>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                          </svg>
+                        </div>
+                        <div
+                          class="flex-initial max-w-full text-xs font-normal"
+                        >
+                          {{ validation.last_education[0] }}
+                        </div>
+                      </div>
+                    </span>
+                    <!-- End of validation last_education -->
+                  </div>
+                  <div class="relative w-full mb-3">
+                    <label
+                      class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
+                      htmlFor="grid-password"
+                    >
+                      Jenis Kelamin
+                    </label>
+                    <Listbox
+                      v-model="specificEmployee.data.data.employee.gender"
+                    >
+                      <div class="relative mt-1">
+                        <ListboxButton
+                          class="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded shadow cursor-default  focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
+                        >
+                          <span
+                            v-if="
+                              specificEmployee.data.data.employee.gender === ''
+                            "
+                            class="block text-sm truncate text-blueGray-600"
+                          >
+                            Pilih
+                          </span>
+                          <span
+                            v-else
+                            class="block text-sm truncate text-blueGray-600"
+                          >
+                            {{ specificEmployee.data.data.employee.gender }}
+                          </span>
+                          <span
+                            class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none "
+                          >
+                            <SelectorIcon
+                              class="w-5 h-5 text-blueGray-400"
+                              aria-hidden="true"
+                            />
+                          </span>
+                        </ListboxButton>
+
+                        <transition
+                          leave-active-class="transition duration-100 ease-in"
+                          leave-from-class="opacity-100"
+                          leave-to-class="opacity-0"
+                        >
+                          <ListboxOptions
+                            class="absolute z-50 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg  max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                          >
+                            <ListboxOption
+                              v-slot="{ active, selected }"
+                              v-for="gender in genders.type"
+                              :key="gender"
+                              :value="gender"
+                              as="template"
+                            >
+                              <li
+                                :class="[
+                                  active
+                                    ? 'text-blueGray-800 bg-blueGray-200'
+                                    : 'text-blueGray-800',
+                                  'cursor-default select-none relative py-2 pl-10 pr-4',
+                                ]"
+                              >
+                                <span
+                                  :class="[
+                                    selected ? 'font-medium' : 'font-normal',
+                                    'block truncate',
+                                  ]"
+                                  >{{ gender }}</span
+                                >
+                                <span
+                                  v-if="selected"
+                                  class="absolute inset-y-0 left-0 flex items-center pl-3  text-blueGray-600"
+                                >
+                                  <CheckIcon
+                                    class="w-5 h-5"
+                                    aria-hidden="true"
+                                  />
+                                </span>
+                              </li>
+                            </ListboxOption>
+                          </ListboxOptions>
+                        </transition>
+                      </div>
+                    </Listbox>
+                    <!-- Start of validation gender -->
+                    <span v-if="validation.gender">
+                      <div
+                        class="flex items-center justify-start pt-2 font-medium text-red-600 "
+                      >
+                        <div>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="100%"
+                            height="100%"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="w-5 h-5 mr-1 feather feather-alert-octagon"
+                          >
+                            <polygon
+                              points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"
+                            ></polygon>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                          </svg>
+                        </div>
+                        <div
+                          class="flex-initial max-w-full text-xs font-normal"
+                        >
+                          {{ validation.gender[0] }}
+                        </div>
+                      </div>
+                    </span>
+                    <!-- End of validation gender -->
+                  </div>
+                  <div class="relative w-full mb-3">
+                    <label
+                      class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
+                      htmlFor="grid-password"
+                    >
+                      NIK
+                    </label>
+                    <input
+                      v-model="specificEmployee.data.data.employee.nik"
+                      type="text"
+                      class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    />
+                    <!-- Start of validation nik -->
+                    <span v-if="validation.nik">
+                      <div
+                        class="flex items-center justify-start pt-2 font-medium text-red-600 "
+                      >
+                        <div>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="100%"
+                            height="100%"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="w-5 h-5 mr-1 feather feather-alert-octagon"
+                          >
+                            <polygon
+                              points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"
+                            ></polygon>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                          </svg>
+                        </div>
+                        <div
+                          class="flex-initial max-w-full text-xs font-normal"
+                        >
+                          {{ validation.nik[0] }}
+                        </div>
+                      </div>
+                    </span>
+                    <!-- End of validation nik -->
+                  </div>
+                </div>
                 <div class="relative w-full mb-3">
                   <label
                     class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
@@ -523,6 +770,132 @@
                   </span>
                   <!-- End of validation address -->
                 </div>
+                <input
+                  type="checkbox"
+                  v-model="accountRequired"
+                  name=""
+                  id="checkbox"
+                  class="mr-1 rounded-sm"
+                />
+                <label for="checkbox" class="font-semibold text-blueGray-600"
+                  >Ingin ubah role akun?</label
+                >
+                <transition name="slide-fade">
+                  <div class="relative w-full mt-2 mb-3" v-if="accountRequired">
+                    <label
+                      class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
+                    >
+                      Role
+                    </label>
+                    <Listbox v-model="specificEmployee.data.data.role">
+                      <div class="relative mt-1">
+                        <ListboxButton
+                          class="relative w-full py-3 pl-3 pr-10 text-left bg-white rounded shadow cursor-default  focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm"
+                        >
+                          <span
+                            v-if="
+                              specificEmployee.data.data.role === null || ''
+                            "
+                            class="block text-sm truncate text-blueGray-600"
+                          >
+                            Pilih Role
+                          </span>
+                          <span
+                            v-else
+                            class="block text-sm truncate text-blueGray-600"
+                          >
+                            {{ specificEmployee.data.data.role }}
+                          </span>
+                          <span
+                            class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none "
+                          >
+                            <SelectorIcon
+                              class="w-5 h-5 text-blueGray-400"
+                              aria-hidden="true"
+                            />
+                          </span>
+                        </ListboxButton>
+
+                        <transition
+                          leave-active-class="transition duration-100 ease-in"
+                          leave-from-class="opacity-100"
+                          leave-to-class="opacity-0"
+                        >
+                          <ListboxOptions
+                            class="absolute z-50 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg  max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                          >
+                            <ListboxOption
+                              v-slot="{ active, selected }"
+                              v-for="role in roles"
+                              :key="role.display"
+                              :value="role.value"
+                              as="template"
+                            >
+                              <li
+                                :class="[
+                                  active
+                                    ? 'text-blueGray-800 bg-blueGray-200'
+                                    : 'text-blueGray-800',
+                                  'cursor-default select-none relative py-2 pl-10 pr-4',
+                                ]"
+                              >
+                                <span
+                                  :class="[
+                                    selected ? 'font-medium' : 'font-normal',
+                                    'block truncate',
+                                  ]"
+                                  >{{ role.display }}</span
+                                >
+                                <span
+                                  v-if="selected"
+                                  class="absolute inset-y-0 left-0 flex items-center pl-3  text-blueGray-600"
+                                >
+                                  <CheckIcon
+                                    class="w-5 h-5"
+                                    aria-hidden="true"
+                                  />
+                                </span>
+                              </li>
+                            </ListboxOption>
+                          </ListboxOptions>
+                        </transition>
+                      </div>
+                    </Listbox>
+                    <!-- Start of validation role -->
+                    <span v-if="validation.role">
+                      <div
+                        class="flex items-center justify-start pt-2 font-medium text-red-600 "
+                      >
+                        <div>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="100%"
+                            height="100%"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="w-5 h-5 mr-1 feather feather-alert-octagon"
+                          >
+                            <polygon
+                              points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"
+                            ></polygon>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                          </svg>
+                        </div>
+                        <div
+                          class="flex-initial max-w-full text-xs font-normal"
+                        >
+                          {{ validation.role[0] }}
+                        </div>
+                      </div>
+                    </span>
+                    <!-- End of validation role -->
+                  </div>
+                </transition>
 
                 <div class="mt-6 text-center">
                   <button
@@ -572,7 +945,14 @@
 
 
 <script>
-import { reactive, ref, computed, onMounted, onBeforeMount } from "vue";
+import {
+  reactive,
+  ref,
+  computed,
+  onMounted,
+  onBeforeMount,
+  watchEffect,
+} from "vue";
 import {
   Dialog,
   DialogOverlay,
@@ -624,6 +1004,7 @@ export default {
     const showing = props.isModalUpdateOpen;
     const modalContent = props.modalUpdateContent;
     const specificEmployee = props.specificEmployee;
+    const accountRequired = ref(false);
     const roles = [
       {
         display: "Admin",
@@ -634,6 +1015,20 @@ export default {
         value: "User",
       },
     ];
+    if (specificEmployee.data.data) {
+      function onlyNumber() {
+        specificEmployee.data.data.employee.phone_number =
+          specificEmployee.data.data.employee.phone_number.replace(
+            /[^0-9 | +]/g,
+            ""
+          );
+        specificEmployee.data.data.employee.nik =
+          specificEmployee.data.data.employee.nik.replace(/[^0-9 | +]/g, "");
+      }
+      watchEffect(() => {
+        onlyNumber();
+      });
+    }
     const closeAndClearValidation = () => {
       /*
        * close modal and set validation value to null or empty string
@@ -645,6 +1040,10 @@ export default {
       validation.role = "";
       validation.salary = "";
       validation.position_id = "";
+      validation.join_date = "";
+      validation.nik = "";
+      validation.last_education = "";
+      validation.gender = "";
       emit("close");
     };
     /*
@@ -661,6 +1060,10 @@ export default {
       role: "",
       salary: "",
       position_id: "",
+      join_date: "",
+      nik: "",
+      gender: "",
+      last_education: "",
     });
 
     const update = () => {
@@ -672,22 +1075,34 @@ export default {
           email: specificEmployee.data.data.email,
           role: specificEmployee.data.data.role,
           name: specificEmployee.data.data.employee.name,
-          phone_number: specificEmployee.data.data.employee.phone_number,
+          phone_number:
+            specificEmployee.data.data.employee.phone_number.replace(
+              /^0/,
+              "+62"
+            ),
           address: specificEmployee.data.data.employee.address,
           salary: specificEmployee.data.data.employee.salary,
           position_id: specificEmployee.data.data.employee.position.id,
+          join_date: specificEmployee.data.data.employee.join_date,
+          nik: specificEmployee.data.data.employee.nik,
+          last_education: specificEmployee.data.data.employee.last_education,
+          gender: specificEmployee.data.data.employee.gender,
+          accountRequired: accountRequired.value,
         })
         .then((res) => {
           store.dispatch("employees/getEmployees");
           isLoading.value = false;
           isDisabled.value = false;
           validation.email = "";
-          validation.password = "";
           validation.role = "";
           validation.name = "";
           validation.phone_number = "";
           validation.address = "";
           validation.salary = "";
+          validation.join_date = "";
+          validation.nik = "";
+          validation.last_education = "";
+          validation.gender = "";
           // * close modal after insert
           emit("close");
         })
@@ -695,12 +1110,15 @@ export default {
           isLoading.value = false;
           isDisabled.value = false;
           validation.email = err.response.data.email;
-          validation.password = err.response.data.password;
           validation.role = err.response.data.role;
           validation.name = err.response.data.name;
           validation.phone_number = err.response.data.phone_number;
           validation.address = err.response.data.address;
           validation.salary = err.response.data.salary;
+          validation.join_date = err.response.data.join_date;
+          validation.nik = err.response.data.nik;
+          validation.last_education = err.response.data.last_education;
+          validation.gender = err.response.data.gender;
         });
     };
     // *POSITIONS
@@ -712,6 +1130,23 @@ export default {
     });
     const positions = computed(() => {
       return store.getters["position/getPositionsState"];
+    });
+    const last_educations = reactive({
+      level: [
+        "SD",
+        "SMP",
+        "SMA SEDERAJAT",
+        "D1",
+        "D2",
+        "D3",
+        "D4",
+        "S1",
+        "S2",
+        "S3",
+      ],
+    });
+    const genders = reactive({
+      type: ["Laki-laki", "Perempuan"],
     });
     return {
       // * function to update data
@@ -729,7 +1164,26 @@ export default {
       position,
       positions,
       roles,
+      accountRequired,
+      last_educations,
+      genders,
     };
   },
 };
 </script>
+
+<style scoped>
+.slide-fade-enter-active {
+  transition: all .3s ease-in-out;
+}
+
+.slide-fade-leave-active {
+  transition: all .5s ease-in;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateY(50px);
+  opacity: 0;
+}
+</style>

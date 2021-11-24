@@ -1,4 +1,3 @@
-<template>Halo ini dashboard</template>
 
 <script>
 import { useRouter } from "vue-router";

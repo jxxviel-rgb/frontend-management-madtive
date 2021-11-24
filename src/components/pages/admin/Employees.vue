@@ -91,12 +91,22 @@
                       </th>
 
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase break-normal align-middle border border-l-0 border-r-0 border-solid  text-blueGray-500"
                       >
                         Nama
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase break-normal align-middle border border-l-0 border-r-0 border-solid  text-blueGray-500"
+                      >
+                        NIK
+                      </th>
+                      <th
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase break-normal align-middle border border-l-0 border-r-0 border-solid  text-blueGray-500"
+                      >
+                        Jenis Kelamin
+                      </th>
+                      <th
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase break-normal align-middle border border-l-0 border-r-0 border-solid  text-blueGray-500"
                       >
                         Email
                       </th>
@@ -106,27 +116,37 @@
                         No. Telp
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowra text-blueGray-500"
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                       >
                         Posisi
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowra text-blueGray-500"
+                        class="px-2 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                       >
                         Gaji
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowra text-blueGray-500"
+                        class="px-2 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
+                      >
+                        Tanggal Bergabung
+                      </th>
+                      <th
+                        class="px-2 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
+                      >
+                        Pendidikan Terakhir
+                      </th>
+                      <th
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                       >
                         Alamat
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowra text-blueGray-500"
+                        class="px-2 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                       >
                         Role
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
+                        class="px-2 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                       >
                         Aksi
                       </th>
@@ -150,23 +170,56 @@
                             {{ index + 1 }}
                           </td>
                           <th
-                            class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                            class="px-6 py-4 text-xs text-left break-normal align-middle border-t-0 border-l-0 border-r-0 "
                           >
-                            {{ item.employee.name }}
+                            {{
+                              item.employee.name === null ||
+                              item.employee === null
+                                ? "Belum ada nama"
+                                : item.employee.name
+                            }}
                           </th>
                           <td
-                            class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                            class="px-6 py-4 text-xs text-left break-normal align-middle border-t-0 border-l-0 border-r-0 "
                           >
-                            {{ item.email }}
+                            {{
+                              item.employee.nik === null ||
+                              item.employee === null
+                                ? "Belum ada nik"
+                                : item.employee.nik
+                            }}
                           </td>
                           <td
-                            class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                            class="px-6 py-4 text-xs text-left break-normal align-middle border-t-0 border-l-0 border-r-0 "
                           >
-                            {{ item.employee.phone_number }}
+                            {{
+                              item.employee.gender === null ||
+                              item.employee === null
+                                ? "Belum ada jenis kelamin"
+                                : item.employee.gender
+                            }}
+                          </td>
+                          <td
+                            class="px-6 py-4 text-xs text-left break-normal align-middle border-t-0 border-l-0 border-r-0 "
+                          >
+                            {{ item.email ?? "Belum ada email" }}
+                          </td>
+                          <td
+                            class="px-6 py-4 text-xs break-normal align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            {{
+                              item.employee.phone_number === null ||
+                              item.employee === null
+                                ? "Belum ada nomor telepon"
+                                : item.employee.phone_number
+                            }}
                           </td>
 
                           <td
-                            v-if="item.employee.position === null"
+                            v-if="
+                              item.employee.position === null ||
+                              item.employee === null
+                            "
                             class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                           >
                             Belum ada posisi
@@ -178,27 +231,55 @@
                             {{ item.employee.position.position_name }}
                           </td>
                           <td
-                            class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                            class="px-2 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                           >
                             Rp.
                             {{
                               new Intl.NumberFormat().format(
-                                item.employee.salary
+                                item.employee.salary === null ||
+                                  item.employee === null
+                                  ? "0"
+                                  : item.employee.salary
                               )
+                            }}
+                          </td>
+                          <td
+                            class="px-2 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            {{
+                              item.employee.join_date === null ||
+                              item.employee === null
+                                ? "Belum ada tanggal bergabung"
+                                : item.employee.join_date
+                            }}
+                          </td>
+                          <td
+                            class="px-2 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            {{
+                              item.employee.last_education === null ||
+                              item.employee === null
+                                ? "Belum ada pendidikan terakhir"
+                                : item.employee.last_education
                             }}
                           </td>
                           <td
                             class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                           >
-                            {{ item.employee.address }}
+                            {{
+                              item.employee.address === null ||
+                              item.employee === null
+                                ? "Belum ada alamat"
+                                : item.employee.address
+                            }}
                           </td>
                           <td
-                            class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                            class="px-2 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                           >
-                            {{ item.role }}
+                            {{ item.role ?? "Tidak ada role" }}
                           </td>
                           <td
-                            class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                            class="px-2 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                           >
                             <div class="">
                               <button
@@ -227,7 +308,7 @@
                   </template>
                   <template v-else>
                     <tr>
-                      <td colspan="9" class="text-center">
+                      <td colspan="12" class="text-center">
                         <div class="flex justify-center">
                           <img
                             class="w-6 my-2"
@@ -263,7 +344,8 @@ import ModalDelete from "../../employee/ModalDelete.vue";
 import ModalAlert from "../../employee/ModalAlert.vue";
 import { TrashIcon, PencilIcon, PlusCircleIcon } from "@heroicons/vue/solid";
 import { useStore } from "vuex";
-import { computed, ref, reactive } from "vue";
+import { computed, ref, reactive, watchEffect } from "vue";
+import moment from "moment";
 export default {
   components: {
     ModalAlert,
@@ -309,6 +391,12 @@ export default {
     const specificEmployee = reactive({
       data: [],
     });
+    if (employees.value.data)
+      for (let i = 0; i < employees.value.data; i++) {
+        employees.value.data[i].employee.join_date = moment(
+          employees.value.data[i].employee.join_date
+        ).format("ll");
+      }
     // * trigger  get specific data when its clicked
     const sendIdAndOpenModalUpdate = (id) => {
       isModalUpdateOpen.value = !isModalUpdateOpen.value;

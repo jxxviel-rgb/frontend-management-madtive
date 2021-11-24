@@ -180,15 +180,6 @@
               <span class="mt-1 ml-1">Pegawai</span>
             </router-link>
           </li>
-          <li class="items-center">
-            <router-link
-              :to="{ name: 'position' }"
-              class="flex py-3 text-xs font-bold uppercase  text-blueGray-600 hover:text-blueGray-500"
-            >
-              <FolderIcon class="w-5"></FolderIcon>
-              <span class="mt-1 ml-1">Posisi</span>
-            </router-link>
-          </li>
 
           <li class="items-center">
             <router-link
@@ -199,6 +190,110 @@
               <span class="mt-1 ml-1">Projek</span>
             </router-link>
           </li>
+          <!-- <li class="items-center">
+           
+          </li> -->
+
+          <li class="items-center">
+            <router-link
+              :to="{ name: 'log' }"
+              class="flex py-3 text-xs font-bold uppercase  text-blueGray-600 hover:text-blueGray-500"
+            >
+              <InboxInIcon class="w-5" />
+              <span class="mt-1 ml-1">Log Pesan</span>
+            </router-link>
+          </li>
+          <li class="items-center">
+            <router-link
+              :to="{ name: 'reminder' }"
+              class="flex py-3 text-xs font-bold uppercase  text-blueGray-600 hover:text-blueGray-500"
+            >
+              <ClipboardListIcon class="w-5" />
+              <span class="mt-1 ml-1">Reminder Tagihan</span>
+            </router-link>
+          </li>
+          <li class="items-center">
+            <!-- <router-link
+              :to="{ name: 'log' }"
+              class="flex py-3 text-xs font-bold uppercase text-blueGray-600 hover:text-blueGray-500"
+            >
+              <InboxInIcon class="w-5" />
+              <span class="mt-1 ml-1">Log Pesan</span>
+            </router-link> -->
+            <Menu as="div" class="relative inline-block text-left">
+              <div>
+                <MenuButton
+                  class="flex py-3 text-xs font-bold uppercase  text-blueGray-600 hover:text-blueGray-500"
+                >
+                  <CogIcon class="w-5" />
+                  <span class="mt-1 ml-1"> Konfigurasi</span>
+                  <ChevronDownIcon
+                    class="w-5 h-5 ml-2 -mr-1  text-violet-200 hover:text-violet-100"
+                    aria-hidden="true"
+                  />
+                </MenuButton>
+              </div>
+
+              <transition
+                enter-active-class="transition duration-100 ease-out"
+                enter-from-class="transform scale-95 opacity-0"
+                enter-to-class="transform scale-100 opacity-100"
+                leave-active-class="transition duration-75 ease-in"
+                leave-from-class="transform scale-100 opacity-100"
+                leave-to-class="transform scale-95 opacity-0"
+              >
+                <MenuItems
+                  class="absolute mt-2 divide-y divide-gray-100 rounded-md shadow-lg  bg-blueGray-200 w-52 ring-1 ring-black ring-opacity-5 focus:outline-none"
+                >
+                  <div class="px-1 py-1 space-y-1">
+                    <MenuItem v-slot="{ active }">
+                      <router-link
+                        :class="[
+                          active
+                            ? 'bg-blueGray-300 text-blueGray-500 font-bold'
+                            : 'text-blueGray-600 font-bold ',
+                          'group flex rounded-md items-center w-full px-2 py-2 text-sm',
+                        ]"
+                        :to="{ name: 'sender' }"
+                      >
+                        <ChatAltIcon class="w-5" />
+                        <span class="mt-1 ml-1">Pesan</span>
+                      </router-link>
+                    </MenuItem>
+                    <MenuItem v-slot="{ active }">
+                      <router-link
+                        :class="[
+                          active
+                            ? 'bg-blueGray-300 font-bold text-blueGray-500 font-bold'
+                            : 'text-blueGray-600 font-bold ',
+                          'group flex rounded-md items-center w-full px-2 py-2 text-sm',
+                        ]"
+                        :to="{ name: 'position' }"
+                      >
+                        <FolderIcon class="w-5 font-bold"></FolderIcon>
+                        <span class="mt-1 ml-1">Posisi</span>
+                      </router-link>
+                    </MenuItem>
+                    <MenuItem v-slot="{ active }">
+                      <router-link
+                        :class="[
+                          active
+                            ? 'bg-blueGray-300 font-bold text-blueGray-500 font-bold'
+                            : 'text-blueGray-600 font-bold ',
+                          'group flex rounded-md items-center w-full px-2 py-2 text-sm',
+                        ]"
+                        :to="{ name: 'projectCost' }"
+                      >
+                        <CashIcon class="w-5 font-bold" />
+                        <span class="mt-1 ml-1">Biaya Project</span>
+                      </router-link>
+                    </MenuItem>
+                  </div>
+                </MenuItems>
+              </transition>
+            </Menu>
+          </li>
+
           <!-- 
           <li class="items-center">
             <router-link
@@ -237,6 +332,11 @@ import {
   FolderIcon,
   HomeIcon,
   LogoutIcon,
+  ChatAltIcon,
+  InboxInIcon,
+  CogIcon,
+  ClipboardListIcon,
+  CashIcon,
 } from "@heroicons/vue/outline";
 import { Menu, MenuButton, MenuItems, MenuItem } from "@headlessui/vue";
 import { ChevronDownIcon } from "@heroicons/vue/solid";
@@ -245,6 +345,9 @@ import { useRouter } from "vue-router";
 Popper.Defaults.modifiers.computeStyle.gpuAcceleration = false;
 export default {
   components: {
+    CashIcon,
+    CogIcon,
+    InboxInIcon,
     HomeIcon,
     FolderIcon,
     UsersIcon,
@@ -258,6 +361,8 @@ export default {
     MenuItem,
     ChevronDownIcon,
     LogoutIcon,
+    ChatAltIcon,
+    ClipboardListIcon,
   },
   name: "Sidebar",
   setup() {

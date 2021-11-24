@@ -155,6 +155,50 @@
                   </span>
                   <!-- End of validation phone_number -->
                 </div>
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
+                    htmlFor="grid-password"
+                  >
+                    Posisi
+                  </label>
+                  <input
+                    v-model="pic.position"
+                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                    placeholder="Contoh: Manager, HRD, Supervisor"
+                  />
+                  <!-- Start of validation position -->
+                  <span v-if="validation.position">
+                    <div
+                      class="flex items-center justify-start pt-2 font-medium text-red-600 "
+                    >
+                      <div>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="100%"
+                          height="100%"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="w-5 h-5 mr-1 feather feather-alert-octagon"
+                        >
+                          <polygon
+                            points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"
+                          ></polygon>
+                          <line x1="12" y1="8" x2="12" y2="12"></line>
+                          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                      </div>
+                      <div class="flex-initial max-w-full text-xs font-normal">
+                        {{ validation.position[0] }}
+                      </div>
+                    </div>
+                  </span>
+                  <!-- End of validation position -->
+                </div>
 
                 <div class="relative w-full mb-3">
                   <label
@@ -310,9 +354,10 @@ export default {
       name: "",
       phone_number: "",
       email: "",
+      position: "",
     });
     function formating() {
-      pic.phone_number = pic.phone_number.replace(/[^0-9]/g, "");
+      pic.phone_number = pic.phone_number.replace(/[^0-9 | +]/g, "");
     }
     watchEffect(() => {
       formating();
@@ -344,6 +389,7 @@ export default {
       validation.email = "";
       validation.client = "";
       validation.phone_number = "";
+      validation.position = "";
       emit("close");
     };
     const validation = reactive({
@@ -351,6 +397,7 @@ export default {
       name: "",
       phone_number: "",
       email: "",
+      position: "",
     });
     const clientId = computed(() => {
       return store.getters["client/getStateClientId"];
@@ -365,6 +412,7 @@ export default {
           name: pic.name,
           phone_number: formatedNumber.value,
           email: pic.email,
+          position: pic.position,
         })
         .then((res) => {
           store.dispatch("pic/getAllPicsClient", clientId.value);
@@ -377,6 +425,7 @@ export default {
           pic.email = "";
           pic.phone_number = "";
           pic.client = "";
+          pic.position = "";
           // * close modal after insert
 
           emit("close");
@@ -392,6 +441,7 @@ export default {
           validation.client = err.response.data.client_id;
           validation.phone_number = err.response.data.phone_number;
           validation.email = err.response.data.email;
+          validation.position = err.response.data.position;
         });
     });
     // ! get data client for select component

@@ -17,7 +17,7 @@ export default {
       state.loggedIn = value;
     },
     setLoginFailed(state, value) {
-      state.loginFailed = value;
+      state.loggedIn = value;
     },
   },
   getters: {

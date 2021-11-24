@@ -1,5 +1,5 @@
 <template>
-  <TransitionRoot as="template" :show="(showing = !showing)">
+  <TransitionRoot as="template" :show="showing">
     <Dialog
       :initialFocus="closeButtonRef"
       as="div"
@@ -7,7 +7,7 @@
       @close="$emit('close')"
     >
       <div
-        class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0"
+        class="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center  sm:block sm:p-0"
       >
         <TransitionChild
           as="template"
@@ -39,12 +39,12 @@
           leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
         >
           <div
-            class="inline-block overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+            class="inline-block overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl  sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
           >
             <div class="px-4 pt-5 pb-4 bg-white sm:p-6 sm:pb-4">
               <div class="sm:flex sm:items-start">
                 <div
-                  class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-green-100 rounded-full sm:mx-0 sm:h-10 sm:w-10"
+                  class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-green-100 rounded-full  sm:mx-0 sm:h-10 sm:w-10"
                 >
                   <UserAddIcon
                     class="w-6 h-6 text-green-600"
@@ -73,7 +73,7 @@
             >
               <button
                 type="button"
-                class="flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-green-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
+                class="flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-green-600 border border-transparent rounded-md shadow-sm  hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm"
                 @click="$emit('close')"
                 ref="closeButtonRef"
               >
@@ -81,7 +81,7 @@
               </button>
               <button
                 type="button"
-                class="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                class="inline-flex justify-center w-full px-4 py-2 mt-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm  hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
               >
                 Cancel
               </button>
@@ -95,7 +95,7 @@
 
 
 <script>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import {
   Dialog,
   DialogOverlay,
@@ -118,7 +118,7 @@ export default {
   props: {
     isVisible: {
       type: Boolean,
-      default: "",
+      default: false,
     },
     content: {
       type: Object,
@@ -126,7 +126,9 @@ export default {
     },
   },
   setup(props, { emit }) {
-    const showing = props.isVisible;
+    const showing = computed(() => {
+      return props.isVisible;
+    });
     const modalContent = props.content;
     const closeButtonRef = ref(null);
     return {

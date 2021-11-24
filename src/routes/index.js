@@ -1,10 +1,10 @@
 import axios from "axios";
-import nprogress from "nprogress";
-import nProgress from "nprogress";
+import NProgress from "nprogress";
 import { createRouter, createWebHistory } from "vue-router";
 import Dashboard from "../components/Dashboard.vue";
 import Login from "../components/pages/auth/Login.vue";
 import EmailVerification from "../components/pages/EmailVerification.vue";
+import LogMessage from "../components/pages/admin/LogMessage.vue";
 import { store } from "../stores/";
 const routes = [
   {
@@ -12,6 +12,11 @@ const routes = [
     name: "login",
     component: Login,
     meta: { requiresVisitor: true },
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem("token")) {
+        next({ name: "admin" });
+      } else next();
+    },
   },
   {
     path: "/register",
@@ -49,15 +54,39 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: "/admin/positions",
+    path: "/admin/reminder",
+    name: "reminder",
+    component: () => import("../components/pages/admin/Reminder.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/admin/configurations/positions",
     name: "position",
     component: () => import("../components/pages/admin/Position.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/admin/configurations/messages",
+    name: "sender",
+    component: () => import("../components/pages/admin/Message.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/admin/configurations/projectCost",
+    name: "projectCost",
+    component: () => import("../components/pages/admin/ProjectCost.vue"),
     meta: { requiresAuth: true },
   },
   {
     path: "/admin/projects",
     name: "project",
     component: () => import("../components/pages/admin/Project.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/admin/messages/logs",
+    name: "log",
+    component: () => import("../components/pages/admin/LogMessage.vue"),
     meta: { requiresAuth: true },
   },
 ];
@@ -74,6 +103,7 @@ router.beforeEach((to, from, next) => {
       store.dispatch("auth/checkingToken").then((res) => {
         if (res.status === 200) next();
         else if (res.status === 401) next({ name: "login" });
+        else next();
       });
 
       return;
@@ -87,22 +117,18 @@ router.beforeEach((to, from, next) => {
   }
 });
 
-router.beforeResolve((to, from, next) => {
-  if (to.path) {
-    nProgress.start();
-  }
-  next();
+router.beforeEach((transition) => {
+  NProgress.start();
 });
-
-router.afterEach((to, from) => {
-  nProgress.done();
+router.afterEach((transition) => {
+  NProgress.done();
 });
 axios.interceptors.request.use((config) => {
-  nProgress.start();
+  NProgress.start();
   return config;
 });
 axios.interceptors.response.use((response) => {
-  nProgress.done();
+  NProgress.done();
   return response;
 });
 

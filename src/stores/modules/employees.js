@@ -1,5 +1,7 @@
 import axios from "axios";
 import { baseUrlApi } from "../../config/baseurl";
+import moment from "moment";
+import "moment/locale/id";
 export default {
   namespaced: true,
   state() {
@@ -30,6 +32,11 @@ export default {
         .get(`${baseUrlApi.defaults.baseURL}/employees`)
         .then((response) => {
           if (response.data.success) {
+            moment.locale("id");
+            for (let i = 0; i < response.data.data.length; i++) {
+              response.data.data[i].employee.join_date = moment(response.data.data[i].employee.join_date).format("DD/MM/YYYY");
+            }
+            console.log(response.data);
             commit("setEmployees", response.data);
             return response.data;
           }
@@ -52,6 +59,11 @@ export default {
             name: data.name,
             address: data.address,
             salary: data.salary,
+            join_date: data.join_date,
+            nik: data.nik,
+            gender: data.gender,
+            last_education: data.last_education,
+            accountRecuired: data.accountRecuired,
           })
           .then((res) => {
             resolve(res);
@@ -75,6 +87,7 @@ export default {
       });
     },
     updateData({ commit }, data) {
+      console.log(data);
       return new Promise((resolve, reject) => {
         axios
           .put(`${baseUrlApi.defaults.baseURL}/employees/${data.id}`, {
@@ -85,6 +98,11 @@ export default {
             phone_number: data.phone_number,
             address: data.address,
             salary: data.salary,
+            join_date: data.join_date,
+            nik: data.nik,
+            gender: data.gender,
+            last_education: data.last_education,
+            accountRequired: data.accountRequired,
           })
           .then((res) => {
             resolve(res);
@@ -102,6 +120,21 @@ export default {
             resolve(res);
           })
           .catch((err) => {
+            reject(err);
+          });
+      });
+    },
+    getEmployeeProjects({ commit }, data) {
+      return new Promise((resolve, reject) => {
+        axios
+          .post(`${baseUrlApi.defaults.baseURL}/employees/projects`, {
+            ids: data,
+          })
+          .then((res) => {
+            commit("setEmployees", res.data);
+            resolve(res);
+          })
+          .catch((res) => {
             reject(err);
           });
       });

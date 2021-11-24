@@ -42,7 +42,7 @@
               <div class="p-6 px-4 pt-5 pb-4 bg-blueGray-200 sm:p-6 sm:pb-4">
                 <div class="flex mb-5">
                   <span
-                    class="p-2 rounded shadow-lg bg-blueGray-300 text-blueGray-800"
+                    class="p-2 rounded shadow-lg  bg-blueGray-300 text-blueGray-800"
                   >
                     Detail Tim pada Project :
                     <span class="font-semibold text-blueGray-800">{{
@@ -56,27 +56,28 @@
                   >
                     <button
                       @click="toggleModalInsertTeam"
-                      class="flex justify-center px-4 py-2 space-x-1 transition-colors duration-100 rounded-md hover:bg-blueGray-400 hover:text-blueGray-800 text-blueGray-800 bg-blueGray-300 active:bg-blueGray-400"
+                      class="flex justify-center px-4 py-2 space-x-1 transition-colors duration-100 rounded-md  hover:bg-blueGray-400 hover:text-blueGray-800 text-blueGray-800 bg-blueGray-300 active:bg-blueGray-400"
                     >
                       <PlusCircleIcon class="flex-none w-6" />
                       <p class="flex-none">Tim</p>
                     </button>
                   </div>
                   <div
-                    class="flex-none min-w-0 mb-6 -ml-4 break-words rounded shadow-xxl"
+                    class="flex-none min-w-0 mb-6 -ml-4 break-words rounded  shadow-xxl"
                   >
                     <div
-                      class="flex justify-center px-4 py-2 space-x-1 transition-colors duration-100 rounded-md shadow-lg text-blueGray-800"
+                      class="flex justify-center px-4 py-2 space-x-1 transition-colors duration-100 rounded-md shadow-lg  text-blueGray-800"
                       :class="[result < 0 ? 'bg-red-400' : 'bg-blueGray-300']"
                     >
                       <CashIcon class="flex-none w-6" />
                       <p v-if="projectDetail.data" class="flex-none">
-                        Sisa Budget Tim :{{
+                        Sisa Budget :
+                        {{
                           Intl.NumberFormat("id-ID", {
                             style: "currency",
                             currency: "IDR",
                             minimumFractionDigits: 0,
-                          }).format(parseInt(result))
+                          }).format(result)
                         }}
                       </p>
                     </div>
@@ -90,33 +91,33 @@
                     <thead class="bg-blueGray-300">
                       <tr class="shadow-lg">
                         <th
-                          class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
+                          class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                         >
                           #
                         </th>
 
                         <th
-                          class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
+                          class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                         >
                           Nama Member
                         </th>
                         <th
-                          class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
+                          class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                         >
                           Posisi
                         </th>
                         <th
-                          class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
+                          class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                         >
-                          Profit
+                          Fee
                         </th>
                         <th
-                          class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
+                          class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                         >
                           Status Pembayaran
                         </th>
                         <th
-                          class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
+                          class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                         >
                           Aksi
                         </th>
@@ -134,34 +135,34 @@
                         <tbody class="bg-blueGray-200">
                           <tr v-for="(team, index) in teams.data" :key="index">
                             <td
-                              class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                              class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                             >
                               {{ index + 1 }}
                             </td>
                             <td
-                              class="p-4 px-6 text-xs font-semibold text-left align-middle border-t-0 border-l-0 border-r-0 text-blueGray-600 whitespace-nowrap"
+                              class="p-4 px-6 text-xs font-semibold text-left align-middle border-t-0 border-l-0 border-r-0  text-blueGray-600 whitespace-nowrap"
                             >
                               {{ team.employee.name }}
                             </td>
                             <td
-                              class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                              class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                             >
                               {{ team.position }}
                             </td>
                             <td
-                              class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                              class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                             >
                               {{
                                 Intl.NumberFormat("id-ID", {
                                   style: "currency",
                                   currency: "IDR",
                                   minimumFractionDigits: 0,
-                                }).format(team.profit)
+                                }).format(team.fee)
                               }}
                             </td>
                             <td
                               v-if="team.payment_status === 'PENDING'"
-                              class="p-4 px-6 text-xs font-semibold text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                              class="p-4 px-6 text-xs font-semibold text-left align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                             >
                               <span class="px-2 py-1 bg-yellow-500 shadow">
                                 {{ team.payment_status }}
@@ -169,31 +170,31 @@
                             </td>
                             <td
                               v-else-if="team.payment_status === 'ON PROCESS'"
-                              class="p-4 px-6 text-xs font-semibold text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                              class="p-4 px-6 text-xs font-semibold text-left align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                             >
                               <span
-                                class="px-2 py-1 font-medium shadow text-blueGray-800 bg-sky-400"
+                                class="px-2 py-1 font-medium shadow  text-blueGray-800 bg-sky-400"
                               >
                                 {{ team.payment_status }}
                               </span>
                             </td>
                             <td
                               v-else
-                              class="p-4 px-6 text-xs font-semibold text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                              class="p-4 px-6 text-xs font-semibold text-left align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                             >
                               <span
-                                class="px-2 py-1 font-medium shadow text-blueGray-800 bg-emerald-400"
+                                class="px-2 py-1 font-medium shadow  text-blueGray-800 bg-emerald-400"
                               >
                                 {{ team.payment_status }}
                               </span>
                             </td>
                             <td
-                              class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                              class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                             >
                               <div class="">
                                 <button
                                   @click="openModalEdit(team.id)"
-                                  class="px-1 py-1 text-white transition-colors duration-200 bg-sky-500 hover:bg-sky-600 active:bg-sky-800"
+                                  class="px-1 py-1 text-white transition-colors duration-200  bg-sky-500 hover:bg-sky-600 active:bg-sky-800"
                                 >
                                   <PencilIcon class="w-5"></PencilIcon>
                                 </button>
@@ -206,7 +207,7 @@
                                       team.employee.name
                                     )
                                   "
-                                  class="px-1 py-1 text-white transition-colors duration-200 bg-rose-500 hover:bg-rose-600 active:bg-rose-800"
+                                  class="px-1 py-1 text-white transition-colors duration-200  bg-rose-500 hover:bg-rose-600 active:bg-rose-800"
                                 >
                                   <TrashIcon class="w-5"></TrashIcon>
                                 </button>
@@ -236,11 +237,11 @@
               <!-- Start of form content -->
               <!-- End of form content -->
               <div
-                class="px-4 py-3 bg-blueGray-200 sm:px-6 sm:flex sm:flex-row-reverse"
+                class="px-4 py-3  bg-blueGray-200 sm:px-6 sm:flex sm:flex-row-reverse"
               >
                 <button
                   type="submit"
-                  class="flex justify-center w-full px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-blueGray-800 hover:bg-blueGray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blueGray-500 sm:ml-3 sm:w-auto sm:text-sm"
+                  class="flex justify-center w-full px-4 py-2 text-base font-medium text-white border border-transparent rounded-md shadow-sm  bg-blueGray-800 hover:bg-blueGray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blueGray-500 sm:ml-3 sm:w-auto sm:text-sm"
                   @click="$emit('close')"
                 >
                   Close
@@ -308,7 +309,7 @@ import ModalAlert from "../../components/global/ModalAlert.vue";
 const emit = defineEmits(["close"]);
 const props = defineProps({
   isOpen: Boolean,
-  team: Number,
+  team: Object,
   projectId: Number,
   projectNameLabel: String,
 });
@@ -394,38 +395,61 @@ const remove = () => {
 };
 const isModalInsertTeamOpen = ref(false);
 const toggleModalInsertTeam = () => {
+  store.dispatch("project/showForUpdate", projectId.value);
+  store.dispatch("employees/getEmployeeProjects", employeeIds.value);
   isModalInsertTeamOpen.value = !isModalInsertTeamOpen.value;
 };
 const projectDetail = computed(() => {
-  return store.getters["project/getProjectState"];
+  return store.getters["project/getProjectShowState"];
 });
 // (teams.value);
 // const profitTeam = ref(null);
-const balance = ref(null);
-const profitTeam = computed(() => {
+const balance = ref(0);
+const feeTeam = computed(() => {
   if (teams.value.data) {
-    // (teams.value);
-    balance.value = null;
+    balance.value = 0;
     for (let i = 0; i < teams.value.data.length; i++) {
-      // (teams.value.data[i].profit);
-      balance.value = balance.value + teams.value.data[i].profit;
-      balance.value;
+      balance.value = balance.value + teams.value.data[i].fee;
     }
     return parseInt(balance.value);
   }
 });
-
+const employeeIds = ref([]);
+watchEffect(() => {
+  if (teams.value.data) {
+    employeeIds.value.length = 0;
+    for (let i = 0; i < teams.value.data.length; i++) {
+      employeeIds.value.push(teams.value.data[i].employee_id);
+    }
+  }
+});
+store.dispatch("cost/getAllData", projectId.value);
+const addlCosts = computed(() => {
+  return store.getters["cost/getStateCosts"];
+});
+const cost = ref(0);
+const costs = computed(() => {
+  if (addlCosts.value.data) {
+    cost.value = 0;
+    if (addlCosts.value.data.type === "PENGURANGAN") {
+    }
+    for (let i = 0; i < addlCosts.value.data.length; i++) {
+      cost.value = cost.value + addlCosts.value.data[i].cost;
+    }
+    return parseInt(cost.value);
+  }
+});
 const result = computed(() => {
   if (projectDetail.value.data) {
-    return (
-      parseInt(projectDetail.value.data.project_value) -
-        parseInt(projectDetail.value.data.profit_team) -
-        parseInt(projectDetail.value.data.profit_company) -
-        parseInt(projectDetail.value.data.tax) -
-        parseInt(profitTeam.value)
+    return parseInt(
+      projectDetail.value.data.project_value -
+        projectDetail.value.data.profit_team -
+        projectDetail.value.data.profit_company -
+        projectDetail.value.data.tax -
+        projectDetail.value.data.accomodation -
+        feeTeam.value -
+        costs.value
     );
-    // store.commit("project/setBalanceTeamBudget", result.value);
-    // (result.value);
   }
 });
 </script>

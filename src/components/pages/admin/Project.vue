@@ -1,5 +1,4 @@
 <template>
-  <nprogress-container></nprogress-container>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root">
     <!-- Modal calls section -->
@@ -15,6 +14,11 @@
       :projectId="projectId"
       :projectNameLabel="projectNameLabel"
     />
+    <FormModalUpdate
+      :isModalUpdateOpen="isModalUpdateOpen"
+      :contentModalUpdate="contentModalUpdate"
+      @close="toggleModalUpdate"
+    />
     <ModalTabs
       :isModalTabsOpen="isModalTabsOpen"
       :project="project"
@@ -25,11 +29,6 @@
     <FormModalInsertTeam
       :isModalInsertTeamOpen="isModalInsertTeamOpen"
       @close="closeModalInsertTeam"
-    />
-    <FormModalUpdate
-      :isModalUpdateOpen="isModalUpdateOpen"
-      :contentModalUpdate="contentModalUpdate"
-      @close="toggleModalUpdate"
     />
 
     <ModalDelete
@@ -76,11 +75,11 @@
               </div>
               <div class="flex px-4 space-x-1">
                 <div
-                  class="flex-none min-w-0 mb-6 ml-0 break-words rounded shadow-lg lg:-ml-6 md:-ml-6"
+                  class="flex-none min-w-0 mb-6 ml-0 break-words rounded shadow-lg  lg:-ml-6 md:-ml-6"
                 >
                   <button
                     @click="toggleModalInsert"
-                    class="flex justify-center px-4 py-2 -mt-5 space-x-1 transition-colors duration-100 rounded-md hover:bg-blueGray-300 text-blueGray-800 bg-blueGray-200 active:bg-blueGray-400"
+                    class="flex justify-center px-4 py-2 -mt-5 space-x-1 transition-colors duration-100 rounded-md  hover:bg-blueGray-300 text-blueGray-800 bg-blueGray-200 active:bg-blueGray-400"
                   >
                     <PlusCircleIcon class="flex-none w-6"></PlusCircleIcon>
                     <p class="flex-none">Project</p>
@@ -105,98 +104,108 @@
                   <thead class="bg-blueGray-300">
                     <tr class="shadow-lg">
                       <th
-                        class="px-4 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
+                        class="px-4 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                       >
                         #
                       </th>
 
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                       >
                         Project
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
+                        class="px-4 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                       >
                         Client
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
+                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
+                      >
+                        Mulai Projek
+                      </th>
+                      <th
+                        class="px-4 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                       >
                         Deadline
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
+                        class="px-4 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                       >
                         Estimasi
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
+                        class="px-4 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                       >
                         Status
                       </th>
 
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
+                        class="px-4 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                       >
                         Tim
                       </th>
                       <th
-                        class="px-6 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid whitespace-nowrap text-blueGray-500"
+                        class="px-4 py-3 text-xs font-semibold text-left uppercase align-middle border border-l-0 border-r-0 border-solid  whitespace-nowrap text-blueGray-500"
                       >
                         Aksi
                       </th>
                     </tr>
                   </thead>
                   <template v-if="projects.data">
-                    <template v-if="projects.data.length === 0">
+                    <template v-if="projects.data.data.length === 0">
                       <tr>
-                        <td colspan="6" class="text-center">Tidak ada data</td>
+                        <td colspan="8" class="text-center">Tidak ada data</td>
                       </tr>
                     </template>
                     <template v-else>
                       <tbody class="bg-blueGray-200">
                         <tr
-                          v-for="(project, index) in projects.data"
+                          v-for="(project, index) in projects.data.data"
                           :key="index"
                         >
                           <td
-                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                           >
                             {{ index + 1 }}
                           </td>
                           <th
-                            class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap text-blueGray-600"
+                            class="p-4 px-6 text-xs text-left align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap text-blueGray-600"
                           >
                             {{ project.name }}
                           </th>
                           <td
                             v-if="project.client === null"
-                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                           >
                             Belum ada client
                           </td>
                           <td
                             v-else
-                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                           >
                             {{ project.client.company_name }}
                           </td>
                           <td
-                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
+                          >
+                            {{ project.start_project }}
+                          </td>
+                          <td
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                           >
                             {{ project.deadline }}
                           </td>
                           <td
-                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                           >
                             {{ project.estimation }}
                           </td>
                           <td
-                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                           >
                             <span
-                              class="px-2 py-1 text-xs font-semibold text-blueGray-700 whitespace-nowrap"
+                              class="px-2 py-1 text-xs font-semibold  text-blueGray-700 whitespace-nowrap"
                               :class="[
                                 project.status === 'On Progres'
                                   ? 'bg-yellow-500 shadow'
@@ -213,31 +222,37 @@
                             </span>
                           </td>
                           <td
-                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                            class="px-4 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                           >
                             <button
                               @click="openModalTable(project.id, project.name)"
-                              class="flex px-1 py-1 text-white transition-colors duration-200 rounded-full bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-800"
+                              class="flex px-1 py-1 text-white transition-colors duration-200 rounded-full  bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-800"
                             >
                               <EyeIcon class="w-6" />
                             </button>
                           </td>
 
                           <td
-                            class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+                            class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0  whitespace-nowrap"
                           >
                             <div class="">
                               <button
                                 @click="sendIdAndOpenModalTabs(project.id)"
-                                class="px-1 py-1 text-white transition-colors duration-200 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-800"
+                                class="px-1 py-1 text-white transition-colors duration-200  bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-800"
                               >
                                 <InformationCircleIcon
                                   class="w-5"
                                 ></InformationCircleIcon>
                               </button>
                               <button
+                                :disabled="project.status === 'Finish'"
                                 @click="sendIdAndOpenModalUpdate(project.id)"
-                                class="px-1 py-1 text-white transition-colors duration-200 bg-sky-500 hover:bg-sky-600 active:bg-sky-800"
+                                class="px-1 py-1 text-white transition-colors duration-200  bg-sky-500"
+                                :class="[
+                                  project.status === 'Finish'
+                                    ? ' bg-opacity-30 cursor-not-allowed'
+                                    : 'active:bg-sky-800 hover:bg-sky-600',
+                                ]"
                               >
                                 <PencilIcon class="w-5"></PencilIcon>
                               </button>
@@ -246,7 +261,7 @@
                                 @click="
                                   sendIdForDelete(project.id, project.name)
                                 "
-                                class="px-1 py-1 text-white transition-colors duration-200 bg-rose-500 hover:bg-rose-600 active:bg-rose-800"
+                                class="px-1 py-1 text-white transition-colors duration-200  bg-rose-500 hover:bg-rose-600 active:bg-rose-800"
                               >
                                 <TrashIcon class="w-5"></TrashIcon>
                               </button>
@@ -281,6 +296,28 @@
                 </table>
               </div>
             </div>
+            <template v-if="projects.data">
+              <div
+                class="flex justify-center"
+                :class="[projects.data.data.length > 1 ? '-mt-2' : 'mt-10']"
+              >
+                <template v-if="projects.data.total > 5">
+                  <template
+                    v-for="(link, index) in projects.data.links.slice(1, -1)"
+                    :key="index"
+                  >
+                    <button @click="gotoPage(link.url)">
+                      <span
+                        class="w-8 p-3 mr-2 rounded-sm shadow-md  text-blueGray-800 bg-blueGray-300 hover:bg-blueGray-400"
+                        :class="[link.active ? 'bg-blueGray-400' : '']"
+                      >
+                        {{ link.label }}
+                      </span>
+                    </button>
+                  </template>
+                </template>
+              </div>
+            </template>
           </div>
           <div class="w-full px-4 mb-12">
             <div
@@ -310,9 +347,12 @@ import {
   PlusCircleIcon,
   InformationCircleIcon,
   EyeIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
 } from "@heroicons/vue/solid";
 import { useStore } from "vuex";
 import { computed, ref, reactive } from "vue";
+import { useRouter } from "vue-router";
 export default {
   components: {
     FormModalSkeleton,
@@ -330,11 +370,14 @@ export default {
     ModalAlert,
     ModalTabs,
     ModalTableTeam,
+    ChevronLeftIcon,
+    ChevronRightIcon,
   },
   setup() {
     // title
     document.title = "Madtive Management | Project";
     const store = useStore();
+    const router = useRouter();
     // ! get all data projects
     store.dispatch("project/getAllProjects");
     const projects = computed(() => {
@@ -344,6 +387,7 @@ export default {
     // ! MODAL INSERT(toggle, local state, etc)
     const isOpen = ref("");
     const toggleModalInsert = () => {
+      store.dispatch("projectCost/getDataProjectCost");
       isOpen.value = !isOpen.value;
     };
     const content = reactive({
@@ -417,18 +461,18 @@ export default {
       data: [],
     });
     const project = reactive({
-      data: []
-    })
+      data: [],
+    });
     const sendIdAndOpenModalTabs = (id) => {
-      isModalTabsOpen.value = true;
-      store.dispatch("project/show", id);
-      store.dispatch("team/getSpecificProjectTeam", id);
-      project.data = computed(() => {
-        return store.getters["project/getProjectState"];
-      });
+      projectId.value = id;
+      store.dispatch("project/show", projectId.value);
+      store.dispatch("team/getSpecificProjectTeam", projectId.value);
+      store.dispatch("cost/getAllData", projectId.value);
+      // store.dispatch("pic/getAllPicsClient", projectId.value);
       team.data = computed(() => {
         return store.getters["team/getStateProjectTeam"];
       });
+      isModalTabsOpen.value = true;
     };
     // ! MODAL INSERT TEAM SECTION
     const isModalInsertTeamOpen = ref(false);
@@ -449,6 +493,9 @@ export default {
     };
     const closeModalTable = () => {
       isModalTableOpen.value = false;
+    };
+    const gotoPage = (url) => {
+      store.dispatch("project/paginate", url);
     };
     return {
       projects,
@@ -477,10 +524,11 @@ export default {
       openFormModalInsertTeam,
       isModalTableOpen,
       closeModalTable,
-      openModalTable, 
+      openModalTable,
       projectId,
       projectNameLabel,
       project,
+      gotoPage,
       // openFormModalInsertTeam,
     };
   },

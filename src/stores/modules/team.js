@@ -78,7 +78,7 @@ export default {
             project_id: data.project_id,
             employee_id: data.employee_id,
             position: data.position,
-            profit: data.profit,
+            fee: data.fee,
             payment_status: "PENDING",
           })
           .then((res) => {
@@ -108,7 +108,7 @@ export default {
             project_id: data.project_id,
             employee_id: data.employee_id,
             position: data.position,
-            profit: data.profit,
+            fee: data.fee,
             payment_status: data.payment_status,
           })
           .then((res) => {

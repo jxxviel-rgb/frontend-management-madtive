@@ -274,11 +274,6 @@
                   >
                     Email
                   </label>
-                  <!-- <input
-                          type=""
-                          class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
-                          placeholder="+62"
-                        /> -->
                   <input
                     v-model="pic.data.data.email"
                     type="text"
@@ -315,6 +310,50 @@
                     </div>
                   </span>
                   <!-- End of validation email -->
+                </div>
+                <div class="relative w-full mb-3">
+                  <label
+                    class="block mb-2 text-xs font-semibold uppercase  text-blueGray-600"
+                    htmlFor="grid-password"
+                  >
+                    Posisi
+                  </label>
+                  <input
+                    v-model="pic.data.data.position"
+                    type="text"
+                    class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow  placeholder-blueGray-300 text-blueGray-600 focus:outline-none focus:ring"
+                  />
+                  <!-- Start of validation position -->
+                  <span v-if="validation.position">
+                    <div
+                      class="flex items-center justify-start pt-2 font-medium text-red-600 "
+                    >
+                      <div>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="100%"
+                          height="100%"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="w-5 h-5 mr-1 feather feather-alert-octagon"
+                        >
+                          <polygon
+                            points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"
+                          ></polygon>
+                          <line x1="12" y1="8" x2="12" y2="12"></line>
+                          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                      </div>
+                      <div class="flex-initial max-w-full text-xs font-normal">
+                        {{ validation.position[0] }}
+                      </div>
+                    </div>
+                  </span>
+                  <!-- End of validation position -->
                 </div>
 
                 <div class="mt-6 text-center">
@@ -356,7 +395,7 @@
 
 
 <script>
-import { reactive, ref, computed, onMounted, onBeforeMount } from "vue";
+import { reactive, ref, computed, onMounted, watchEffect } from "vue";
 import {
   Dialog,
   DialogOverlay,
@@ -426,7 +465,21 @@ export default {
       phone_number: "",
       email: "",
     });
-
+    function formating() {
+      if (pic.data.data)
+        pic.data.data.phone_number = pic.data.data.phone_number.replace(
+          /[^0-9 | +]/g,
+          ""
+        );
+    }
+    watchEffect(() => {
+      formating();
+    });
+    const formatedNumber = computed(() => {
+      if (pic.data.data) {
+        return pic.data.data.phone_number.replace(/^0/g, "+62");
+      }
+    });
     const insert = computed(() => {
       isLoading.value = true;
       isDisabled.value = true;
@@ -437,6 +490,7 @@ export default {
           name: pic.data.data.name,
           phone_number: pic.data.data.phone_number,
           email: pic.data.data.email,
+          position: pic.data.data.position,
         })
         .then((res) => {
           store.dispatch("pic/getAllPicsClient", pic.data.data.client.id);

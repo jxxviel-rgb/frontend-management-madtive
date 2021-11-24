@@ -53,6 +53,7 @@ export default {
             name: data.name,
             email: data.email,
             phone_number: data.phone_number,
+            position: data.position,
           })
           .then((res) => {
             resolve(res);
@@ -70,6 +71,7 @@ export default {
             name: data.name,
             email: data.email,
             phone_number: data.phone_number,
+            position: data.position,
           })
           .then((res) => {
             resolve(res);
