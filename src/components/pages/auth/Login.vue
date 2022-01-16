@@ -5,7 +5,7 @@
         <!-- start of background -->
         <div
           class="absolute top-0 bottom-0 w-screen h-screen bg-no-repeat bg-blueGray-800 bg-full"
-          style="background-image: url(src/assets/img/register_bg_2.png)"
+          style="background-image: url(public/register_bg_2.png)"
         >
           <!-- end of background -->
 
@@ -32,9 +32,7 @@
               >
                 <div class="px-6 py-6 mb-0 rounded-t">
                   <div class="mb-3 text-center">
-                    <h6 class="text-sm font-bold text-blueGray-500">
-                      Sign in your account
-                    </h6>
+                    <h6 class="text-sm font-bold text-blueGray-500">Sign in your account</h6>
                   </div>
                   <!-- <div class="text-center btn-wrapper">
                     <button
@@ -59,7 +57,7 @@
                       />Google
                     </button>
             
-                  </div> -->
+                  </div>-->
                   <hr class="mt-6 border-b-1 border-blueGray-300" />
                 </div>
                 <div class="flex-auto px-4 py-10 pt-0 lg:px-10">
@@ -68,42 +66,23 @@
                       <label
                         class="block mb-2 text-xs font-bold uppercase text-blueGray-600"
                         for="grid-password"
-                        >Email</label
-                      >
+                      >Email</label>
 
                       <input
                         type="text"
                         v-model="email"
-                        class="
-                          w-full
-                          px-3
-                          py-3
-                          text-sm
-                          transition-all
-                          duration-150
-                          ease-linear
-                          bg-white
-                          border-0
-                          rounded
-                          shadow
-                          ${blueGray}
-                          text-blueGray-600
-                          focus:outline-none focus:ring
-                        "
+                        class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow ${blueGray} text-blueGray-600 focus:outline-none focus:ring"
                         :class="{
-                          [`ring-1 ring-red-500 ${
-                            validation.email
+                          [`ring-1 ring-red-500 ${validation.email
                               ? 'placeholder-red-500'
                               : 'placeholder-blueGray-300'
-                          }`]: validation.email,
+                            }`]: validation.email,
                         }"
                         placeholder="Email"
                       />
                       <!-- Start Alert email validation -->
                       <span v-if="validation.email">
-                        <div
-                          class="flex items-center justify-start py-2 font-medium text-red-600 "
-                        >
+                        <div class="flex items-center justify-start py-2 font-medium text-red-600">
                           <div>
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -119,16 +98,14 @@
                             >
                               <polygon
                                 points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"
-                              ></polygon>
-                              <line x1="12" y1="8" x2="12" y2="12"></line>
-                              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                              />
+                              <line x1="12" y1="8" x2="12" y2="12" />
+                              <line x1="12" y1="16" x2="12.01" y2="16" />
                             </svg>
                           </div>
                           <div
                             class="flex-initial max-w-full text-xs font-normal"
-                          >
-                            {{ validation.email[0] }}
-                          </div>
+                          >{{ validation.email[0] }}</div>
                         </div>
                       </span>
                       <!-- End of validation -->
@@ -137,25 +114,22 @@
                       <label
                         class="block mb-2 text-xs font-bold uppercase text-blueGray-600"
                         for="grid-password"
-                        >Password</label
-                      ><input
+                      >Password</label>
+                      <input
                         type="password"
                         v-model="password"
                         class="w-full px-3 py-3 text-sm transition-all duration-150 ease-linear bg-white border-0 rounded shadow text-blueGray-600 focus:outline-none focus:ring"
                         :class="{
-                          [`ring-1 ring-red-500 ${
-                            validation.password
+                          [`ring-1 ring-red-500 ${validation.password
                               ? 'placeholder-red-500'
                               : 'placeholder-blueGray-300'
-                          }`]: validation.password,
+                            }`]: validation.password,
                         }"
                         placeholder="Password"
                       />
                       <!-- Alert password validation -->
                       <span v-if="validation.password">
-                        <div
-                          class="flex items-center justify-start py-2 font-medium text-red-600 "
-                        >
+                        <div class="flex items-center justify-start py-2 font-medium text-red-600">
                           <div>
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -171,16 +145,14 @@
                             >
                               <polygon
                                 points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"
-                              ></polygon>
-                              <line x1="12" y1="8" x2="12" y2="12"></line>
-                              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                              />
+                              <line x1="12" y1="8" x2="12" y2="12" />
+                              <line x1="12" y1="16" x2="12.01" y2="16" />
                             </svg>
                           </div>
                           <div
                             class="flex-initial max-w-full text-xs font-normal"
-                          >
-                            {{ validation.password[0] }}
-                          </div>
+                          >{{ validation.password[0] }}</div>
                         </div>
                       </span>
                       <!-- End of Alert password validation -->
@@ -197,9 +169,9 @@
                           v-if="isLoading"
                           src="/src/assets/img/spinner2.svg"
                           class="items-center w-5"
-                          alt=""
+                          alt
                         />
-                        <span v-if="isLoading" class=""> Signing... </span>
+                        <span v-if="isLoading" class>Signing...</span>
                         <span v-else>Sign In</span>
                       </button>
                     </div>
@@ -208,9 +180,9 @@
               </div>
               <div class="flex flex-wrap mt-6">
                 <div class="w-1/2">
-                  <a href="#pablo" class="text-blueGray-200"
-                    ><small>Forgot password?</small></a
-                  >
+                  <a href="#pablo" class="text-blueGray-200">
+                    <small>Forgot password?</small>
+                  </a>
                 </div>
               </div>
             </div>
@@ -238,11 +210,11 @@ export default {
     const route = useRouter();
     const isDisabled = ref(false);
     const isLoading = ref(false);
-      // if (store.state.auth.token) {
-      //   route.push({
-      //     name: "admin",
-      //   });
-      // }
+    // if (store.state.auth.token) {
+    //   route.push({
+    //     name: "admin",
+    //   });
+    // }
 
     const email = ref("");
     const password = ref("");
